@@ -7,6 +7,27 @@
 var app = angular.module('myApp', []);
 app.controller('personCtrl', function($scope) {
 
+    $scope.init= function () {
+        $scope.checkSummaryVisibility();
+    }
+
+    $scope.checkSummaryVisibility=function(){
+        
+        $scope.currsource=$scope.sourceTemplate
+
+        if ($scope.currsource.folderPath!=""){
+            $scope.cssSummary={
+                display : "block"
+            }
+        }
+        else{
+            $scope.cssSummary={
+                display : "none"
+            }
+        }
+    }
+
+
     $scope.firstName = "John";
     $scope.lastName = "Doe";
 
@@ -18,7 +39,7 @@ app.controller('personCtrl', function($scope) {
         lastBackupDate : ""
     };
 
-    $scope.currsource=$scope.sourceTemplate
+    
 
     $scope.mySources=[        
 
@@ -37,6 +58,7 @@ app.controller('personCtrl', function($scope) {
             folderSize  :   $scope.currsource.folderSize,
             lastBackupDate : "",               
         })
+        $scope.resetDialog();
     };
 
     $scope.resetDialog=() => {
@@ -47,17 +69,23 @@ app.controller('personCtrl', function($scope) {
     }
 
 
-    $scope.closeDialog=() => {
+    $scope.closeModal=() => {
         $scope.resetDialog();
+    }
+
+    $scope.openModal=() => {
+        $scope.checkSummaryVisibility();
     }
 
     $scope.openDialog=async () => {
         document.getElementById('folderSummaryLoading').style.visibility="visible";
-        var folderSummaryElement = document.getElementById('folderSummaryDetails');
-      
-        $scope.resetDialog();
+        document.getElementById('noFolderSelected').style.visibility="hidden";
         
       
+        $scope.resetDialog();
+        $scope.checkSummaryVisibility();
+        // $scope.$apply(); 
+
         const folderDetails = await window.FOLDER_SELECTION.openDialog();
       
         var mySourceContainer = document.querySelector('#mySource1');
@@ -74,14 +102,11 @@ app.controller('personCtrl', function($scope) {
             $scope.currsource.folderPath=folderDetails.folderPath;
             $scope.currsource.folderName=""
         }
-        
-
-
         // folderSummaryElement.innerHTML=JSON.stringify(folderDetails.folderSummary);
-      
+        $scope.checkSummaryVisibility();
         document.getElementById('folderSummaryLoading').style.visibility="hidden";
-        $scope.$apply();
-        
+        document.getElementById('noFolderSelected').style.visibility="visible";
+        $scope.$apply();        
       }
 });
 

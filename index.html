@@ -15,7 +15,7 @@
   </head>
   <body>     
     <div class="container">     
-      <div ng-app="myApp" ng-controller="personCtrl">
+      <div ng-app="myApp" ng-controller="personCtrl" ng-init="init()">
 
         <div class="row bg-light p-3 border">
           <p class="lead" style="text-align: center;">
@@ -29,7 +29,7 @@
           <!-- Modal -->
           <div style="padding: 0px;margin-top: 10px;">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="margin: 5px; background-color: #0d6efd;">
+            <button ng-click="openModal()" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="margin: 5px; background-color: #0d6efd;">
               New Backup Source
             </button>
 
@@ -55,38 +55,44 @@
                         </div>          
                         <!-- Folder Summary -->
                         <div class="col  p-3 border" >
-                          <div style="text-align: center;" id="folderSummaryLoading">
-                            <div class="spinner-grow text-primary" role="status" style="width: 1rem; height: 1rem;">                  
+                          
+                            <div style="text-align: center;" id="folderSummaryLoading">
+                              <div class="spinner-grow text-primary" role="status" style="width: 1rem; height: 1rem;">                  
+                              </div>
+                              <span class="sr-only">Fetching Folder Details</span>
                             </div>
-                            <span class="sr-only">Fetching Folder Details</span>
-                          </div>
-                          <div id="folderSummaryDetails"> 
-                            <div class="mb-3 row">
-                              <b class="col-sm-3">Folder Path</b>
-                              <div class="col-sm-9">
-                                {{currsource.folderPath}}
+                          <div id="noFolderSelected" ng-if="currsource.folderPath==''" style="text-align: center;">
+                            No Folder Selected
+                          </div>  
+                          <div ng-style="cssSummary">
+                            <div id="folderSummaryDetails"> 
+                              <div class="mb-3 row">
+                                <b class="col-sm-3">Folder Path</b>
+                                <div class="col-sm-9">
+                                  {{currsource.folderPath}}
+                                </div>
                               </div>
+                              <div class="mb-3 row">
+                                <b class="col-sm-3">Folder Size</b>
+                                <div class="col-sm-9">
+                                  {{currsource.folderSize}}
+                                </div>
+                              </div>  
+                              <div class="mb-3 row">
+                                <b class="col-sm-3">Total Files</b>
+                                <div class="col-sm-9">
+                                  {{currsource.toltalFiles}}
+                                </div>
+                              </div>                
                             </div>
-                            <div class="mb-3 row">
-                              <b class="col-sm-3">Folder Size</b>
-                              <div class="col-sm-9">
-                                {{currsource.folderSize}}
-                              </div>
-                            </div>  
-                            <div class="mb-3 row">
-                              <b class="col-sm-3">Total Files</b>
-                              <div class="col-sm-9">
-                                {{currsource.toltalFiles}}
-                              </div>
-                            </div>                
                           </div>
                         </div>
                       </div>
                     
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" ng-click="closeDialog()">Close</button>
-                    <button type="button" class="btn btn-primary" ng-click="addSourceFolder()">Add</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" ng-click="closeModal()">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="addSourceFolder()" data-bs-dismiss="modal">Add</button>
                   </div>
                 </div>
               </div>
