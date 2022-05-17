@@ -8,7 +8,18 @@ var app = angular.module('myApp', []);
 app.controller('personCtrl', function($scope) {
 
     $scope.init= function () {
+        //$scope.loadSources();
         $scope.checkSummaryVisibility();
+        
+    }
+
+    angular.element(document).ready(function () {        
+        $scope.loadSources(); 
+    }); 
+
+    $scope.loadSources=async function(){
+        $scope.mySources=await window.FILE_IO.getSources();
+        $scope.$apply();
     }
 
     $scope.checkSummaryVisibility=function(){
@@ -36,7 +47,7 @@ app.controller('personCtrl', function($scope) {
         folderPath  : "",
         toltalFiles : "",
         folderSize  : "",
-        lastBackupDate : ""
+        lastBackupDate : "n/a"
     };
 
     
@@ -51,14 +62,21 @@ app.controller('personCtrl', function($scope) {
    
 
     $scope.addSourceFolder = function(){
+        if ($scope.currsource.folderPath==''){
+            return;
+        }
+
         $scope.mySources.push({
             folderName  :   $scope.currsource.folderName,
             fodlerPath  :   $scope.currsource.folderPath,
             toltalFiles :   $scope.currsource.toltalFiles,
             folderSize  :   $scope.currsource.folderSize,
-            lastBackupDate : "",               
+            lastBackupDate : "n/a",  
+            isBackingUp : 0             
         })
-        $scope.resetDialog();
+        $scope.resetDialog();        
+        window.FILE_IO.saveJson(JSON.parse(angular.toJson($scope.mySources)));
+        
     };
 
     $scope.resetDialog=() => {
@@ -73,7 +91,8 @@ app.controller('personCtrl', function($scope) {
         $scope.resetDialog();
     }
 
-    $scope.openModal=() => {
+    $scope.openModal=() => {        
+        
         $scope.checkSummaryVisibility();
     }
 
@@ -107,6 +126,23 @@ app.controller('personCtrl', function($scope) {
         document.getElementById('folderSummaryLoading').style.visibility="hidden";
         document.getElementById('noFolderSelected').style.visibility="visible";
         $scope.$apply();        
+      }
+      $scope.getBackupSlot=function (min, max) { 
+        var min=8;
+        var max=16;   
+        var Hrs=Math.floor(
+          Math.random() * (max - min) + min
+        ) 
+
+        var min=1;
+        var max=60;   
+        var Min=Math.floor(
+          Math.random() * (max - min) + min
+        )
+        
+        var myToday= new Date();
+
+
       }
 });
 

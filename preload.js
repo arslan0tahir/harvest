@@ -19,6 +19,11 @@ window.addEventListener('DOMContentLoaded', () => {
     openDialog: () => ipcRenderer.invoke('open-folder-selection-dialog')
   })
 
+  contextBridge.exposeInMainWorld('FILE_IO',{
+    saveJson: (mySources) => ipcRenderer.invoke('save-backup-sources',mySources),
+    getSources: () => ipcRenderer.invoke('get-backup-sources')
+  })
+
 });
 
 

@@ -1,5 +1,6 @@
 // Modules to control application life and create native browser window
 const {app, Tray, Menu, BrowserWindow, dialog, ipcMain } = require('electron')
+const fs = require('fs');
 const myFs=require('./myLibraries/myFolderDetails')
 const path = require('path')
 const util = require('util');
@@ -100,6 +101,30 @@ app.whenReady().then(() => {
       }
     }
   })
+
+
+  ipcMain.handle('save-backup-sources',function(e,mySources){
+
+    
+    let data = JSON.stringify(mySources, null, 2);
+    fs.writeFile('db/backupSources.json', data, (err) => {
+      if (err) throw err;
+      console.log('Sources updated');
+    });
+  
+    console.log(mySources)
+ 
+  })
+
+  ipcMain.handle('get-backup-sources',function(e,arg){
+
+      var mySources = fs.readFileSync('db/backupSources.json');
+      
+      mySources = JSON.parse(mySources);
+      console.log(mySources)
+      return mySources;
+  })
+
   
   createWindow();
   app.on('activate', function () {
