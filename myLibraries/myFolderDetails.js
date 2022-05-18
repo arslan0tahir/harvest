@@ -50,8 +50,7 @@ const getFolderSummary = function(directoryPath) {
 
   var summ={
     size: convertBytes(totalSize),
-    totalFiles: arrayOfFiles.length
-    
+    totalFiles: arrayOfFiles.length    
   }
 
   return summ
