@@ -13,6 +13,7 @@ app.controller('personCtrl', function($scope) {
         
     }
 
+
     angular.element(document).ready(function () {        
         $scope.loadSources(); 
     }); 
@@ -21,6 +22,7 @@ app.controller('personCtrl', function($scope) {
         $scope.mySources=await window.FILE_IO.getSources();
         $scope.$apply();
     }
+
 
     $scope.checkSummaryVisibility=function(){
         
@@ -52,14 +54,33 @@ app.controller('personCtrl', function($scope) {
 
     
 
-    $scope.mySources=[        
-
+    $scope.mySources=[
     ]
+
+    $scope.myActiveSummary={
+        fodlerPath  :   "",
+        toltalFiles :   "",
+        folderSize  :   "",
+        lastBackupDate : "",  
+    }
 
     $scope.fullName = function() {
         return $scope.firstName + " " + $scope.lastName;
+        
     };
    
+    $scope.myLoadSummary= function(d,$index){
+        $scope.myActiveSummary.folderPath       = d.fodlerPath;
+        $scope.myActiveSummary.toltalFiles      = d.toltalFiles;
+        $scope.myActiveSummary.folderSize       = d.folderSize;
+        $scope.myActiveSummary.lastBackupDate   = d.lastBackupDate;             
+    }
+    $scope.myUnLoadSummary= function(){
+        $scope.myActiveSummary.folderPath       = "";
+        $scope.myActiveSummary.toltalFiles      = "";
+        $scope.myActiveSummary.folderSize       = "";
+        $scope.myActiveSummary.lastBackupDate   = "";             
+    }
 
     $scope.addSourceFolder = function(){
         if ($scope.currsource.folderPath==''){
@@ -79,6 +100,11 @@ app.controller('personCtrl', function($scope) {
         
     };
 
+    $scope.removeSourceFolder = function(x,$index){
+        $scope.mySources.splice($index,1)
+        window.FILE_IO.saveJson(JSON.parse(angular.toJson($scope.mySources)));        
+    }
+
     $scope.resetDialog=() => {
         $scope.currsource.folderSize= "";
         $scope.currsource.toltalFiles= "";
@@ -91,8 +117,7 @@ app.controller('personCtrl', function($scope) {
         $scope.resetDialog();
     }
 
-    $scope.openModal=() => {        
-        
+    $scope.openModal=() => {              
         $scope.checkSummaryVisibility();
     }
 

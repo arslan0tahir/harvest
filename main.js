@@ -93,7 +93,7 @@ app.whenReady().then(() => {
       }
     } else {
       var folderSummary=myFs.getFolderSummary(filePaths[0])
-      console.log(folderSummary)
+      
       
       return {
         folderPath    : filePaths[0],
@@ -102,7 +102,7 @@ app.whenReady().then(() => {
     }
   })
 
-
+  //save backup sources to a text file
   ipcMain.handle('save-backup-sources',function(e,mySources){
 
     
@@ -112,16 +112,17 @@ app.whenReady().then(() => {
       console.log('Sources updated');
     });
   
-    console.log(mySources)
+    
  
   })
 
+  //read backup sources from a text file
   ipcMain.handle('get-backup-sources',function(e,arg){
 
       var mySources = fs.readFileSync('db/backupSources.json');
       
       mySources = JSON.parse(mySources);
-      console.log(mySources)
+      console.log(mySources);
       return mySources;
   })
 

@@ -1,3 +1,14 @@
 /* styles.css */
 
 /* Add styles here to customize the appearance of your app */
+
+.mySourcesRow:hover a.mySourcesRemove{
+    visibility: visible;
+    right: -30px;
+    top: 0px;
+
+}
+
+.mySourcesRow a.mySourcesRemove{
+    visibility: hidden;
+}

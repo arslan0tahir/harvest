@@ -45,10 +45,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
-                    <!-- Add new backup source -->
-                    
-                      <div>  
-                                    
+                    <!-- Add new backup source -->                    
+                      <div>                                      
                         <div class="input-group mb-3" id="mySource1">               
                           <input id="filePath" value="{{currsource.folderPath}}" type="text" class="form-control" placeholder="Path of Folder to be Copied" aria-label="Path of Folder to be Copied" aria-describedby="button-addon2">
                           <div class="myTooltip">
@@ -114,7 +112,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="x in mySources">
+              <tr ng-repeat="x in mySources" class="mySourcesRow">
                 <th scope="row">{{$index + 1}}</th>
                 <td>
                   
@@ -127,25 +125,109 @@
                   </div>
                   <div ng-if='x.isBackingUp==0' style="display: inline-block;font-size: small;">{{x.lastBackupDate}}</div>
                 </td>                
-                <td>
-                  <a href="#">
+                <td style="position: relative;">
+                  <a href="#" ng-click="myLoadSummary(x,$index)" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16">
                       <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
                       <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
                     </svg>
-                  </a>                  
+                  </a> 
+                  <a style="position:absolute;" class="mySourcesRemove" ng-click="removeSourceFolder(x,$index)">
+                    <button class="btn btn-danger">X</button>
+                  </a>                 
                 </td>              
               </tr>             
             </tbody>
           </table>
         </div>
+
+        
+        <div class="row">         
+          <!-- Modal -->
+          <div style="padding: 0px;margin-top: 10px;">
+            <!-- Modal -->
+            <div  class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop1Label" aria-hidden="true">
+              <div class="modal-dialog" style="max-width: 500px;">
+        
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdrop1Label">Summary</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <!-- Add new backup source -->                    
+                      <div> 
+                        <div class="mb-3 row">
+                          <b class="col-sm-5">Folder Path</b>
+                          <div class="col-sm-7">
+                            {{myActiveSummary.folderPath}}
+                          </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                          <b class="col-sm-5">Total Files</b>
+                          <div class="col-sm-7">
+                            {{myActiveSummary.toltalFiles}}
+                          </div>
+                        </div>
+                        
+                        <div class="mb-3 row">
+                          <b class="col-sm-5">Folder Size</b>
+                          <div class="col-sm-7">
+                            {{myActiveSummary.folderSize}}
+                          </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                          <b class="col-sm-5">Last BackupDate</b>
+                          <div class="col-sm-7">
+                            {{myActiveSummary.lastBackupDate}}
+                          </div>
+                        </div>                         
+        
+                      </div>
+                    
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" ng-click="myUnLoadSummary()">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         
         
       </div>
     </div>
+    
+    <footer class="text-center text-lg-start bg-light text-muted" style="position: fixed;width: 100%;bottom:0px">
+
+     
+
+      <!-- Copyright -->
+      <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+        © 2022 Copyright:
+        <a class="text-reset fw-bold" href="#">051-9321086</a>
+      </div>
+      <!-- Copyright -->
+    </footer>
+    
     <!-- You can also require other files to run in this process -->
 
     <script src="./renderer.js"></script>
     <script src="./js/myModule.js"></script>
+    
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
