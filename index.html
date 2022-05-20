@@ -14,7 +14,10 @@
     <title>Hello Worlds!</title>
   </head>
   <body>     
-    <div class="container">     
+    <div class="container" style="margin-bottom: 100px;">
+      
+      
+      
       <div ng-app="myApp" ng-controller="personCtrl" ng-init="init()">
 
         <div class="row bg-light p-3 border">
@@ -23,123 +26,226 @@
           </p>
         </div>
 
-        <div class="row">
-           
-          
-          <!-- Modal -->
-          <div style="padding: 0px;margin-top: 10px;">
-            <!-- Button trigger modal -->
-            <button ng-click="openModal()" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="margin: 5px;">
-              Add Backup Source
-            </button>
-            <button ng-click="" type="button" class="btn btn-outline-primary" style="margin: 5px;">
-              Start Backup
-            </button>
 
-            <!-- Modal -->
-            <div  class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-              <div class="modal-dialog" style="max-width: 800px;">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Add New Backup Source</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <!-- Add new backup source -->                    
-                      <div>                                      
-                        <div class="input-group mb-3" id="mySource1">               
-                          <input id="filePath" value="{{currsource.folderPath}}" type="text" class="form-control" placeholder="Path of Folder to be Copied" aria-label="Path of Folder to be Copied" aria-describedby="button-addon2">
-                          <div class="myTooltip">
-                            <button class="btn btn-outline-secondary" type="button" id="myFolder" ng-click="openDialog()">Choose Folder</button>
-                            <span class="myTooltiptext">test</span>
-                          </div>                              
-                        </div>          
-                        <!-- Folder Summary -->
-                        <div class="col  p-3 border" >
+
+        <br>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Backup Source</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Backup Destination</button>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          
+          <!-- tab 1 Sources -->
+          <div class="tab-pane fade show active " id="home" role="tabpanel" aria-labelledby="home-tab">
+            <br>
+            <div>  
+              <!-- Sources List Control           -->
+              <div class="p-3 border">          
+            
+                <!-- Modal -->
+                <div style="padding: 0px;margin-top: 10px;">
+                  <!-- Button trigger modal -->
+                  <button ng-click="openModal()" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="margin: 5px;">
+                    Add Backup Source
+                  </button>
+                  <button ng-click="" type="button" class="btn btn-outline-primary" style="margin: 5px;">
+                    Start Backup
+                  </button>
+      
+                  <!-- Modal -->
+                  <div  class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="max-width: 800px;">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="staticBackdropLabel">Add New Backup Source</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <!-- Add new backup source -->                    
+                            <div>    
+                                                              
+                              <div class="input-group mb-3" id="mySource1">               
+                                <input id="filePath" value="{{currsource.folderPath}}" type="text" class="form-control" placeholder="Path of Folder to be Copied" aria-label="Path of Folder to be Copied" aria-describedby="button-addon2">
+                                <div class="myTooltip">
+                                  <button class="btn btn-outline-secondary" type="button" id="myFolder" ng-click="openDialog()">Choose Folder</button>
+                                  <span class="myTooltiptext">test</span>
+                                </div>                              
+                              </div>          
+                              <!-- Folder Summary -->
+                              <div class="col  p-3 border" >
+                                
+                                  <div style="text-align: center;" id="folderSummaryLoading">
+                                    <div class="spinner-grow text-primary" role="status" style="width: 1rem; height: 1rem;">                  
+                                    </div>
+                                    <span class="sr-only">Fetching Folder Details</span>
+                                  </div>
+                                <div id="noFolderSelected" ng-if="currsource.folderPath==''" style="text-align: center;">
+                                  No Folder Selected
+                                </div>  
+                                <div ng-style="cssSummary">
+                                  <div id="folderSummaryDetails"> 
+                                    <div class="mb-3 row">
+                                      <b class="col-sm-3">Folder Path</b>
+                                      <div class="col-sm-9">
+                                        {{currsource.folderPath}}
+                                      </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                      <b class="col-sm-3">Folder Size</b>
+                                      <div class="col-sm-9">
+                                        {{currsource.folderSize}}
+                                      </div>
+                                    </div>  
+                                    <div class="mb-3 row">
+                                      <b class="col-sm-3">Total Files</b>
+                                      <div class="col-sm-9">
+                                        {{currsource.toltalFiles}}
+                                      </div>
+                                    </div>                
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           
-                            <div style="text-align: center;" id="folderSummaryLoading">
-                              <div class="spinner-grow text-primary" role="status" style="width: 1rem; height: 1rem;">                  
-                              </div>
-                              <span class="sr-only">Fetching Folder Details</span>
-                            </div>
-                          <div id="noFolderSelected" ng-if="currsource.folderPath==''" style="text-align: center;">
-                            No Folder Selected
-                          </div>  
-                          <div ng-style="cssSummary">
-                            <div id="folderSummaryDetails"> 
-                              <div class="mb-3 row">
-                                <b class="col-sm-3">Folder Path</b>
-                                <div class="col-sm-9">
-                                  {{currsource.folderPath}}
-                                </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <b class="col-sm-3">Folder Size</b>
-                                <div class="col-sm-9">
-                                  {{currsource.folderSize}}
-                                </div>
-                              </div>  
-                              <div class="mb-3 row">
-                                <b class="col-sm-3">Total Files</b>
-                                <div class="col-sm-9">
-                                  {{currsource.toltalFiles}}
-                                </div>
-                              </div>                
-                            </div>
-                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" ng-click="closeModal()">Close</button>
+                          <button type="button" class="btn btn-primary" ng-click="addSourceFolder()" data-bs-dismiss="modal">Add</button>
                         </div>
                       </div>
-                    
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" ng-click="closeModal()">Close</button>
-                    <button type="button" class="btn btn-primary" ng-click="addSourceFolder()" data-bs-dismiss="modal">Add</button>
+                    </div>
                   </div>
                 </div>
+              </div>
+              <!-- Sources List View                 -->
+              <div class="">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">Sr.</th>
+                      <th scope="col">Folder Path</th>
+                      <th scope="col">Last Backup</th>                
+                      <th scope="col">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="x in mySources" class="mySourcesRow">
+                      <th scope="row">{{$index + 1}}</th>
+                      <td>
+                        
+                        {{x.fodlerPath}}
+                      </td>
+                      <td> 
+                        <div style="display: inline-block;" ng-if='x.isBackingUp==1'>
+                          <div  class="spinner-grow text-primary" role="status" style="width: 1rem; height: 1rem;"></div> 
+                          Backing Up                
+                        </div>
+                        <div ng-if='x.isBackingUp==0' style="display: inline-block;font-size: small;">{{x.lastBackupDate}}</div>
+                      </td>                
+                      <td style="position: relative;">
+                        <a href="#" ng-click="myLoadSummary(x,$index)" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16">
+                            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                            <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+                          </svg>
+                        </a> 
+                        <a style="position:absolute;" class="mySourcesRemove" ng-click="removeSourceFolder(x,$index)">
+                          <button class="btn btn-danger">X</button>
+                        </a>                 
+                      </td>              
+                    </tr>             
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- tab 2 Destinations -->
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div> 
+              <br> 
+              <!-- Sources List Control           -->
+              <div class="p-3 border">                 
+                <!-- Modal -->
+                <div style="padding: 0px;margin-top: 10px;">
+                  <!-- Button trigger modal -->
+                  <button ng-click="" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropDest" style="margin: 5px;">
+                    Add Destination
+                  </button>
+                  <button ng-click="resetDefaultDest()" type="button" class="btn btn-outline-primary" style="margin: 5px;">
+                    Defaults
+                  </button>
+      
+                  <!-- Modal -->
+                  <div  class="modal fade" id="staticBackdropDest" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropDestLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="max-width: 800px;">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="staticBackdropDestLabel">Add New Backup Destination</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <!-- Add new backup source -->                    
+                            <div>
+                              <div class="mb-3 row">
+                                <label for="destinationAlias" class="col-sm-4 col-form-label">Destination Alias</label>
+                                <div class="col-sm-8">
+                                  <input type="text" class="form-control" id="destinationAlias" placeholder="Enter alias for destination folder" ng-model="currDest.folderAlias">
+                                </div>
+                              </div>                                        
+                              <div class="input-group mb-3" id="myDest1">               
+                                <input id="filePath" value="{{currDest.folderPath}}" type="text" class="form-control" placeholder="Path of Folder to be Copied" aria-label="Path of Folder to be Copied" aria-describedby="button-addon2">
+                                <div class="myTooltip">
+                                  <button class="btn btn-outline-secondary" type="button" id="myFolder" ng-click="openDialogDest()">Choose Folder</button>
+                                  <span class="myTooltiptext">{{currDest.folderPath}}</span>
+                                </div>                              
+                              </div>                            
+                            </div>                          
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" ng-click="resetDestDialog()">Close</button>
+                          <button type="button" class="btn btn-primary" ng-click="addDestinationFolder()" data-bs-dismiss="modal">Add</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Destination List View                 -->
+              <div class="">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">Sr.</th>
+                      <th scope="col">Folder Alias</th> 
+                      <th scope="col">Folder Path</th>                     
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="x in myDest" class="myDestRow" style="position: relative;;">
+                      <th scope="row">{{$index + 1}}</th>
+                      <td>                        
+                        {{x.folderAlias}}
+                      </td>  
+                      <td>                        
+                        {{x.folderPath}}
+                        <a style="position:absolute;" class="myDestRemove" ng-click="removeDestFolder(x,$index)">
+                          <button class="btn btn-danger">X</button>
+                        </a> 
+                      </td>                                  
+                    </tr>             
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
-          
-        <div class="row">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">Sr.</th>
-                <th scope="col">Folder Path</th>
-                <th scope="col">Last Backup</th>                
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="x in mySources" class="mySourcesRow">
-                <th scope="row">{{$index + 1}}</th>
-                <td>
-                  
-                  {{x.fodlerPath}}
-                </td>
-                <td> 
-                  <div style="display: inline-block;" ng-if='x.isBackingUp==1'>
-                    <div  class="spinner-grow text-primary" role="status" style="width: 1rem; height: 1rem;"></div> 
-                    Backing Up                
-                  </div>
-                  <div ng-if='x.isBackingUp==0' style="display: inline-block;font-size: small;">{{x.lastBackupDate}}</div>
-                </td>                
-                <td style="position: relative;">
-                  <a href="#" ng-click="myLoadSummary(x,$index)" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16">
-                      <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                      <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
-                    </svg>
-                  </a> 
-                  <a style="position:absolute;" class="mySourcesRemove" ng-click="removeSourceFolder(x,$index)">
-                    <button class="btn btn-danger">X</button>
-                  </a>                 
-                </td>              
-              </tr>             
-            </tbody>
-          </table>
-        </div>
+
+
 
         
         <div class="row">         

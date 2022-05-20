@@ -12,3 +12,14 @@
 .mySourcesRow a.mySourcesRemove{
     visibility: hidden;
 }
+
+.myDestRow:hover a.myDestRemove{
+    visibility: visible;
+    right: -30px;
+    top: 0px;
+
+}
+
+.myDestRow a.myDestRemove{
+    visibility: hidden;
+}

@@ -5,10 +5,137 @@ const myFs=require('./myLibraries/myFolderDetails')
 const path = require('path')
 const util = require('util');
 
+
+
+
+//This section will ensure that only single instance of this app will run.
+let mainWindow = null    
+const gotTheLock = app.requestSingleInstanceLock();    
+if (!gotTheLock) {
+  app.quit()
+} else {
+  app.on('second-instance', (event, commandLine, workingDirectory) => {
+    // Someone tried to run a second instance, we should focus our window.
+    if (mainWindow) {
+      if (mainWindow.isMinimized()) mainWindow.restore()
+      mainWindow.focus()
+    }
+  })
+    
+  // Create myWindow, load the rest of the app, etc...
+  
+  // This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// Some APIs can only be used after this event occurs.
+  app.whenReady().then(() => {
+
+    //recieving event folder selection event.
+    ipcMain.handle('open-folder-selection-dialog', async function () {
+      const { canceled, filePaths } = await dialog.showOpenDialog({
+        properties: ['openFile', 'openDirectory']
+      })
+      if (canceled) {
+        return {
+          folderPath    : "",
+          folderSummary : {}
+        }
+      } else {
+        var folderSummary=myFs.getFolderSummary(filePaths[0])
+        
+        
+        return {
+          folderPath    : filePaths[0],
+          folderSummary : folderSummary
+        }
+      }
+    })
+
+    ipcMain.handle('open-dest-folder-selection-dialog', async function () {
+      const {canceled, filePaths } = await dialog.showOpenDialog({
+        properties: ['openFile', 'openDirectory']
+      })
+      if (canceled) {
+        return {
+          folderPath    : "",
+          folderSummary : {}
+        }
+      } else {
+        return {
+          folderPath    : filePaths[0],
+          folderSummary : {}
+        }
+      }
+    })
+
+    //save backup sources to a text file
+    ipcMain.handle('save-backup-sources',function(e,mySources){
+
+      
+      let data = JSON.stringify(mySources, null, 2);
+      fs.writeFile('db/backupSources.json', data, (err) => {
+        if (err) throw err;
+        console.log('Sources updated');
+      });
+    
+      
+  
+    })
+
+    ipcMain.handle('save-backup-dest',function(e,myDest){
+      
+      let data = JSON.stringify(myDest, null, 2);
+      console.log("myDest"+data);
+      fs.writeFile('db/backupDest.json', data, (err) => {
+        if (err) throw err;
+        console.log('Dest  updated');
+      });
+      
+  
+    })
+
+
+    //read backup sources from a text file
+    ipcMain.handle('get-backup-sources',function(e,arg){
+
+        var mySources = fs.readFileSync('db/backupSources.json');
+        if (mySources!=""){
+          mySources = JSON.parse(mySources);
+        }
+        else{
+          mySources=[];
+        }
+        
+        console.log(mySources);
+        return mySources;
+    })
+
+    ipcMain.handle('get-backup-dest',function(e,arg){
+
+      var myDest = fs.readFileSync('db/backupDest.json');    
+      myDest = JSON.parse(myDest);
+      return myDest;
+
+    })
+
+    
+    createWindow();
+    app.on('activate', function () {
+      // On macOS it's common to re-create a window in the app when the
+      // dock icon is clicked and there are no other windows open.
+      if (BrowserWindow.getAllWindows().length === 0) createWindow()
+    })
+
+  })
+  
+}
+
+
+
+
+
+
+
 var iconpath = path.join(__dirname, 'icon.png')
-
-
-
 function createWindow () {
   
   // Create the browser window.
@@ -76,67 +203,7 @@ function createWindow () {
 
 
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.whenReady().then(() => {
 
-  //recieving event folder selection event.
-  ipcMain.handle('open-folder-selection-dialog', async function () {
-    const { canceled, filePaths } = await dialog.showOpenDialog({
-      properties: ['openFile', 'openDirectory']
-    })
-    if (canceled) {
-      return {
-        folderPath    : "",
-        folderSummary : {}
-      }
-    } else {
-      var folderSummary=myFs.getFolderSummary(filePaths[0])
-      
-      
-      return {
-        folderPath    : filePaths[0],
-        folderSummary : folderSummary
-      }
-    }
-  })
-
-  //save backup sources to a text file
-  ipcMain.handle('save-backup-sources',function(e,mySources){
-
-    
-    let data = JSON.stringify(mySources, null, 2);
-    fs.writeFile('db/backupSources.json', data, (err) => {
-      if (err) throw err;
-      console.log('Sources updated');
-    });
-  
-    
- 
-  })
-
-  //read backup sources from a text file
-  ipcMain.handle('get-backup-sources',function(e,arg){
-
-      var mySources = fs.readFileSync('db/backupSources.json');
-      
-      mySources = JSON.parse(mySources);
-      console.log(mySources);
-      return mySources;
-  })
-
-  
-  createWindow();
-  app.on('activate', function () {
-    // On macOS it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
-  })
-
-
-
-})
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits

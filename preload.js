@@ -16,12 +16,15 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
   contextBridge.exposeInMainWorld('FOLDER_SELECTION',{
-    openDialog: () => ipcRenderer.invoke('open-folder-selection-dialog')
+    openDialog:     () => ipcRenderer.invoke('open-folder-selection-dialog'),
+    openDialogDest: () => ipcRenderer.invoke('open-dest-folder-selection-dialog')
   })
 
   contextBridge.exposeInMainWorld('FILE_IO',{
     saveJson: (mySources) => ipcRenderer.invoke('save-backup-sources',mySources),
-    getSources: () => ipcRenderer.invoke('get-backup-sources')
+    saveDest: (myDest) => ipcRenderer.invoke('save-backup-dest',myDest),
+    getSources: () => ipcRenderer.invoke('get-backup-sources'),
+    getDest: () => ipcRenderer.invoke('get-backup-dest')
   })
 
 });

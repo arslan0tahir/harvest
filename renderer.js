@@ -7,8 +7,57 @@
 var app = angular.module('myApp', []);
 app.controller('personCtrl', function($scope) {
 
+
+    $scope.firstName = "John";
+    $scope.lastName = "Doe";
+
+    $scope.sourceTemplate={
+        folderName  : "",
+        folderPath  : "",
+        toltalFiles : "",
+        folderSize  : "",
+        lastBackupDate : "n/a"
+    };
+
+    
+
+    $scope.mySources=[
+    ]
+
+    $scope.myDest=[
+    ]
+
+    $scope.myDestDefaults=[
+        {
+            folderAlias  : "Zdrive",
+            folderPath  : "\\127.0.0.1\share",        
+        }
+    ]
+
+    $scope.currDest={
+        folderAlias  : "",
+        folderPath  : "",        
+    };
+
+    $scope.sourceTemplate={
+        folderName  : "",
+        folderPath  : "",
+        toltalFiles : "",
+        folderSize  : "",
+        lastBackupDate : "n/a"
+    };
+
+    $scope.myActiveSummary={
+        fodlerPath  :   "",
+        toltalFiles :   "",
+        folderSize  :   "",
+        lastBackupDate : "",  
+    }
+    
+
     $scope.init= function () {
         //$scope.loadSources();
+        $scope.myDest=$scope.myDestDefaults;
         $scope.checkSummaryVisibility();
         
     }
@@ -16,11 +65,38 @@ app.controller('personCtrl', function($scope) {
 
     angular.element(document).ready(function () {        
         $scope.loadSources(); 
+        $scope.loadDest(); 
     }); 
 
     $scope.loadSources=async function(){
         $scope.mySources=await window.FILE_IO.getSources();
         $scope.$apply();
+    }
+
+    $scope.loadDest=async function(){
+        $scope.myDest=await window.FILE_IO.getDest();
+        $scope.$apply();
+    }
+
+    $scope.resetDefaultDest=async function(){
+        $scope.myDest=[
+            {
+                folderAlias  : "Zdrive",
+                folderPath  : "\\127.0.0.1\share",        
+            }
+        ]    
+        window.FILE_IO.saveDest(JSON.parse(angular.toJson($scope.myDest)));
+
+    }
+
+    $scope.resetDestDialog=async function(){
+        $scope.currDest={
+            folderAlias  : "",
+                folderPath  : "",        
+            }
+
+        
+        
     }
 
 
@@ -41,28 +117,7 @@ app.controller('personCtrl', function($scope) {
     }
 
 
-    $scope.firstName = "John";
-    $scope.lastName = "Doe";
 
-    $scope.sourceTemplate={
-        folderName  : "",
-        folderPath  : "",
-        toltalFiles : "",
-        folderSize  : "",
-        lastBackupDate : "n/a"
-    };
-
-    
-
-    $scope.mySources=[
-    ]
-
-    $scope.myActiveSummary={
-        fodlerPath  :   "",
-        toltalFiles :   "",
-        folderSize  :   "",
-        lastBackupDate : "",  
-    }
 
     $scope.fullName = function() {
         return $scope.firstName + " " + $scope.lastName;
@@ -99,10 +154,24 @@ app.controller('personCtrl', function($scope) {
         window.FILE_IO.saveJson(JSON.parse(angular.toJson($scope.mySources)));
         
     };
+    $scope.addDestinationFolder=function(){
+        if ($scope.currDest.folderPath==''){
+            return;
+        }
+
+        $scope.myDest.push($scope.currDest)
+                
+        window.FILE_IO.saveDest(JSON.parse(angular.toJson($scope.myDest)));     
+        $scope.resetDestDialog();   
+    };
 
     $scope.removeSourceFolder = function(x,$index){
         $scope.mySources.splice($index,1)
         window.FILE_IO.saveJson(JSON.parse(angular.toJson($scope.mySources)));        
+    }
+    $scope.removeDestFolder = function(x,$index){
+        $scope.myDest.splice($index,1)
+        window.FILE_IO.saveDest(JSON.parse(angular.toJson($scope.myDest)));        
     }
 
     $scope.resetDialog=() => {
@@ -121,10 +190,24 @@ app.controller('personCtrl', function($scope) {
         $scope.checkSummaryVisibility();
     }
 
+    $scope.openDialogDest=async () => {
+        
+
+        const folderDetails = await window.FOLDER_SELECTION.openDialogDest();        
+      
+        if (folderDetails.folderPath!=""){            
+            //update folder summary
+            
+            $scope.currDest.folderPath=folderDetails.folderPath;
+            
+
+        }
+        $scope.$apply();        
+      }
+
     $scope.openDialog=async () => {
         document.getElementById('folderSummaryLoading').style.visibility="visible";
-        document.getElementById('noFolderSelected').style.visibility="hidden";
-        
+        document.getElementById('noFolderSelected').style.visibility="hidden";        
       
         $scope.resetDialog();
         $scope.checkSummaryVisibility();
@@ -152,6 +235,7 @@ app.controller('personCtrl', function($scope) {
         document.getElementById('noFolderSelected').style.visibility="visible";
         $scope.$apply();        
       }
+
       $scope.getBackupSlot=function (min, max) { 
         var min=8;
         var max=16;   
