@@ -27,6 +27,16 @@ window.addEventListener('DOMContentLoaded', () => {
     getDest: () => ipcRenderer.invoke('get-backup-dest')
   })
 
+  contextBridge.exposeInMainWorld('BACKUP',{
+
+    startBackup: (myData) => ipcRenderer.invoke('start-backup',myData)
+
+  })
+
+  contextBridge.exposeInMainWorld('electronAPI', {
+    onStartStream: (callback) => ipcRenderer.on('test-stream', callback)
+  })
+
 });
 
 

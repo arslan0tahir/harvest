@@ -45,7 +45,7 @@
             <br>
             <div>  
               <!-- Sources List Control           -->
-              <div class="p-3 border">          
+              <div class="">          
             
                 <!-- Modal -->
                 <div style="padding: 0px;margin-top: 10px;">
@@ -53,7 +53,7 @@
                   <button ng-click="openModal()" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="margin: 5px;">
                     Add Backup Source
                   </button>
-                  <button ng-click="" type="button" class="btn btn-outline-primary" style="margin: 5px;">
+                  <button ng-click="startBackup()" type="button" class="btn btn-outline-primary" style="margin: 5px;" >
                     Start Backup
                   </button>
       
@@ -136,9 +136,8 @@
                   <tbody>
                     <tr ng-repeat="x in mySources" class="mySourcesRow">
                       <th scope="row">{{$index + 1}}</th>
-                      <td>
-                        
-                        {{x.fodlerPath}}
+                      <td>                        
+                        {{x.folderPath}}
                       </td>
                       <td> 
                         <div style="display: inline-block;" ng-if='x.isBackingUp==1'>
@@ -302,26 +301,23 @@
               </div>
             </div>
           </div>
-        </div>
-
-        
+        </div>       
         
       </div>
 
-      <footer class="text-center text-lg-start bg-light text-muted" style="position: fixed;width: 100%;bottom:0px">
+      
 
-     
 
-        <!-- Copyright -->
-        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-          © 2022 Copyright:
-          <a class="text-reset fw-bold" href="#">051-9321086</a>
-        </div>
-        <!-- Copyright -->
-      </footer>
     </div>
     
-
+    <footer class="text-center text-lg-start bg-light text-muted" style="position: fixed;width: 100%;bottom:0px">
+      <!-- Copyright -->
+      <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+        © 2022 Copyright:
+        <a class="text-reset fw-bold" href="#">051-9321086</a>
+      </div>
+      <!-- Copyright -->
+    </footer> 
     
     <!-- You can also require other files to run in this process -->
 

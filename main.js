@@ -116,6 +116,53 @@ if (!gotTheLock) {
       return myDest;
 
     })
+    
+    
+    ipcMain.handle('start-backup',function(e,myData){
+      const mySources=myData.sources;
+      const myDestinations=myData.destinations
+      
+      for (const key in mySources) {
+        if (mySources.hasOwnProperty(key)) {   
+          
+          mySources[key]["files"]=myFs.getAllFiles(mySources[key].folderPath);          
+
+          mySources[key]["folderName"]=mySources[key]["folderPath"].split("\\").pop();
+          console.log("### Folders Identified For Backup", mySources[key]["folderName"]) 
+
+         
+          
+          //check if folder exist in destination
+
+          //traverse source paths
+          //check if file already exist in dest
+          
+          //check dates
+
+          //if same do nothing
+          //if different copy the file
+        }
+      }
+
+      var sourcesLogPath='logs\\back-source-files-'+( Math.random() *1000000 ) +'.txt';
+      console.log("#########",sourcesLogPath)
+      try {
+        fs.writeFileSync(sourcesLogPath, JSON.stringify(mySources, null, 2));
+        // file written successfully
+      } catch (err) {
+        console.error(err);
+      }
+
+      
+
+      console.log("Backup Started",mySources,myDestinations)
+      return
+
+    })
+
+
+
+    
 
     
     createWindow();
@@ -141,7 +188,7 @@ function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
-    height: 600,
+    height:800,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     },
@@ -187,6 +234,14 @@ function createWindow () {
       }
       return false;
   });
+
+
+  function intervalFunc() {
+    mainWindow.webContents.send('test-stream', 1)
+    // console.log('Streaming now!');
+  }
+  
+  setInterval(intervalFunc, 2000);
 
   // mainWindow.on('show', function () {
   //     appIcon.setHighlightMode('always')

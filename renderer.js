@@ -48,12 +48,11 @@ app.controller('personCtrl', function($scope) {
     };
 
     $scope.myActiveSummary={
-        fodlerPath  :   "",
+        folderPath  :   "",
         toltalFiles :   "",
         folderSize  :   "",
         lastBackupDate : "",  
-    }
-    
+    }    
 
     $scope.init= function () {
         //$scope.loadSources();
@@ -62,10 +61,13 @@ app.controller('personCtrl', function($scope) {
         
     }
 
-
     angular.element(document).ready(function () {        
         $scope.loadSources(); 
         $scope.loadDest(); 
+
+        window.electronAPI.onStartStream((_event, value) => {
+            console.log("Stream Recieved")
+        })
     }); 
 
     $scope.loadSources=async function(){
@@ -86,18 +88,15 @@ app.controller('personCtrl', function($scope) {
             }
         ]    
         window.FILE_IO.saveDest(JSON.parse(angular.toJson($scope.myDest)));
-
     }
 
     $scope.resetDestDialog=async function(){
         $scope.currDest={
             folderAlias  : "",
                 folderPath  : "",        
-            }
-
-        
-        
+            }        
     }
+
 
 
     $scope.checkSummaryVisibility=function(){
@@ -125,7 +124,7 @@ app.controller('personCtrl', function($scope) {
     };
    
     $scope.myLoadSummary= function(d,$index){
-        $scope.myActiveSummary.folderPath       = d.fodlerPath;
+        $scope.myActiveSummary.folderPath       = d.folderPath;
         $scope.myActiveSummary.toltalFiles      = d.toltalFiles;
         $scope.myActiveSummary.folderSize       = d.folderSize;
         $scope.myActiveSummary.lastBackupDate   = d.lastBackupDate;             
@@ -144,7 +143,7 @@ app.controller('personCtrl', function($scope) {
 
         $scope.mySources.push({
             folderName  :   $scope.currsource.folderName,
-            fodlerPath  :   $scope.currsource.folderPath,
+            folderPath  :   $scope.currsource.folderPath,
             toltalFiles :   $scope.currsource.toltalFiles,
             folderSize  :   $scope.currsource.folderSize,
             lastBackupDate : "n/a",  
@@ -203,7 +202,7 @@ app.controller('personCtrl', function($scope) {
 
         }
         $scope.$apply();        
-      }
+    }
 
     $scope.openDialog=async () => {
         document.getElementById('folderSummaryLoading').style.visibility="visible";
@@ -234,30 +233,42 @@ app.controller('personCtrl', function($scope) {
         document.getElementById('folderSummaryLoading').style.visibility="hidden";
         document.getElementById('noFolderSelected').style.visibility="visible";
         $scope.$apply();        
-      }
+    }
 
-      $scope.getBackupSlot=function (min, max) { 
+    $scope.getBackupSlot=function (min, max) { 
         var min=8;
         var max=16;   
         var Hrs=Math.floor(
           Math.random() * (max - min) + min
-        ) 
+        )
 
         var min=1;
         var max=60;   
         var Min=Math.floor(
           Math.random() * (max - min) + min
-        )
-        
+        )        
         var myToday= new Date();
+    }
 
+    $scope.startBackup=async () => {
+        console.log("RENDERER In start Backup")
+        await window.BACKUP.startBackup({
+            sources     : $scope.mySources,
+            destinations : $scope.myDest
+        }); 
+        
+        
+    }
 
-      }
 });
 
 
 const btn = document.getElementById('myFolder')
 document.getElementById('folderSummaryLoading').style.visibility="hidden"
+
+
+
+
 
 // btn.addEventListener('click', )
 

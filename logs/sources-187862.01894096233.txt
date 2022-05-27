@@ -1,11 +1,16 @@
 [
   {
-    "folderName": "",
+    "folderName": "arshad",
     "folderPath": "E:\\arshad",
     "toltalFiles": 2,
     "folderSize": "64.5 MB",
     "lastBackupDate": "n/a",
-    "isBackingUp": 0
+    "isBackingUp": 0,
+    "$$hashKey": "object:6",
+    "files": [
+      "E:\\arshad\\iaea-te_1333.pdf",
+      "E:\\arshad\\seismic evaluation DOE-EH-0545.pdf"
+    ]
   },
   {
     "folderName": "",
@@ -13,7 +18,8 @@
     "toltalFiles": 9,
     "folderSize": "87.2 MB",
     "lastBackupDate": "n/a",
-    "isBackingUp": 0
+    "isBackingUp": 0,
+    "$$hashKey": "object:7"
   },
   {
     "folderName": "",
@@ -21,6 +27,7 @@
     "toltalFiles": 7348,
     "folderSize": "85.0 GB",
     "lastBackupDate": "n/a",
-    "isBackingUp": 0
+    "isBackingUp": 0,
+    "$$hashKey": "object:8"
   }
 ]
