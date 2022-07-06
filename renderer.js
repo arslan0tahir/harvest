@@ -30,7 +30,7 @@ app.controller('personCtrl', function($scope) {
     $scope.myDestDefaults=[
         {
             folderAlias  : "Zdrive",
-            folderPath  : "\\127.0.0.1\share",        
+            folderPath  : "\\\\127.0.0.1\\share",        
         }
     ]
 
@@ -57,8 +57,7 @@ app.controller('personCtrl', function($scope) {
     $scope.init= function () {
         //$scope.loadSources();
         $scope.myDest=$scope.myDestDefaults;
-        $scope.checkSummaryVisibility();
-        
+        $scope.checkSummaryVisibility();        
     }
 
     angular.element(document).ready(function () {        
@@ -84,7 +83,7 @@ app.controller('personCtrl', function($scope) {
         $scope.myDest=[
             {
                 folderAlias  : "Zdrive",
-                folderPath  : "\\127.0.0.1\share",        
+                folderPath  : "\\\\127.0.0.1\\share",        
             }
         ]    
         window.FILE_IO.saveDest(JSON.parse(angular.toJson($scope.myDest)));

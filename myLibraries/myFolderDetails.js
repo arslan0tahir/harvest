@@ -1,6 +1,6 @@
 const fs = require("fs")
 const path = require("path")
-
+var progress = require('progress-stream');
 
 const getAllFiles = function(dirPath, arrayOfFiles) {
   files = fs.readdirSync(dirPath)
@@ -56,7 +56,52 @@ const getFolderSummary = function(directoryPath) {
   return summ
 }
 
+/**
+ * Return Promise to Copy Files
+ * @param  {String} source Source File Path
+ * @param  {String} destination Destination File Path
+ * @return {Promise} Return Promise
+ */
+ const myCopyFile = function (source,destination) { 
+
+  let myCopyPromise=new Promise((resolve,reject) => {
+    var stat = fs.statSync(source);
+    var str = progress({
+        length: stat.size,
+        time: 5000 /* ms */
+    });
+    
+    str.on('progress', function(progress) {
+        console.log(progress);
+    
+        /*
+        {
+            percentage: 9.05,
+            transferred: 949624,
+            length: 10485760,
+            remaining: 9536136,
+            eta: 42,
+            runtime: 3,
+            delta: 295396,
+            speed: 949624
+        }
+        */
+    });
+    console.log(destination)
+    let writeStream=fs.createWriteStream(destination);
+    let readStream=fs.createReadStream(source);
+    readStream.pipe(str).pipe(writeStream);
+    
+    writeStream.on("finish",()=>(resolve("Copied "+source)))
+    writeStream.on("error",()=>(reject("!!ERROR "+source)))
+    
+    
+  })
+  return myCopyPromise;      
+}
+
 
 exports.getFolderSummary = getFolderSummary;
 exports.getAllFiles = getAllFiles;
+exports.myCopyFile=myCopyFile;
 // const result = getTotalSize("./my-directory")

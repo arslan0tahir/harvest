@@ -1,0 +1,7 @@
+[
+  {
+    "folderAlias": "hTest",
+    "folderPath": "E:\\hTest\\Destination",
+    "$$hashKey": "object:9"
+  }
+]

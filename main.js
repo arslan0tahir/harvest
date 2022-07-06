@@ -4,6 +4,7 @@ const fs = require('fs');
 const myFs=require('./myLibraries/myFolderDetails')
 const path = require('path')
 const util = require('util');
+var progress = require('progress-stream');
 
 
 
@@ -74,7 +75,7 @@ if (!gotTheLock) {
       let data = JSON.stringify(mySources, null, 2);
       fs.writeFile('db/backupSources.json', data, (err) => {
         if (err) throw err;
-        console.log('Sources updated');
+        
       });
     
       
@@ -84,10 +85,8 @@ if (!gotTheLock) {
     ipcMain.handle('save-backup-dest',function(e,myDest){
       
       let data = JSON.stringify(myDest, null, 2);
-      console.log("myDest"+data);
       fs.writeFile('db/backupDest.json', data, (err) => {
-        if (err) throw err;
-        console.log('Dest  updated');
+        if (err) throw err;        
       });
       
   
@@ -103,9 +102,8 @@ if (!gotTheLock) {
         }
         else{
           mySources=[];
-        }
-        
-        console.log(mySources);
+        }        
+
         return mySources;
     })
 
@@ -118,49 +116,127 @@ if (!gotTheLock) {
     })
     
     
-    ipcMain.handle('start-backup',function(e,myData){
+    ipcMain.handle('start-backup',async function(e,myData){
       const mySources=myData.sources;
       const myDestinations=myData.destinations
       
+
+      //make log folder for backup session
+      dirPath='logs\\backup-session-'+new Date().toISOString().replaceAll(":","x");
+      fs.mkdirSync(dirPath);
+      
+      
+
+      // Preparing and appending additional sources data in mySources array 
       for (const key in mySources) {
         if (mySources.hasOwnProperty(key)) {   
           
-          mySources[key]["files"]=myFs.getAllFiles(mySources[key].folderPath);          
-
+          
+          //Append folder name and file paths in each item of "mySources" array (json objects)
+          mySources[key]["files"]=myFs.getAllFiles(mySources[key].folderPath);   
           mySources[key]["folderName"]=mySources[key]["folderPath"].split("\\").pop();
-          console.log("### Folders Identified For Backup", mySources[key]["folderName"]) 
 
          
-          
-          //check if folder exist in destination
-
-          //traverse source paths
-          //check if file already exist in dest
-          
-          //check dates
-
-          //if same do nothing
-          //if different copy the file
         }
       }
 
-      var sourcesLogPath='logs\\back-source-files-'+( Math.random() *1000000 ) +'.txt';
-      console.log("#########",sourcesLogPath)
+
+
+      //loging sources information
       try {
-        fs.writeFileSync(sourcesLogPath, JSON.stringify(mySources, null, 2));
+        fs.writeFileSync(dirPath+"\\sources.txt", JSON.stringify(mySources, null, 2));
+        // file written successfully
+      } catch (err) {        
+        console.error(err);
+      }
+
+      //loging destination information
+      try {
+        fs.writeFileSync(dirPath+"\\destinations.txt", JSON.stringify(myDestinations, null, 2));
         // file written successfully
       } catch (err) {
         console.error(err);
       }
 
-      
+      //log sources and destinations
 
-      console.log("Backup Started",mySources,myDestinations)
+
+
+      //Initializing Replication of source data to destination folders.
+      //loop myDestinations 
+     
+      for (const key in myDestinations) {
+        
+        var currDestPath=myDestinations[key]
+        //loop sources
+        for (const key in mySources) {
+
+          var sourceFilePaths=mySources[key].files;
+          var sourceFolderPath=mySources[key].folderPath;
+          
+          //loop all sources files        
+          console.log("test...............")
+          for (const key in sourceFilePaths){
+            
+            var currSourceFilePath=sourceFilePaths[key];
+            var relativeSourceFilePath=currSourceFilePath.split(sourceFolderPath)[1];
+            var calculatedDestinationFilePath=currDestPath.folderPath+relativeSourceFilePath
+
+            //reading stats of source and destination files
+            let sourceStats
+            let destStats
+            try {
+              sourceStats = fs.statSync(currSourceFilePath);             
+            } catch (err) {
+              sourceStats={};
+              console.error(err);
+            }
+
+            try {
+              destStats = fs.statSync(calculatedDestinationFilePath);
+            } catch (err) {
+              destStats={};
+              console.error(err);
+            }
+
+            //check if file in source fiolder is an old one or new one
+            if(sourceStats.mtime!=destStats.mtime || sourceStats.size!=destStats.size ){
+              await myFs.myCopyFile(currSourceFilePath,calculatedDestinationFilePath);
+            }
+            else{
+
+            }
+
+            
+
+
+          }            
+
+        }
+                //if file does not exist in detination
+                  //copy files in destination one by one
+                //if file  with same mData and size exist
+                  //do nothing
+
+      
+      //purging
+        // loop all destinations one by one
+          //loop all destination files
+            //check if file exists in sources 
+              //retian that file in destination
+            //if file does not exist in sources
+              //delete file in destination.
+      
+      
+      }
+
       return
 
-    })
+    })    
 
 
+
+    
 
     
 
