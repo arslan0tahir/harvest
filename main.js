@@ -188,30 +188,33 @@ if (!gotTheLock) {
             try {
               sourceStats = fs.statSync(currSourceFilePath);             
             } catch (err) {
-              sourceStats={};
-              console.error(err);
+              break;
+              // sourceStats={};
+              // console.error(err);              
             }
 
             try {
               destStats = fs.statSync(calculatedDestinationFilePath);
             } catch (err) {
-              destStats={};
-              console.error(err);
+              // console.error(err);
             }
 
             //check if file in source fiolder is an old one or new one
-            if(sourceStats.mtime!=destStats.mtime || sourceStats.size!=destStats.size ){
+            if ( destStats == undefined){              
               await myFs.myCopyFile(currSourceFilePath,calculatedDestinationFilePath);
+              fs.utimesSync(calculatedDestinationFilePath, sourceStats.atime, sourceStats.mtime);                                    
             }
-            else{
-
-            }
-
+            else{                    
+                if((sourceStats.mtime.getTime() == destStats.mtime.getTime() ) && (sourceStats.size == destStats.size) ){
+                  console.log("File already exist")
+                }
+                else{                  
+                  await myFs.myCopyFile(currSourceFilePath,calculatedDestinationFilePath);
+                  fs.utimesSync(calculatedDestinationFilePath, sourceStats.atime, sourceStats.mtime);          
+                }
             
-
-
-          }            
-
+            }
+          } 
         }
                 //if file does not exist in detination
                   //copy files in destination one by one
