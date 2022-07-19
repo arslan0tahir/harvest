@@ -62,17 +62,19 @@ const getFolderSummary = function(directoryPath) {
  * @param  {String} destination Destination File Path
  * @return {Promise} Return Promise
  */
- const myCopyFile = function (source,destination) { 
+ const myCopyFile = (source,destination,streamStatus,writeStreamStatusToRendrer)=> { 
 
   let myCopyPromise=new Promise((resolve,reject) => {
     var stat = fs.statSync(source);
     var str = progress({
         length: stat.size,
-        time: 5000 /* ms */
+        time: 1000 /* ms */
     });
     
     str.on('progress', function(progress) {
-        console.log(progress);
+      streamStatus["currFileProgress"]=progress;
+      writeStreamStatusToRendrer(streamStatus);
+      // console.log(progress);
     
         /*
         {

@@ -116,7 +116,7 @@ if (!gotTheLock) {
     })
     
     
-    ipcMain.handle('start-backup',async function(e,myData){
+    ipcMain.handle('start-backup',async (e,myData)=>{
       const mySources=myData.sources;
       const myDestinations=myData.destinations
       
@@ -168,12 +168,21 @@ if (!gotTheLock) {
       for (const key in myDestinations) {
         
         var currDestPath=myDestinations[key]
+        var currDest={
+          currCount:  Number(key)+1,
+          totalCount: myDestinations.length,
+          destPath:   myDestinations[key]
+        }
         //loop sources
         for (const key in mySources) {
 
           var sourceFilePaths=mySources[key].files;
           var sourceFolderPath=mySources[key].folderPath;
-          
+          var currSource={
+            currCount:    Number(key)+1,
+            totalCount:   mySources.length,
+            sourcePath:   mySources[key].folderPath
+          }
           //loop all sources files        
           console.log("test...............")
           for (const key in sourceFilePaths){
@@ -181,7 +190,11 @@ if (!gotTheLock) {
             var currSourceFilePath=sourceFilePaths[key];
             var relativeSourceFilePath=currSourceFilePath.split(sourceFolderPath)[1];
             var calculatedDestinationFilePath=currDestPath.folderPath+relativeSourceFilePath
-
+            var currSourceFile={
+              currCount:    Number(key)+1,
+              totalCount:   sourceFilePaths.length,
+              sourcePath:   currSourceFilePath
+            }
             //reading stats of source and destination files
             let sourceStats
             let destStats
@@ -199,9 +212,16 @@ if (!gotTheLock) {
               // console.error(err);
             }
 
-            //check if file in source fiolder is an old one or new one
+            
+            var streamStatus={
+              currDest: currDest,
+              currSource: currSource,
+              currSourceFile: currSourceFile
+            }
+            
+            //check if file in source folder is an old one or new one
             if ( destStats == undefined){              
-              await myFs.myCopyFile(currSourceFilePath,calculatedDestinationFilePath);
+              await myFs.myCopyFile(currSourceFilePath,calculatedDestinationFilePath,streamStatus,writeStreamStatusToRendrer);
               fs.utimesSync(calculatedDestinationFilePath, sourceStats.atime, sourceStats.mtime);                                    
             }
             else{                    
@@ -209,7 +229,7 @@ if (!gotTheLock) {
                   console.log("File already exist")
                 }
                 else{                  
-                  await myFs.myCopyFile(currSourceFilePath,calculatedDestinationFilePath);
+                  await myFs.myCopyFile(currSourceFilePath,calculatedDestinationFilePath,streamStatus,writeStreamStatusToRendrer);
                   fs.utimesSync(calculatedDestinationFilePath, sourceStats.atime, sourceStats.mtime);          
                 }
             
@@ -260,7 +280,7 @@ if (!gotTheLock) {
 
 
 
-
+var writeStreamStatusToRendrer
 var iconpath = path.join(__dirname, 'icon.png')
 function createWindow () {
   
@@ -315,12 +335,12 @@ function createWindow () {
   });
 
 
-  function intervalFunc() {
-    mainWindow.webContents.send('test-stream', 1)
+  writeStreamStatusToRendrer=(data)=> {
+    mainWindow.webContents.send('write-stream-status', data)
     // console.log('Streaming now!');
   }
   
-  setInterval(intervalFunc, 2000);
+  // setInterval(copyFileStreamStatus, 2000);
 
   // mainWindow.on('show', function () {
   //     appIcon.setHighlightMode('always')

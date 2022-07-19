@@ -64,8 +64,8 @@ app.controller('personCtrl', function($scope) {
         $scope.loadSources(); 
         $scope.loadDest(); 
 
-        window.electronAPI.onStartStream((_event, value) => {
-            console.log("Stream Recieved")
+        window.electronAPI.onWriteStreamStatus((_event, value) => {
+            console.log(value)
         })
     }); 
 

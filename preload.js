@@ -34,7 +34,7 @@ window.addEventListener('DOMContentLoaded', () => {
   })
 
   contextBridge.exposeInMainWorld('electronAPI', {
-    onStartStream: (callback) => ipcRenderer.on('test-stream', callback)
+    onWriteStreamStatus: (callback) => ipcRenderer.on('write-stream-status', callback)
   })
 
 });
