@@ -90,9 +90,23 @@ const getFolderSummary = function(directoryPath) {
         */
     });
     console.log(destination)
+    console.log(source)
+
+    var destFolder=destination.split("\\");
+    destFolder.pop()
+    destFolder=destFolder.join("\\");
+
+    if (!fs.existsSync(destFolder)) {
+      fs.mkdirSync(destFolder, {
+        recursive: true
+      });
+    }
+
     let writeStream=fs.createWriteStream(destination);
     let readStream=fs.createReadStream(source);
     readStream.pipe(str).pipe(writeStream);
+
+
     
     writeStream.on("finish",()=>(resolve("Copied "+source)))
     writeStream.on("error",()=>(reject("!!ERROR "+source)))

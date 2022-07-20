@@ -142,7 +142,15 @@
                       <td> 
                         <div style="display: inline-block;" ng-if='x.isBackingUp==1'>
                           <div  class="spinner-grow text-primary" role="status" style="width: 1rem; height: 1rem;"></div> 
-                          Backing Up                
+                          Backing Up 
+                          <span><b>D </b><span style="color: darkgreen;">{{x.StatusSummary.currDestCount}}</span></span>
+                          <span><b>F </b><span style="color: darkgreen;">{{x.StatusSummary.currSourceFileCount}} of {{x.StatusSummary.currSourceFileTotalCount}}</span></span>
+                          <span><b>P </b><span style="color: darkgreen;">{{x.StatusSummary.currFileProgress}}</span></span>
+
+                            <!-- currDestCount:              status.currDest.currCount,
+                    currSourceFileCount:        status.currSourceFile.currCount,
+                    currSourceFileTotalCount:   status.currSourceFile.totalCount,
+                    currFileProgress:           status.currFileProgress.percentage.toFixed(1)                -->
                         </div>
                         <div ng-if='x.isBackingUp==0' style="display: inline-block;font-size: small;">{{x.lastBackupDate}}</div>
                       </td>                

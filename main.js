@@ -4,6 +4,8 @@ const fs = require('fs');
 const myFs=require('./myLibraries/myFolderDetails')
 const path = require('path')
 const util = require('util');
+const myTime=require('./myLibraries/myTime')
+const myLogger=require('./myLibraries/myLogger')
 var progress = require('progress-stream');
 
 
@@ -121,11 +123,7 @@ if (!gotTheLock) {
       const myDestinations=myData.destinations
       
 
-      //make log folder for backup session
-      dirPath='logs\\backup-session-'+new Date().toISOString().replaceAll(":","x");
-      fs.mkdirSync(dirPath);
-      
-      
+    
 
       // Preparing and appending additional sources data in mySources array 
       for (const key in mySources) {
@@ -141,24 +139,12 @@ if (!gotTheLock) {
       }
 
 
-
-      //loging sources information
-      try {
-        fs.writeFileSync(dirPath+"\\sources.txt", JSON.stringify(mySources, null, 2));
-        // file written successfully
-      } catch (err) {        
-        console.error(err);
+      logData={
+        mySources:      mySources,
+        myDestinations: myDestinations
       }
-
-      //loging destination information
-      try {
-        fs.writeFileSync(dirPath+"\\destinations.txt", JSON.stringify(myDestinations, null, 2));
-        // file written successfully
-      } catch (err) {
-        console.error(err);
-      }
-
-      //log sources and destinations
+      myLogger.purgeLog() //purge old log files
+      myLogger.generateLog(logData)     
 
 
 
@@ -213,10 +199,12 @@ if (!gotTheLock) {
             }
 
             
+            //stramStatus holds complete summary of real time copy stream
             var streamStatus={
               currDest: currDest,
               currSource: currSource,
-              currSourceFile: currSourceFile
+              currSourceFile: currSourceFile,
+              currTime: myTime.formattedTime()
             }
             
             //check if file in source folder is an old one or new one
@@ -231,8 +219,7 @@ if (!gotTheLock) {
                 else{                  
                   await myFs.myCopyFile(currSourceFilePath,calculatedDestinationFilePath,streamStatus,writeStreamStatusToRendrer);
                   fs.utimesSync(calculatedDestinationFilePath, sourceStats.atime, sourceStats.mtime);          
-                }
-            
+                }            
             }
           } 
         }

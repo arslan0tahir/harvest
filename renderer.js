@@ -64,8 +64,38 @@ app.controller('personCtrl', function($scope) {
         $scope.loadSources(); 
         $scope.loadDest(); 
 
-        window.electronAPI.onWriteStreamStatus((_event, value) => {
-            console.log(value)
+        //show percetages and status of write stream
+        window.electronAPI.onWriteStreamStatus((_event, status) => {     
+            
+            
+
+            let activeSource=$scope.mySources[Number(status.currSource.currCount)-1]
+            
+            if(activeSource.folderPath==status.currSource.sourcePath){      
+
+                activeSource.isBackingUp=1;
+                //preparing $scope to be updated by angular
+                activeSource.StatusSummary={
+                    currDestCount:              status.currDest.currCount,
+                    currSourceFileCount:        status.currSourceFile.currCount,
+                    currSourceFileTotalCount:   status.currSourceFile.totalCount,
+                    currFileProgress:           status.currFileProgress.percentage.toFixed(1)
+                }
+
+                // activeSource.StatusSummary="D:"+status.currDest.currCount+" F:"+status.currSourceFile.currCount+" of "+status.currSourceFile.totalCount+" P:"+ status.currFileProgress.percentage.toFixed(1)//summary
+
+                if (status.currFileProgress.percentage==100 && status.currSourceFile.currCount==status.currSourceFile.totalCount && status.currDest.currCount==status.currDest.totalCount){
+                    activeSource.isBackingUp=0;
+                    activeSource.StatusSummary=""
+                }
+            }
+            else{
+                console.log("Mismached Sources")
+            }
+
+            
+            console.log(status)
+            $scope.$apply();
         })
     }); 
 

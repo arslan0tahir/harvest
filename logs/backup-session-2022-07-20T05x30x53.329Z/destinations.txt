@@ -1,0 +1,12 @@
+[
+  {
+    "folderAlias": "hTest",
+    "folderPath": "E:\\hTest\\Destination",
+    "$$hashKey": "object:12"
+  },
+  {
+    "folderAlias": "d2",
+    "folderPath": "E:\\hTest\\d2",
+    "$$hashKey": "object:13"
+  }
+]
