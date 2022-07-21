@@ -6,6 +6,11 @@ const path = require('path')
 const util = require('util');
 const myTime=require('./myLibraries/myTime')
 const myLogger=require('./myLibraries/myLogger')
+const myDbHandlers=require('./myLibraries/myDbHandlers')
+const myUiHandlers=require('./myLibraries/myUiHandlers')
+const myWindow=require('./myLibraries/electronWindow')
+
+
 var progress = require('progress-stream');
 
 
@@ -71,178 +76,14 @@ if (!gotTheLock) {
     })
 
     //save backup sources to a text file
-    ipcMain.handle('save-backup-sources',function(e,mySources){
-
-      
-      let data = JSON.stringify(mySources, null, 2);
-      fs.writeFile('db/backupSources.json', data, (err) => {
-        if (err) throw err;
-        
-      });
-    
-      
-  
-    })
-
-    ipcMain.handle('save-backup-dest',function(e,myDest){
-      
-      let data = JSON.stringify(myDest, null, 2);
-      fs.writeFile('db/backupDest.json', data, (err) => {
-        if (err) throw err;        
-      });
-      
-  
-    })
+    ipcMain.handle('save-backup-sources',myDbHandlers.saveBackupSources)
+    ipcMain.handle('save-backup-dest',myDbHandlers.saveBackupDest)
 
 
     //read backup sources from a text file
-    ipcMain.handle('get-backup-sources',function(e,arg){
-
-        var mySources = fs.readFileSync('db/backupSources.json');
-        if (mySources!=""){
-          mySources = JSON.parse(mySources);
-        }
-        else{
-          mySources=[];
-        }        
-
-        return mySources;
-    })
-
-    ipcMain.handle('get-backup-dest',function(e,arg){
-
-      var myDest = fs.readFileSync('db/backupDest.json');    
-      myDest = JSON.parse(myDest);
-      return myDest;
-
-    })
-    
-    
-    ipcMain.handle('start-backup',async (e,myData)=>{
-      const mySources=myData.sources;
-      const myDestinations=myData.destinations
-      
-
-    
-
-      // Preparing and appending additional sources data in mySources array 
-      for (const key in mySources) {
-        if (mySources.hasOwnProperty(key)) {   
-          
-          
-          //Append folder name and file paths in each item of "mySources" array (json objects)
-          mySources[key]["files"]=myFs.getAllFiles(mySources[key].folderPath);   
-          mySources[key]["folderName"]=mySources[key]["folderPath"].split("\\").pop();
-
-         
-        }
-      }
-
-
-      logData={
-        mySources:      mySources,
-        myDestinations: myDestinations
-      }
-      myLogger.purgeLog() //purge old log files
-      myLogger.generateLog(logData)     
-
-
-
-      //Initializing Replication of source data to destination folders.
-      //loop myDestinations 
-     
-      for (const key in myDestinations) {
-        
-        var currDestPath=myDestinations[key]
-        var currDest={
-          currCount:  Number(key)+1,
-          totalCount: myDestinations.length,
-          destPath:   myDestinations[key]
-        }
-        //loop sources
-        for (const key in mySources) {
-
-          var sourceFilePaths=mySources[key].files;
-          var sourceFolderPath=mySources[key].folderPath;
-          var currSource={
-            currCount:    Number(key)+1,
-            totalCount:   mySources.length,
-            sourcePath:   mySources[key].folderPath
-          }
-          //loop all sources files        
-          console.log("test...............")
-          for (const key in sourceFilePaths){
-            
-            var currSourceFilePath=sourceFilePaths[key];
-            var relativeSourceFilePath=currSourceFilePath.split(sourceFolderPath)[1];
-            var calculatedDestinationFilePath=currDestPath.folderPath+relativeSourceFilePath
-            var currSourceFile={
-              currCount:    Number(key)+1,
-              totalCount:   sourceFilePaths.length,
-              sourcePath:   currSourceFilePath
-            }
-            //reading stats of source and destination files
-            let sourceStats
-            let destStats
-            try {
-              sourceStats = fs.statSync(currSourceFilePath);             
-            } catch (err) {
-              break;
-              // sourceStats={};
-              // console.error(err);              
-            }
-
-            try {
-              destStats = fs.statSync(calculatedDestinationFilePath);
-            } catch (err) {
-              // console.error(err);
-            }
-
-            
-            //stramStatus holds complete summary of real time copy stream
-            var streamStatus={
-              currDest: currDest,
-              currSource: currSource,
-              currSourceFile: currSourceFile,
-              currTime: myTime.formattedTime()
-            }
-            
-            //check if file in source folder is an old one or new one
-            if ( destStats == undefined){              
-              await myFs.myCopyFile(currSourceFilePath,calculatedDestinationFilePath,streamStatus,writeStreamStatusToRendrer);
-              fs.utimesSync(calculatedDestinationFilePath, sourceStats.atime, sourceStats.mtime);                                    
-            }
-            else{                    
-                if((sourceStats.mtime.getTime() == destStats.mtime.getTime() ) && (sourceStats.size == destStats.size) ){
-                  console.log("File already exist")
-                }
-                else{                  
-                  await myFs.myCopyFile(currSourceFilePath,calculatedDestinationFilePath,streamStatus,writeStreamStatusToRendrer);
-                  fs.utimesSync(calculatedDestinationFilePath, sourceStats.atime, sourceStats.mtime);          
-                }            
-            }
-          } 
-        }
-                //if file does not exist in detination
-                  //copy files in destination one by one
-                //if file  with same mData and size exist
-                  //do nothing
-
-      
-      //purging
-        // loop all destinations one by one
-          //loop all destination files
-            //check if file exists in sources 
-              //retian that file in destination
-            //if file does not exist in sources
-              //delete file in destination.
-      
-      
-      }
-
-      return
-
-    })    
+    ipcMain.handle('get-backup-sources',myDbHandlers.getBackupSources)
+    ipcMain.handle('get-backup-dest',myDbHandlers.getBackupDest)
+    ipcMain.handle('start-backup',myUiHandlers.startBackupHandler)    
 
 
 
@@ -250,8 +91,9 @@ if (!gotTheLock) {
 
     
 
-    
-    createWindow();
+    myWindow.createWindow();
+    mainWindow=myWindow.getWindow()
+
     app.on('activate', function () {
       // On macOS it's common to re-create a window in the app when the
       // dock icon is clicked and there are no other windows open.
@@ -267,75 +109,64 @@ if (!gotTheLock) {
 
 
 
-var writeStreamStatusToRendrer
-var iconpath = path.join(__dirname, 'icon.png')
-function createWindow () {
+
+
+
+// function createWindow () {
   
-  // Create the browser window.
-  const mainWindow = new BrowserWindow({
-    width: 800,
-    height:800,
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
-    },
-    icon: iconpath,
-  })
+//   // Create the browser window.
+//   const mainWindow = new BrowserWindow({
+//     width: 800,
+//     height:800,
+//     webPreferences: {
+//       preload: path.join(__dirname, 'preload.js')
+//     },
+//     icon: iconpath,
+//   })
 
-  // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
+//   // and load the index.html of the app.
+//   mainWindow.loadFile('index.html')
   
 
-  // Creating System Tray
-  var trayIcon = new Tray(iconpath)
-  var contextMenu = Menu.buildFromTemplate([
-      {
-          label: 'Show App', click: function () {
-              mainWindow.show()
-          }
-      },
-      {
-          label: 'Quit', click: function () {
-              app.isQuiting = true
-              app.quit()
-          }
-      }
-  ])
-  trayIcon.setContextMenu(contextMenu)
+//   // Creating System Tray
+//   var trayIcon = new Tray(iconpath)
+//   var contextMenu = Menu.buildFromTemplate([
+//       {
+//           label: 'Show App', click: function () {
+//               mainWindow.show()
+//           }
+//       },
+//       {
+//           label: 'Quit', click: function () {
+//               app.isQuiting = true
+//               app.quit()
+//           }
+//       }
+//   ])
+//   trayIcon.setContextMenu(contextMenu)
 
 
-  // dialog box to get folder name  
+//   // dialog box to get folder name  
 
 
-  // onMinimize hide to system tray
-  mainWindow.on('minimize',function(event){
-    event.preventDefault();
-    mainWindow.hide();
-  });
+//   // onMinimize hide to system tray
+//   mainWindow.on('minimize',function(event){
+//     event.preventDefault();
+//     mainWindow.hide();
+//   });
 
-  // onClose hide to system tray
-  mainWindow.on('close', function (event) {
-      if(!app.isQuiting){
-          event.preventDefault();
-          mainWindow.hide();
-      }
-      return false;
-  });
+//   // onClose hide to system tray
+//   mainWindow.on('close', function (event) {
+//       if(!app.isQuiting){
+//           event.preventDefault();
+//           mainWindow.hide();
+//       }
+//       return false;
+//   });
 
 
-  writeStreamStatusToRendrer=(data)=> {
-    mainWindow.webContents.send('write-stream-status', data)
-    // console.log('Streaming now!');
-  }
-  
-  // setInterval(copyFileStreamStatus, 2000);
 
-  // mainWindow.on('show', function () {
-  //     appIcon.setHighlightMode('always')
-  // })
-
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
-}
+// }
 
 
 
