@@ -1,0 +1,115 @@
+const myLogger=require('./myLogger')
+const myFs=require('./myFolderOpHandler')
+const myTime=require('./myTime')
+const myWindow=require('./electronWindow')
+const myDbHandlers=require('./myDbHandlers')
+
+
+
+
+var startBackupHandler=async (e,myData)=>{
+    const mySources=myData.sources;
+    const myDestinations=myData.destinations
+  
+
+    // Preparing and appending additional sources data in mySources array 
+    for (const key in mySources) {
+      if (mySources.hasOwnProperty(key)) {   
+        
+        
+        //Append folder name and file paths in each item of "mySources" array (json objects)
+        mySources[key]["files"]=myFs.getAllFiles(mySources[key].folderPath);   
+        mySources[key]["folderName"]=mySources[key]["folderPath"].split("\\").pop();
+
+       
+      }
+    }
+
+
+    let logData={
+      mySources:      mySources,
+      myDestinations: myDestinations
+    }
+    myLogger.generateLogSession();
+    myLogger.purgeLog() //purge old log files
+    myLogger.generateLog(logData)     
+
+
+
+    //Initializing Replication of source data to destination folders.
+    //loop myDestinations   
+    var streamStatus   
+    for (const key in myDestinations) {
+      
+      var currDestPath=myDestinations[key]
+      var currDest={
+        currCount:  Number(key)+1,
+        totalCount: myDestinations.length,
+        destPath:   myDestinations[key]
+      }
+      //loop sources
+      for (const key in mySources) {
+
+        var sourceFilePaths=mySources[key].files;
+        var sourceFolderPath=mySources[key].folderPath;
+        var currSource={
+          currCount:    Number(key)+1,
+          totalCount:   mySources.length,
+          sourcePath:   mySources[key].folderPath
+        }
+        //loop all sources files       
+       
+        for (const key in sourceFilePaths){
+          
+          var currSourceFilePath=sourceFilePaths[key];
+          var relativeSourceFilePath=currSourceFilePath.split(sourceFolderPath)[1];
+          var calculatedDestinationFilePath=currDestPath.folderPath+relativeSourceFilePath
+          var currSourceFile={
+            currCount:    Number(key)+1,
+            totalCount:   sourceFilePaths.length,
+            sourcePath:   currSourceFilePath
+          }
+
+          //stramStatus holds complete summary of real time copy stream
+          streamStatus={
+            currDest: currDest,
+            currSource: currSource,
+            currSourceFile: currSourceFile,
+            currTime: myTime.formattedTime()
+          }
+          
+          
+          await myFs.myCopyFile(currSourceFilePath,calculatedDestinationFilePath,streamStatus,writeStreamStatusToRendrer); 
+           
+        }
+
+        myDbHandlers.updateLastBackupDateInSourceDb(streamStatus)   
+
+      }
+      myFs.purgeDestination(myDestinations[key])
+    
+    //purging
+      // loop all destinations one by one
+        //loop all destination files
+          //check if file exists in sources 
+            //retian that file in destination
+          //if file does not exist in sources
+            //delete file in destination.
+    
+    
+    }
+
+    return
+
+}
+
+
+const writeStreamStatusToRendrer=(data)=> {
+    let mainWindow=myWindow.getWindow();
+    mainWindow.webContents.send('write-stream-status', data)
+}
+
+
+
+
+exports.startBackupHandler = startBackupHandler;

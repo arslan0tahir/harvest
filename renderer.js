@@ -86,6 +86,9 @@ app.controller('personCtrl', function($scope) {
 
                 if (status.currFileProgress.percentage==100 && status.currSourceFile.currCount==status.currSourceFile.totalCount && status.currDest.currCount==status.currDest.totalCount){
                     activeSource.isBackingUp=0;
+                    if(activeSource.lastBackupDate){
+                        activeSource.lastBackupDate=status.currTime;
+                    }
                     activeSource.StatusSummary=""
                 }
             }

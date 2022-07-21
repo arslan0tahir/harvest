@@ -1,0 +1,14 @@
+FOUND E:\hTest\Destination\files\305.pdf @AT@ E:\hTest\source2\files\305.pdf
+FOUND E:\hTest\Destination\files\IJSTEV4I8030.pdf @AT@ E:\hTest\source2\files\IJSTEV4I8030.pdf
+FOUND E:\hTest\Destination\files\isotopylog-0.0.7.tar.gz @AT@ E:\hTest\source2\files\isotopylog-0.0.7.tar.gz
+FOUND E:\hTest\Destination\files\mcnp_input_reader-0.1.8.tar.gz @AT@ E:\hTest\source2\files\mcnp_input_reader-0.1.8.tar.gz
+FOUND E:\hTest\Destination\test.txt @AT@ E:\hTest\Source\test.txt
+FOUND E:\hTest\Destination\Window 7.iso @AT@ E:\hTest\Source\Window 7.iso
+FOUND E:\hTest\Destination\Window xp.iso @AT@ E:\hTest\Source\Window xp.iso
+FOUND E:\hTest\d2\files\305.pdf @AT@ E:\hTest\source2\files\305.pdf
+FOUND E:\hTest\d2\files\IJSTEV4I8030.pdf @AT@ E:\hTest\source2\files\IJSTEV4I8030.pdf
+FOUND E:\hTest\d2\files\isotopylog-0.0.7.tar.gz @AT@ E:\hTest\source2\files\isotopylog-0.0.7.tar.gz
+FOUND E:\hTest\d2\files\mcnp_input_reader-0.1.8.tar.gz @AT@ E:\hTest\source2\files\mcnp_input_reader-0.1.8.tar.gz
+FOUND E:\hTest\d2\test.txt @AT@ E:\hTest\Source\test.txt
+FOUND E:\hTest\d2\Window 7.iso @AT@ E:\hTest\Source\Window 7.iso
+FOUND E:\hTest\d2\Window xp.iso @AT@ E:\hTest\Source\Window xp.iso

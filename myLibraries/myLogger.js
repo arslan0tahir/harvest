@@ -2,13 +2,20 @@ const fs = require("fs")
 const logFolder=".\\logs"
 
 
-
+const generateLogSession=function(logData){
+  //make log folder for backup session
+  dirPath='logs\\backup-session-'+new Date().toISOString().replaceAll(":","x");
+  global.__backupSessionPath = dirPath;
+  
+}
 
 const generateLog=function(logData){
           //make log folder for backup session
-          dirPath='logs\\backup-session-'+new Date().toISOString().replaceAll(":","x");
+          let dirPath=global.__backupSessionPath;
+
           fs.mkdirSync(dirPath);
           
+          if (logData.mySources){}
           try {
             fs.writeFileSync(dirPath+"\\sources.txt", JSON.stringify(logData.mySources, null, 2));
             // file written successfully
@@ -25,6 +32,18 @@ const generateLog=function(logData){
           }
     
           
+}
+
+const logStream=function(logData){
+  //make log folder for backup session
+  let dirPath=global.__backupSessionPath; 
+  try {
+    fs.appendFileSync(dirPath+"\\stream.txt", JSON.stringify(logData, null, 2));
+  } catch (err) {
+    console.error(err);
+  }
+
+  
 }
 
 const purgeLog=function(){
@@ -53,21 +72,31 @@ const purgeLog=function(){
             }
 
         }
-        console.log(files)
+       
     });
 
 
-    // console.log(logFolder)
-    // const files = fs.readdirSync(logFolder)
-    // // console.log(files)
-    // for (const file of files){
-    //     console.log(file)
-    // }
+   
+}
+
+const logPurging=function(logData){
+ 
+  //make log folder for backup session
+  let dirPath=global.__backupSessionPath; 
+  try {
+    fs.appendFileSync(dirPath+"\\purging.txt", logData);
+  } catch (err) {
+    console.error(err);
+  }
+
+  
 }
 
 exports.purgeLog=purgeLog;
 exports.generateLog=generateLog;
-
+exports.generateLogSession=generateLogSession;
+exports.logStream=logStream;
+exports.logPurging=logPurging;
 
 
 

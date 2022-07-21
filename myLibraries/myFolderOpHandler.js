@@ -1,6 +1,9 @@
 const fs = require("fs")
 const path = require("path")
 var progress = require('progress-stream');
+const myLogger=require('./myLogger')
+const myDbHandlers=require('./myDbHandlers')
+const myFs=require('./myFolderOpHandler')
 
 const getAllFiles = function(dirPath, arrayOfFiles) {
   files = fs.readdirSync(dirPath)
@@ -56,6 +59,11 @@ const getFolderSummary = function(directoryPath) {
   return summ
 }
 
+
+
+
+
+
 /**
  * Return Promise to Copy Files
  * @param  {String} source Source File Path
@@ -63,6 +71,37 @@ const getFolderSummary = function(directoryPath) {
  * @return {Promise} Return Promise
  */
  const myCopyFile = (source,destination,streamStatus,writeStreamStatusToRendrer)=> { 
+
+  //reading stats of source and destination files
+  let sourceStats
+  let destStats
+  try {
+    sourceStats = fs.statSync(source);             
+  } catch (err) {
+    streamStatus.currSourceFile["error"]="source offline"        
+  }
+
+  try {
+    destStats = fs.statSync(destination);
+  } catch (err) {
+
+  }
+
+
+  if (destStats !== undefined){
+
+    if((sourceStats.mtime.getTime() == destStats.mtime.getTime() ) && (sourceStats.size == destStats.size) ){
+
+      // console.log("File already exist")
+      streamStatus["currFileProgress"]={
+        percentage: 100,
+      };
+      writeStreamStatusToRendrer(streamStatus);
+      return Promise.resolve("File already exist");
+      
+    }
+  }
+
 
   let myCopyPromise=new Promise((resolve,reject) => {
     var stat = fs.statSync(source);
@@ -74,6 +113,7 @@ const getFolderSummary = function(directoryPath) {
     str.on('progress', function(progress) {
       streamStatus["currFileProgress"]=progress;
       writeStreamStatusToRendrer(streamStatus);
+      myLogger.logStream(streamStatus)
       // console.log(progress);
     
         /*
@@ -89,26 +129,34 @@ const getFolderSummary = function(directoryPath) {
         }
         */
     });
-    console.log(destination)
-    console.log(source)
+
 
     var destFolder=destination.split("\\");
     destFolder.pop()
     destFolder=destFolder.join("\\");
 
     if (!fs.existsSync(destFolder)) {
-      fs.mkdirSync(destFolder, {
-        recursive: true
-      });
+      try {
+        fs.mkdirSync(destFolder, {
+          recursive: true
+        });
+      } catch (err) {
+        streamStatus.currSourceFile["error"]="destination offline"    
+      }
+
     }
 
+    
     let writeStream=fs.createWriteStream(destination);
     let readStream=fs.createReadStream(source);
     readStream.pipe(str).pipe(writeStream);
-
+    
 
     
-    writeStream.on("finish",()=>(resolve("Copied "+source)))
+    writeStream.on("finish",()=>{
+      fs.utimesSync(destination, sourceStats.atime, sourceStats.mtime);
+      resolve("Copied "+source)
+    })
     writeStream.on("error",()=>(reject("!!ERROR "+source)))
     
     
@@ -116,8 +164,41 @@ const getFolderSummary = function(directoryPath) {
   return myCopyPromise;      
 }
 
+const purgeDestination=function (dest){
+  let destFiles=myFs.getAllFiles(dest.folderPath);
+  let destFileRelativePath=''
+  for(key in destFiles){
+    destFileRelativePath=destFiles[key].split(dest.folderPath)[1]  
+
+    //get my sources 
+    mySources=myDbHandlers.getBackupSources();
+
+    //find if destination file exists in all sources
+    let found=0
+    for (key in mySources){
+      // console.log(mySources[key].folderPath+destFileRelativePath)
+      if (fs.existsSync(mySources[key].folderPath+destFileRelativePath)){
+        found=1;
+        myLogger.logPurging("FOUND " + dest.folderPath+destFileRelativePath+" @AT@ " + mySources[key].folderPath+destFileRelativePath+"\n");
+        
+        break;
+      }
+    }
+
+    if (found==0){
+      myLogger.logPurging("DELETING FILE "+dest.folderPath+destFileRelativePath+"\n")
+      fs.rmSync(dest.folderPath+destFileRelativePath)
+    }
+
+  }
+
+
+
+}
+
 
 exports.getFolderSummary = getFolderSummary;
 exports.getAllFiles = getAllFiles;
 exports.myCopyFile=myCopyFile;
+exports.purgeDestination=purgeDestination;
 // const result = getTotalSize("./my-directory")

@@ -1,7 +1,7 @@
 // Modules to control application life and create native browser window
-const {app, Tray, Menu, BrowserWindow, dialog, ipcMain } = require('electron')
+const {app, Tray, Menu, BrowserWindow, dialog, ipcMain ,Notification } = require('electron')
 const fs = require('fs');
-const myFs=require('./myLibraries/myFolderDetails')
+const myFs=require('./myLibraries/myFolderOpHandler')
 const path = require('path')
 const util = require('util');
 const myTime=require('./myLibraries/myTime')
@@ -35,6 +35,14 @@ if (!gotTheLock) {
   // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
+const NOTIFICATION_TITLE = 'Basic Notification'
+const NOTIFICATION_BODY = 'Notification from the Main process'
+
+function showNotification () {
+  new Notification({ title: NOTIFICATION_TITLE, body: NOTIFICATION_BODY }).show()
+}
+
+
   app.whenReady().then(() => {
 
     //recieving event folder selection event.
@@ -79,17 +87,10 @@ if (!gotTheLock) {
     ipcMain.handle('save-backup-sources',myDbHandlers.saveBackupSources)
     ipcMain.handle('save-backup-dest',myDbHandlers.saveBackupDest)
 
-
     //read backup sources from a text file
     ipcMain.handle('get-backup-sources',myDbHandlers.getBackupSources)
     ipcMain.handle('get-backup-dest',myDbHandlers.getBackupDest)
-    ipcMain.handle('start-backup',myUiHandlers.startBackupHandler)    
-
-
-
-    
-
-    
+    ipcMain.handle('start-backup',myUiHandlers.startBackupHandler)      
 
     myWindow.createWindow();
     mainWindow=myWindow.getWindow()
