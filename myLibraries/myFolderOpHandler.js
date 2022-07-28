@@ -166,34 +166,46 @@ const getFolderSummary = function(directoryPath) {
 
 const purgeDestination=function (dest){
   let destFiles=myFs.getAllFiles(dest.folderPath);
-  let destFileRelativePath=''
+  let destFileRelativePath='';
   for(key in destFiles){
-    destFileRelativePath=destFiles[key].split(dest.folderPath)[1]  
-
+    destFileRelativePath=destFiles[key].split(dest.folderPath)[1];
+    
+    hold=destFileRelativePath.split("\\");
+    // hold.shift();
+    // hold.shift();
+    // destFileRelativePath="\\"+hold.join("\\")
+    
+    console.log(destFileRelativePath)
     //get my sources 
     mySources=myDbHandlers.getBackupSources();
 
     //find if destination file exists in all sources
     let found=0
     for (key in mySources){
-      // console.log(mySources[key].folderPath+destFileRelativePath)
-      if (fs.existsSync(mySources[key].folderPath+destFileRelativePath)){
+
+
+      hold=mySources[key].folderPath;
+      hold=hold.split("\\");
+      hold.pop();
+      holdSource=hold.join("\\")
+
+
+      // console.log("looking for --",holdSource,"--",destFileRelativePath)
+      
+      if (fs.existsSync(path.join(holdSource,destFileRelativePath))){
         found=1;
-        myLogger.logPurging("FOUND " + dest.folderPath+destFileRelativePath+" @AT@ " + mySources[key].folderPath+destFileRelativePath+"\n");
-        
+        myLogger.logPurging("FOUND " + dest.folderPath+destFileRelativePath+" @AT@ " + holdSource+destFileRelativePath+"\n");
         break;
       }
     }
 
     if (found==0){
       myLogger.logPurging("DELETING FILE "+dest.folderPath+destFileRelativePath+"\n")
-      fs.rmSync(dest.folderPath+destFileRelativePath)
+      // console.log(path.join(dest.folderPath,destFileRelativePath))
+      fs.rmSync(path.join(dest.folderPath,destFileRelativePath))
     }
 
   }
-
-
-
 }
 
 

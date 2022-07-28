@@ -4,7 +4,7 @@
     "folderPath": "E:\\hTest\\Source",
     "toltalFiles": 1,
     "folderSize": "679.0 MB",
-    "lastBackupDate": "21 Jul 2022, Thursday 3:12 PM",
+    "lastBackupDate": "28 Jul 2022, Thursday 3:25 PM",
     "isBackingUp": 0,
     "StatusSummary": ""
   },
@@ -13,8 +13,16 @@
     "folderPath": "E:\\hTest\\source2",
     "toltalFiles": 16,
     "folderSize": "78.6 MB",
-    "lastBackupDate": "21 Jul 2022, Thursday 3:12 PM",
+    "lastBackupDate": "28 Jul 2022, Thursday 3:25 PM",
     "isBackingUp": 0,
     "StatusSummary": ""
+  },
+  {
+    "folderName": "",
+    "folderPath": "E:\\hTest\\s3",
+    "toltalFiles": 1,
+    "folderSize": "n/a",
+    "lastBackupDate": "28 Jul 2022, Thursday 3:25 PM",
+    "isBackingUp": 0
   }
 ]

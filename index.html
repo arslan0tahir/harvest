@@ -322,11 +322,37 @@
       <!-- Copyright -->
       <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
         © 2022 Copyright:
-        <a class="text-reset fw-bold" href="#">051-9321086</a>
+        
+        <!-- Button trigger Footer modal -->
+        <a  data-bs-toggle="modal" data-bs-target="#footerModal" href="#">
+          051-9321086
+        </a>
+
+        
+
+
       </div>
       <!-- Copyright -->
     </footer> 
-    
+    <!-- Footer Modal -->
+    <div class="modal fade" id="footerModal" tabindex="-1" aria-labelledby="footerModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="footerModalLabel">Realease Information</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <img src="myLibraries/beta launch.png" alt="Beta Launch" style="width:100%; height:100%;">
+            <div>This is the BETA launch of HARVEST. Any bug or malfunction of this app may be reported at DGD 051-9321086</div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- You can also require other files to run in this process -->
 
     <script src="./renderer.js"></script>

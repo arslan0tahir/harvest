@@ -284,10 +284,7 @@ app.controller('personCtrl', function($scope) {
 
     $scope.startBackup=async () => {
         console.log("RENDERER In start Backup")
-        await window.BACKUP.startBackup({
-            sources     : $scope.mySources,
-            destinations : $scope.myDest
-        }); 
+        await window.BACKUP.startBackup(); 
         
         
     }

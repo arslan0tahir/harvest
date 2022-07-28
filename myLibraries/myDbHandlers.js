@@ -34,6 +34,24 @@ const getBackupSources=function(e,arg){
   return mySources;
 }
 
+const getConfig=function(){
+
+  var myConfigs = fs.readFileSync('db/configuration.json');
+  myConfigs = JSON.parse(myConfigs);
+  
+  return myConfigs;
+}
+
+const setConfig=function(data){
+  data=JSON.stringify(data,null,2)
+  fs.writeFileSync('db/configuration.json', data, (err) => {
+    if (err) throw err;        
+  });  
+  
+  return data;
+}
+
+
 const getBackupDest=function(e,arg){
 
   var myDest = fs.readFileSync('db/backupDest.json');    
@@ -73,3 +91,5 @@ exports.saveBackupSources=saveBackupSources;
 exports.saveBackupDest=saveBackupDest;
 exports.getBackupSources=getBackupSources;
 exports.getBackupDest=getBackupDest;
+exports.getConfig=getConfig;
+exports.setConfig=setConfig;

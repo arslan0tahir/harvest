@@ -1,0 +1,31 @@
+{
+  "currDest": {
+    "currCount": 1,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "Zdrive",
+      "folderPath": "\\\\127.0.0.1\\share"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 2,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\test.txt"
+  },
+  "currTime": "28 Jul 2022, Thursday 3:21 PM",
+  "currFileProgress": {
+    "percentage": 100,
+    "transferred": 7,
+    "length": 7,
+    "remaining": 0,
+    "eta": 0,
+    "runtime": 0,
+    "delta": 7,
+    "speed": 7
+  }
+}

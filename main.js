@@ -9,7 +9,10 @@ const myLogger=require('./myLibraries/myLogger')
 const myDbHandlers=require('./myLibraries/myDbHandlers')
 const myUiHandlers=require('./myLibraries/myUiHandlers')
 const myWindow=require('./myLibraries/electronWindow')
+const myAutoBackup=require('./myLibraries/myAutoBackup')
+const configuration=require('./myLibraries/configuration')
 
+ 
 
 var progress = require('progress-stream');
 
@@ -93,7 +96,9 @@ function showNotification () {
     ipcMain.handle('start-backup',myUiHandlers.startBackupHandler)      
 
     myWindow.createWindow();
-    mainWindow=myWindow.getWindow()
+    mainWindow=myWindow.getWindow();
+    configuration.resetBackupLock();
+    myAutoBackup.startAutoBackup();
 
     app.on('activate', function () {
       // On macOS it's common to re-create a window in the app when the

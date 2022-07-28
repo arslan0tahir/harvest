@@ -29,7 +29,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   contextBridge.exposeInMainWorld('BACKUP',{
 
-    startBackup: (myData) => ipcRenderer.invoke('start-backup',myData)
+    startBackup: () => ipcRenderer.invoke('start-backup')
 
   })
 

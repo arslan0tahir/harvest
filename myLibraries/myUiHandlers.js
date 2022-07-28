@@ -3,15 +3,36 @@ const myFs=require('./myFolderOpHandler')
 const myTime=require('./myTime')
 const myWindow=require('./electronWindow')
 const myDbHandlers=require('./myDbHandlers')
+const myAutoBackup=require('./myAutoBackup')
+const configuration=require('./configuration')
+const path = require('path')
 
 
 
+var startBackupHandler=async (e)=>{
+    var myConfigs=myDbHandlers.getConfig();
+    
+    if (configuration.getBackupLock()){
+      console.log("Backing up already in progress")
+      return
+    }
+    else{
+      configuration.setBackupLock();
+    }
+  // myDbHandlers.getBackupSources();
+  // myDbHandlers.getBackupDest();
 
-var startBackupHandler=async (e,myData)=>{
+
+    myData={
+      sources      :  myDbHandlers.getBackupSources(),
+      destinations :  myDbHandlers.getBackupDest()
+    } 
+
+    myAutoBackup.assignBackupSlot();
     const mySources=myData.sources;
     const myDestinations=myData.destinations
   
-
+    
     // Preparing and appending additional sources data in mySources array 
     for (const key in mySources) {
       if (mySources.hasOwnProperty(key)) {   
@@ -52,6 +73,7 @@ var startBackupHandler=async (e,myData)=>{
 
         var sourceFilePaths=mySources[key].files;
         var sourceFolderPath=mySources[key].folderPath;
+        var sourceFolderName=sourceFolderPath.split("\\").pop()
         var currSource={
           currCount:    Number(key)+1,
           totalCount:   mySources.length,
@@ -63,7 +85,7 @@ var startBackupHandler=async (e,myData)=>{
           
           var currSourceFilePath=sourceFilePaths[key];
           var relativeSourceFilePath=currSourceFilePath.split(sourceFolderPath)[1];
-          var calculatedDestinationFilePath=currDestPath.folderPath+relativeSourceFilePath
+          var calculatedDestinationFilePath=path.join(currDestPath.folderPath,sourceFolderName,relativeSourceFilePath)
           var currSourceFile={
             currCount:    Number(key)+1,
             totalCount:   sourceFilePaths.length,
@@ -98,7 +120,10 @@ var startBackupHandler=async (e,myData)=>{
     
     
     }
-
+    currDate=new Date();
+    myConfigs.lastBackupDate=currDate.toString();
+    myDbHandlers.setConfig(myConfigs);    
+    configuration.resetBackupLock();
     return
 
 }
@@ -106,7 +131,7 @@ var startBackupHandler=async (e,myData)=>{
 
 const writeStreamStatusToRendrer=(data)=> {
     let mainWindow=myWindow.getWindow();
-    mainWindow.webContents.send('write-stream-status', data)
+    mainWindow.webContents.send('write-stream-status', data);
 }
 
 

@@ -4,10 +4,9 @@
     "folderPath": "E:\\hTest\\Source",
     "toltalFiles": 1,
     "folderSize": "679.0 MB",
-    "lastBackupDate": "21 Jul 2022, Thursday 2:55 PM",
+    "lastBackupDate": "28 Jul 2022, Thursday 2:33 PM",
     "isBackingUp": 0,
     "StatusSummary": "",
-    "$$hashKey": "object:6",
     "files": [
       "E:\\hTest\\Source\\test.txt",
       "E:\\hTest\\Source\\Window 7.iso",
@@ -19,10 +18,9 @@
     "folderPath": "E:\\hTest\\source2",
     "toltalFiles": 16,
     "folderSize": "78.6 MB",
-    "lastBackupDate": "21 Jul 2022, Thursday 2:55 PM",
+    "lastBackupDate": "28 Jul 2022, Thursday 2:33 PM",
     "isBackingUp": 0,
     "StatusSummary": "",
-    "$$hashKey": "object:7",
     "files": [
       "E:\\hTest\\source2\\files\\305.pdf",
       "E:\\hTest\\source2\\files\\IJSTEV4I8030.pdf",
