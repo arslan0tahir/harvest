@@ -1,0 +1,7 @@
+[
+  "100 E:\\hTest\\source2\\New Microsoft Word Document.docx--\\\\127.0.0.1\\share--E:\\hTest\\source2"
+][
+  "100 E:\\hTest\\source2\\New Microsoft Word Document.docx--E:\\hTest\\Destination--E:\\hTest\\source2"
+][
+  "100 E:\\hTest\\source2\\New Microsoft Word Document.docx--E:\\hTest\\d2--E:\\hTest\\source2"
+]

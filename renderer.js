@@ -10,7 +10,7 @@ app.controller('personCtrl', function($scope) {
 
     $scope.firstName = "John";
     $scope.lastName = "Doe";
-
+    $scope.windowError="Test Eror"
     $scope.sourceTemplate={
         folderName  : "",
         folderPath  : "",
@@ -63,6 +63,28 @@ app.controller('personCtrl', function($scope) {
     angular.element(document).ready(function () {        
         $scope.loadSources(); 
         $scope.loadDest(); 
+
+        window.electronAPI.onMsgFromMain((_event, msg) => { 
+            //console.log(msg)
+            if (msg.msgType== "sourceRowMsg"){
+                for (key in $scope.mySources){
+                    if($scope.mySources[key].folderPath==msg.msgLocation){
+                        $scope.mySources[key].isBackingUp=0;
+                        $scope.mySources[key].lastBackupDate="Source Offline"
+                    }
+                }
+
+            }
+            if (msg.msgType== "console"){
+                console.log(msg.msg)
+
+            }
+
+
+
+            $scope.$apply();
+
+        })
 
         //show percetages and status of write stream
         window.electronAPI.onWriteStreamStatus((_event, status) => {     

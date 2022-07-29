@@ -4,8 +4,20 @@ var progress = require('progress-stream');
 const myLogger=require('./myLogger')
 const myDbHandlers=require('./myDbHandlers')
 const myFs=require('./myFolderOpHandler')
+const toRenderer=require('./toRenderer')
+
+
 
 const getAllFiles = function(dirPath, arrayOfFiles) {
+  if (!fs.existsSync(dirPath)){
+    toRenderer.sendMsgToRenderer({
+      error: "Path not found ",
+      msgType: "sourceRowMsg",
+      msgLocation: dirPath
+    })
+    
+    return "Offline"
+  }
   files = fs.readdirSync(dirPath)
 
   arrayOfFiles = arrayOfFiles || []
@@ -113,7 +125,9 @@ const getFolderSummary = function(directoryPath) {
     str.on('progress', function(progress) {
       streamStatus["currFileProgress"]=progress;
       writeStreamStatusToRendrer(streamStatus);
-      myLogger.logStream(streamStatus)
+
+      simpleStreamStatus=[streamStatus.currFileProgress.percentage+" "+streamStatus.currSourceFile.sourcePath+"--"+streamStatus.currDest.destPath.folderPath +"--"+ streamStatus.currSource.sourcePath ]
+      myLogger.logStream(simpleStreamStatus)
       // console.log(progress);
     
         /*
@@ -164,6 +178,8 @@ const getFolderSummary = function(directoryPath) {
   return myCopyPromise;      
 }
 
+
+
 const purgeDestination=function (dest){
 
   // let destFiles=myFs.getAllFiles(dest.folderPath);
@@ -171,12 +187,29 @@ const purgeDestination=function (dest){
   let destFileRelativePath='';
   let destFiles=[]
   //narrowing scope of destination folder to source folder names
+  
+  
+  
+  
+  if (!fs.existsSync(dest.folderPath)){
+    delete mySources[key];
+    // console.trace("destination no found",dest)
+    return ;
+  }
+
   for (key in mySources){
 
 
     hold=mySources[key].folderPath;
+    
+    if (!fs.existsSync(hold)){
+      delete mySources[key];
+      continue;
+    }
+
+
     if (hold=="" || hold==undefined){
-      console.trace("Error reading source paths")
+      // console.trace("Error reading source paths")
       return
     }
 
@@ -243,11 +276,78 @@ const purgeDestination=function (dest){
     }
 
   }
+
+  cleanEmptyFoldersRecursively(destinationFolder);
 }
+
+const cleanEmptyFoldersRecursively=function (folder) {
+  var fs = require('fs');
+  var path = require('path');
+
+  var isDir = fs.statSync(folder).isDirectory();
+  if (!isDir) {
+    return;
+  }
+  var files = fs.readdirSync(folder);
+  if (files.length > 0) {
+    files.forEach(function(file) {
+      var fullPath = path.join(folder, file);
+      cleanEmptyFoldersRecursively(fullPath);
+    });
+
+    // re-evaluate files; after deleting subfolder
+    // we may have parent folder empty now
+    files = fs.readdirSync(folder);
+  }
+
+  if (files.length == 0) {
+    console.log("removing: ", folder);
+    fs.rmdirSync(folder);
+    return;
+  }
+}
+
+const checkOnlineFolders=function(){
+  setInterval(checkOnlineFoldersInterval,5000)
+}
+
+const checkOnlineFoldersInterval = function(directoryPath) {
+  
+  mySources=myDbHandlers.getBackupSources();
+  myDest=myDbHandlers.getBackupDest();
+
+  for (key in mySources){
+    if (!fs.existsSync(mySources[key].folderPath)){
+        toRenderer.sendMsgToRenderer({
+          error: "Path not found ",
+          msgType: "sourceRowMsg",
+          msgLocation: mySources[key].folderPath
+        })
+    }
+  }
+
+  for (key in myDest){
+    if (!fs.existsSync(myDest[key].folderPath)){
+        toRenderer.sendMsgToRenderer({
+          error: "Path not found ",
+          msgType: "console",
+          msgLocation: ""
+        })
+    }
+  }
+  
+
+  
+  
+}
+
+
 
 
 exports.getFolderSummary = getFolderSummary;
 exports.getAllFiles = getAllFiles;
 exports.myCopyFile=myCopyFile;
 exports.purgeDestination=purgeDestination;
+exports.cleanEmptyFoldersRecursively=cleanEmptyFoldersRecursively;
+exports.checkOnlineFolders=checkOnlineFolders
 // const result = getTotalSize("./my-directory")

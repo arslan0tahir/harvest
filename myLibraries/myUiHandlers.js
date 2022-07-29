@@ -6,7 +6,7 @@ const myDbHandlers=require('./myDbHandlers')
 const myAutoBackup=require('./myAutoBackup')
 const configuration=require('./configuration')
 const path = require('path')
-
+const toRenderer=require('./toRenderer')
 
 
 var startBackupHandler=async (e)=>{
@@ -34,17 +34,29 @@ var startBackupHandler=async (e)=>{
   
     
     // Preparing and appending additional sources data in mySources array 
+    // let allSourcesFound=1;
     for (const key in mySources) {
       if (mySources.hasOwnProperty(key)) {   
         
         
         //Append folder name and file paths in each item of "mySources" array (json objects)
         mySources[key]["files"]=myFs.getAllFiles(mySources[key].folderPath);   
+        if(!Array.isArray(mySources[key]["files"])){
+          configuration.resetBackupLock();
+          // allSourcesFound=0;
+          delete mySources[key];
+          continue;
+          
+        }
         mySources[key]["folderName"]=mySources[key]["folderPath"].split("\\").pop();
+
 
        
       }
     }
+    // if (!allSourcesFound){
+    //   return;
+    // }
 
 
     let logData={
@@ -109,7 +121,6 @@ var startBackupHandler=async (e)=>{
 
       }
       myFs.purgeDestination(myDestinations[key])
-    
     //purging
       // loop all destinations one by one
         //loop all destination files
@@ -136,5 +147,5 @@ const writeStreamStatusToRendrer=(data)=> {
 
 
 
-
+exports.writeStreamStatusToRendrer = writeStreamStatusToRendrer;
 exports.startBackupHandler = startBackupHandler;

@@ -26,6 +26,11 @@
         <!-- <p class="lead" style="text-align: center;">
           Automatic Backup Utility
         </p> -->
+        
+        <!-- <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          {{windowError}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">X</button>
+        </div> -->
 
 
 
@@ -152,7 +157,8 @@
                     currSourceFileTotalCount:   status.currSourceFile.totalCount,
                     currFileProgress:           status.currFileProgress.percentage.toFixed(1)                -->
                         </div>
-                        <div ng-if='x.isBackingUp==0' style="display: inline-block;font-size: small;">{{x.lastBackupDate}}</div>
+                        <div ng-if='x.isBackingUp==0 && x.lastBackupDate!="Source Offline"' style="display: inline-block;font-size: small;">{{x.lastBackupDate}}</div>
+                        <div ng-if='x.isBackingUp==0 && x.lastBackupDate=="Source Offline"' style="display: inline-block;font-size: small;color: red;">{{x.lastBackupDate}}</div>
                       </td>                
                       <td style="position: relative;">
                         <a href="#" ng-click="myLoadSummary(x,$index)" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
