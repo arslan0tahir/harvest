@@ -165,19 +165,55 @@ const getFolderSummary = function(directoryPath) {
 }
 
 const purgeDestination=function (dest){
-  let destFiles=myFs.getAllFiles(dest.folderPath);
+
+  // let destFiles=myFs.getAllFiles(dest.folderPath);
+  let mySources=myDbHandlers.getBackupSources();
   let destFileRelativePath='';
+  let destFiles=[]
+  //narrowing scope of destination folder to source folder names
+  for (key in mySources){
+
+
+    hold=mySources[key].folderPath;
+    if (hold=="" || hold==undefined){
+      console.trace("Error reading source paths")
+      return
+    }
+
+    hold=hold.split("\\");
+    hold=hold.pop();
+
+    destinationFolder=path.join(dest.folderPath,hold);
+
+    if (destinationFolder==dest.folderPath){
+      console.trace("Critical Error");
+      return;
+      break;
+    }
+
+
+    holdFiles=myFs.getAllFiles(destinationFolder)
+    if (Array.isArray(holdFiles)){
+      destFiles=destFiles.concat(myFs.getAllFiles(destinationFolder));
+    }
+    else{
+      console.trace("Error accessing destination files: ",destinationFolder)
+      return;
+    }
+
+  }
+
+
   for(key in destFiles){
     destFileRelativePath=destFiles[key].split(dest.folderPath)[1];
     
-    hold=destFileRelativePath.split("\\");
+    // hold=destFileRelativePath.split("\\");
     // hold.shift();
     // hold.shift();
     // destFileRelativePath="\\"+hold.join("\\")
-    
-    console.log(destFileRelativePath)
+   
     //get my sources 
-    mySources=myDbHandlers.getBackupSources();
+
 
     //find if destination file exists in all sources
     let found=0
@@ -188,6 +224,7 @@ const purgeDestination=function (dest){
       hold=hold.split("\\");
       hold.pop();
       holdSource=hold.join("\\")
+
 
 
       // console.log("looking for --",holdSource,"--",destFileRelativePath)

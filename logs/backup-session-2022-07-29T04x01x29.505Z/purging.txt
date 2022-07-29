@@ -1,0 +1,24 @@
+FOUND \\127.0.0.1\share\Source\test.txt @AT@ E:\hTest\Source\test.txt
+FOUND \\127.0.0.1\share\Source\Window 7.iso @AT@ E:\hTest\Source\Window 7.iso
+FOUND \\127.0.0.1\share\Source\Window xp.iso @AT@ E:\hTest\Source\Window xp.iso
+FOUND \\127.0.0.1\share\source2\files\305.pdf @AT@ E:\hTest\source2\files\305.pdf
+FOUND \\127.0.0.1\share\source2\files\IJSTEV4I8030.pdf @AT@ E:\hTest\source2\files\IJSTEV4I8030.pdf
+FOUND \\127.0.0.1\share\source2\files\isotopylog-0.0.7.tar.gz @AT@ E:\hTest\source2\files\isotopylog-0.0.7.tar.gz
+FOUND \\127.0.0.1\share\source2\files\mcnp_input_reader-0.1.8.tar.gz @AT@ E:\hTest\source2\files\mcnp_input_reader-0.1.8.tar.gz
+FOUND \\127.0.0.1\share\s3\New Text Document.txt @AT@ E:\hTest\s3\New Text Document.txt
+FOUND E:\hTest\Destination\Source\test.txt @AT@ E:\hTest\Source\test.txt
+FOUND E:\hTest\Destination\Source\Window 7.iso @AT@ E:\hTest\Source\Window 7.iso
+FOUND E:\hTest\Destination\Source\Window xp.iso @AT@ E:\hTest\Source\Window xp.iso
+FOUND E:\hTest\Destination\source2\files\305.pdf @AT@ E:\hTest\source2\files\305.pdf
+FOUND E:\hTest\Destination\source2\files\IJSTEV4I8030.pdf @AT@ E:\hTest\source2\files\IJSTEV4I8030.pdf
+FOUND E:\hTest\Destination\source2\files\isotopylog-0.0.7.tar.gz @AT@ E:\hTest\source2\files\isotopylog-0.0.7.tar.gz
+FOUND E:\hTest\Destination\source2\files\mcnp_input_reader-0.1.8.tar.gz @AT@ E:\hTest\source2\files\mcnp_input_reader-0.1.8.tar.gz
+FOUND E:\hTest\Destination\s3\New Text Document.txt @AT@ E:\hTest\s3\New Text Document.txt
+FOUND E:\hTest\d2\Source\test.txt @AT@ E:\hTest\Source\test.txt
+FOUND E:\hTest\d2\Source\Window 7.iso @AT@ E:\hTest\Source\Window 7.iso
+FOUND E:\hTest\d2\Source\Window xp.iso @AT@ E:\hTest\Source\Window xp.iso
+FOUND E:\hTest\d2\source2\files\305.pdf @AT@ E:\hTest\source2\files\305.pdf
+FOUND E:\hTest\d2\source2\files\IJSTEV4I8030.pdf @AT@ E:\hTest\source2\files\IJSTEV4I8030.pdf
+FOUND E:\hTest\d2\source2\files\isotopylog-0.0.7.tar.gz @AT@ E:\hTest\source2\files\isotopylog-0.0.7.tar.gz
+FOUND E:\hTest\d2\source2\files\mcnp_input_reader-0.1.8.tar.gz @AT@ E:\hTest\source2\files\mcnp_input_reader-0.1.8.tar.gz
+FOUND E:\hTest\d2\s3\New Text Document.txt @AT@ E:\hTest\s3\New Text Document.txt

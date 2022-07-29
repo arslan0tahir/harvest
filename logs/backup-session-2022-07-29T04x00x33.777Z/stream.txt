@@ -1,0 +1,991 @@
+{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\test.txt"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 100,
+    "transferred": 7,
+    "length": 7,
+    "remaining": 0,
+    "eta": 0,
+    "runtime": 0,
+    "delta": 7,
+    "speed": 7
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 2,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window 7.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 13.89027122963764,
+    "transferred": 98893824,
+    "length": 711964672,
+    "remaining": 613070848,
+    "eta": 9,
+    "runtime": 1,
+    "delta": 98893824,
+    "speed": 65929216
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 2,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window 7.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 17.57225167486962,
+    "transferred": 125108224,
+    "length": 711964672,
+    "remaining": 586856448,
+    "eta": 12,
+    "runtime": 2,
+    "delta": 26214400,
+    "speed": 50043289.6
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 2,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window 7.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 30.974660495514023,
+    "transferred": 220528640,
+    "length": 711964672,
+    "remaining": 491436032,
+    "eta": 8,
+    "runtime": 3,
+    "delta": 95420416,
+    "speed": 63008182.85714286
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 2,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window 7.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 42.88586723583948,
+    "transferred": 305332224,
+    "length": 711964672,
+    "remaining": 406632448,
+    "eta": 6,
+    "runtime": 4,
+    "delta": 84803584,
+    "speed": 67851605.33333333
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 2,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window 7.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 56.398735469840844,
+    "transferred": 401539072,
+    "length": 711964672,
+    "remaining": 310425600,
+    "eta": 4,
+    "runtime": 5,
+    "delta": 96206848,
+    "speed": 73007104
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 2,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window 7.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 66.26644306306254,
+    "transferred": 471793664,
+    "length": 711964672,
+    "remaining": 240171008,
+    "eta": 3,
+    "runtime": 6,
+    "delta": 70254592,
+    "speed": 72583640.61538461
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 2,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window 7.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 72.71911379333159,
+    "transferred": 517734400,
+    "length": 711964672,
+    "remaining": 194230272,
+    "eta": 3,
+    "runtime": 7,
+    "delta": 45940736,
+    "speed": 69031253.33333333
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 2,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window 7.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 75.95005163402266,
+    "transferred": 540737536,
+    "length": 711964672,
+    "remaining": 171227136,
+    "eta": 3,
+    "runtime": 8,
+    "delta": 23003136,
+    "speed": 63616180.705882356
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 2,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window 7.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 88.24786632109746,
+    "transferred": 628293632,
+    "length": 711964672,
+    "remaining": 83671040,
+    "eta": 1,
+    "runtime": 9,
+    "delta": 87556096,
+    "speed": 66136171.78947368
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 2,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window 7.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 91.44198435733621,
+    "transferred": 651034624,
+    "length": 711964672,
+    "remaining": 60930048,
+    "eta": 1,
+    "runtime": 10,
+    "delta": 22740992,
+    "speed": 62003297.52380952
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 2,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window 7.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 96.32981339838166,
+    "transferred": 685834240,
+    "length": 711964672,
+    "remaining": 26130432,
+    "eta": 0,
+    "runtime": 11,
+    "delta": 34799616,
+    "speed": 59637760
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 2,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window 7.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 100,
+    "transferred": 711964672,
+    "length": 711964672,
+    "remaining": 0,
+    "eta": 0,
+    "runtime": 11,
+    "delta": 26130432,
+    "speed": 60592738.042553194
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 3,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window xp.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 9.738838277638585,
+    "transferred": 69337088,
+    "length": 711964672,
+    "remaining": 642627584,
+    "eta": 16,
+    "runtime": 1,
+    "delta": 69337088,
+    "speed": 39621193.14285714
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 3,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window xp.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 13.163080091704327,
+    "transferred": 93716480,
+    "length": 711964672,
+    "remaining": 618248192,
+    "eta": 18,
+    "runtime": 2,
+    "delta": 24379392,
+    "speed": 34078720
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 3,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window xp.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 15.685236696688232,
+    "transferred": 111673344,
+    "length": 711964672,
+    "remaining": 600291328,
+    "eta": 20,
+    "runtime": 3,
+    "delta": 17956864,
+    "speed": 29779558.4
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 3,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window xp.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 18.814920075135415,
+    "transferred": 133955584,
+    "length": 711964672,
+    "remaining": 578009088,
+    "eta": 20,
+    "runtime": 4,
+    "delta": 22282240,
+    "speed": 28201175.57894737
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 3,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window xp.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 22.800663907099032,
+    "transferred": 162332672,
+    "length": 711964672,
+    "remaining": 549632000,
+    "eta": 19,
+    "runtime": 5,
+    "delta": 28377088,
+    "speed": 28231769.04347826
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 3,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window xp.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 25.083491783142858,
+    "transferred": 178585600,
+    "length": 711964672,
+    "remaining": 533379072,
+    "eta": 21,
+    "runtime": 6,
+    "delta": 16252928,
+    "speed": 25512228.57142857
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 3,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window xp.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 39.8482333685231,
+    "transferred": 283705344,
+    "length": 711964672,
+    "remaining": 428259328,
+    "eta": 12,
+    "runtime": 7,
+    "delta": 105119744,
+    "speed": 35463168
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 3,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window xp.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 51.46488167322999,
+    "transferred": 366411776,
+    "length": 711964672,
+    "remaining": 345552896,
+    "eta": 8,
+    "runtime": 8,
+    "delta": 82706432,
+    "speed": 40712419.55555555
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 3,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window xp.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 56.159406740900764,
+    "transferred": 399835136,
+    "length": 711964672,
+    "remaining": 312129536,
+    "eta": 8,
+    "runtime": 9,
+    "delta": 33423360,
+    "speed": 39983513.6
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 3,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window xp.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 58.95771187927706,
+    "transferred": 419758080,
+    "length": 711964672,
+    "remaining": 292206592,
+    "eta": 8,
+    "runtime": 10,
+    "delta": 19922944,
+    "speed": 38159825.45454545
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 3,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window xp.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 61.96773089325421,
+    "transferred": 441188352,
+    "length": 711964672,
+    "remaining": 270776320,
+    "eta": 7,
+    "runtime": 11,
+    "delta": 21430272,
+    "speed": 36765696
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 3,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window xp.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 73.35425542013411,
+    "transferred": 522256384,
+    "length": 711964672,
+    "remaining": 189708288,
+    "eta": 5,
+    "runtime": 12,
+    "delta": 81068032,
+    "speed": 40173568
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 3,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window xp.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 77.68058244328168,
+    "transferred": 553058304,
+    "length": 711964672,
+    "remaining": 158906368,
+    "eta": 4,
+    "runtime": 13,
+    "delta": 30801920,
+    "speed": 39504164.571428575
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 3,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window xp.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 84.62111558254396,
+    "transferred": 602472448,
+    "length": 711964672,
+    "remaining": 109492224,
+    "eta": 3,
+    "runtime": 14,
+    "delta": 49414144,
+    "speed": 40164829.86666667
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 1,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source"
+  },
+  "currSourceFile": {
+    "currCount": 3,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\Source\\Window xp.iso"
+  },
+  "currTime": "29 Jul 2022, Friday 9:0 AM",
+  "currFileProgress": {
+    "percentage": 100,
+    "transferred": 711964672,
+    "length": 711964672,
+    "remaining": 0,
+    "eta": 0,
+    "runtime": 15,
+    "delta": 109492224,
+    "speed": 45204106.15873016
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 2,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\source2"
+  },
+  "currSourceFile": {
+    "currCount": 1,
+    "totalCount": 4,
+    "sourcePath": "E:\\hTest\\source2\\files\\305.pdf"
+  },
+  "currTime": "29 Jul 2022, Friday 9:1 AM",
+  "currFileProgress": {
+    "percentage": 100,
+    "transferred": 186050,
+    "length": 186050,
+    "remaining": 0,
+    "eta": 0,
+    "runtime": 0,
+    "delta": 186050,
+    "speed": 186050
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 2,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\source2"
+  },
+  "currSourceFile": {
+    "currCount": 2,
+    "totalCount": 4,
+    "sourcePath": "E:\\hTest\\source2\\files\\IJSTEV4I8030.pdf"
+  },
+  "currTime": "29 Jul 2022, Friday 9:1 AM",
+  "currFileProgress": {
+    "percentage": 100,
+    "transferred": 380304,
+    "length": 380304,
+    "remaining": 0,
+    "eta": 0,
+    "runtime": 0,
+    "delta": 380304,
+    "speed": 380304
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 2,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\source2"
+  },
+  "currSourceFile": {
+    "currCount": 3,
+    "totalCount": 4,
+    "sourcePath": "E:\\hTest\\source2\\files\\isotopylog-0.0.7.tar.gz"
+  },
+  "currTime": "29 Jul 2022, Friday 9:1 AM",
+  "currFileProgress": {
+    "percentage": 100,
+    "transferred": 60216,
+    "length": 60216,
+    "remaining": 0,
+    "eta": 0,
+    "runtime": 0,
+    "delta": 60216,
+    "speed": 60216
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 2,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\source2"
+  },
+  "currSourceFile": {
+    "currCount": 4,
+    "totalCount": 4,
+    "sourcePath": "E:\\hTest\\source2\\files\\mcnp_input_reader-0.1.8.tar.gz"
+  },
+  "currTime": "29 Jul 2022, Friday 9:1 AM",
+  "currFileProgress": {
+    "percentage": 100,
+    "transferred": 15617,
+    "length": 15617,
+    "remaining": 0,
+    "eta": 0,
+    "runtime": 0,
+    "delta": 15617,
+    "speed": 15617
+  }
+}{
+  "currDest": {
+    "currCount": 3,
+    "totalCount": 3,
+    "destPath": {
+      "folderAlias": "d2",
+      "folderPath": "E:\\hTest\\d2"
+    }
+  },
+  "currSource": {
+    "currCount": 3,
+    "totalCount": 3,
+    "sourcePath": "E:\\hTest\\s3"
+  },
+  "currSourceFile": {
+    "currCount": 1,
+    "totalCount": 1,
+    "sourcePath": "E:\\hTest\\s3\\New Text Document.txt"
+  },
+  "currTime": "29 Jul 2022, Friday 9:1 AM",
+  "currFileProgress": {
+    "percentage": 100,
+    "transferred": 0,
+    "length": 0,
+    "remaining": 0,
+    "eta": null,
+    "runtime": 0,
+    "delta": 0,
+    "speed": 0
+  }
+}

@@ -4,7 +4,7 @@
     "folderPath": "E:\\hTest\\Source",
     "toltalFiles": 1,
     "folderSize": "679.0 MB",
-    "lastBackupDate": "28 Jul 2022, Thursday 2:37 PM",
+    "lastBackupDate": "28 Jul 2022, Thursday 3:25 PM",
     "isBackingUp": 0,
     "StatusSummary": "",
     "files": [
@@ -18,7 +18,7 @@
     "folderPath": "E:\\hTest\\source2",
     "toltalFiles": 16,
     "folderSize": "78.6 MB",
-    "lastBackupDate": "28 Jul 2022, Thursday 2:37 PM",
+    "lastBackupDate": "28 Jul 2022, Thursday 3:25 PM",
     "isBackingUp": 0,
     "StatusSummary": "",
     "files": [
@@ -26,6 +26,17 @@
       "E:\\hTest\\source2\\files\\IJSTEV4I8030.pdf",
       "E:\\hTest\\source2\\files\\isotopylog-0.0.7.tar.gz",
       "E:\\hTest\\source2\\files\\mcnp_input_reader-0.1.8.tar.gz"
+    ]
+  },
+  {
+    "folderName": "s3",
+    "folderPath": "E:\\hTest\\s3",
+    "toltalFiles": 1,
+    "folderSize": "n/a",
+    "lastBackupDate": "28 Jul 2022, Thursday 3:25 PM",
+    "isBackingUp": 0,
+    "files": [
+      "E:\\hTest\\s3\\New Text Document.txt"
     ]
   }
 ]

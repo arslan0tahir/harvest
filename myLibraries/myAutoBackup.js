@@ -41,9 +41,7 @@ var autoBackup=()=>{
 
     myMin=Math.floor((backupSlotMin/60-myRelHrs)*60);
 
-    currDate=new Date();
-
-    
+    currDate=new Date();    
     
 
     const monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
@@ -64,13 +62,12 @@ var autoBackup=()=>{
 
 var startAutoBackup=()=>{
     // console.log("auto backup check called");
-
     setInterval(autoBackup, 6000);
 }
 
 
 var assignBackupSlot=function (){
-    var myRnd=getRandomInt(72)     
+    var myRnd=getRandomInt(72);     
     var myConfigs=myDbHandlers.getConfig();
     if (myConfigs.backupSlot<0){
         myConfigs.backupSlot=myRnd
