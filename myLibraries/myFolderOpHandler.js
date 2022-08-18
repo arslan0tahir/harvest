@@ -5,6 +5,12 @@ const myLogger=require('./myLogger')
 const myDbHandlers=require('./myDbHandlers')
 const myFs=require('./myFolderOpHandler')
 const toRenderer=require('./toRenderer')
+const checkDiskSpace = require('check-disk-space').default
+
+
+
+
+
 
 
 
@@ -65,6 +71,7 @@ const getFolderSummary = function(directoryPath) {
 
   var summ={
     size: convertBytes(totalSize),
+    sizeBytes: totalSize,
     totalFiles: arrayOfFiles.length    
   }
 

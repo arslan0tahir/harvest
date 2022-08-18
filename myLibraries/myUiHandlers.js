@@ -9,12 +9,18 @@ const path = require('path')
 const toRenderer=require('./toRenderer')
 
 
+const prebackupValidation=require('./preBackupValidation')
+
 var startBackupHandler=async (e)=>{
+    
+    await prebackupValidation.prebackupValidation();
+
+
     var myConfigs=myDbHandlers.getConfig();
     
     if (configuration.getBackupLock()){
-      console.log("Backing up already in progress")
-      return
+      console.log("Backing up already in progress");
+      return;
     }
     else{
       configuration.setBackupLock();

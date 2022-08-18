@@ -29,14 +29,16 @@ app.controller('personCtrl', function($scope) {
 
     $scope.myDestDefaults=[
         {
-            folderAlias  : "Zdrive",
-            folderPath  : "\\\\127.0.0.1\\share",        
+            folderAlias : "Zdrive",
+            folderPath  : "\\\\127.0.0.1\\share",
+            status      : "Online"        
         }
     ]
 
     $scope.currDest={
         folderAlias  : "",
-        folderPath  : "",        
+        folderPath  : "",  
+        status      : "Online"       
     };
 
     $scope.sourceTemplate={
@@ -67,10 +69,18 @@ app.controller('personCtrl', function($scope) {
         window.electronAPI.onMsgFromMain((_event, msg) => { 
             //console.log(msg)
             if (msg.msgType== "sourceRowMsg"){
-                for (key in $scope.mySources){
+                for (let key in $scope.mySources){
                     if($scope.mySources[key].folderPath==msg.msgLocation){
                         $scope.mySources[key].isBackingUp=0;
                         $scope.mySources[key].lastBackupDate="Source Offline"
+                    }
+                }
+
+            }
+            if (msg.msgType== "destRowMsg"){
+                for (let key in $scope.myDest){
+                    if($scope.myDest[key].folderPath==msg.msgLocation){                       
+                        $scope.myDest[key].status=msg.msg
                     }
                 }
 

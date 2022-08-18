@@ -236,7 +236,8 @@
                     <tr>
                       <th scope="col">Sr.</th>
                       <th scope="col">Folder Alias</th> 
-                      <th scope="col">Folder Path</th>                     
+                      <th scope="col">Folder Path</th> 
+                      <th scope="col">Status</th>                      
                     </tr>
                   </thead>
                   <tbody>
@@ -250,6 +251,12 @@
                         <a style="position:absolute;" class="myDestRemove" ng-click="removeDestFolder(x,$index)">
                           <button class="btn btn-danger">X</button>
                         </a> 
+                      </td>
+                      <td>   
+                        
+                        <span ng-if="x.status=='Online'" style="color: green">{{x.status}}    </span>
+                        <span ng-if="x.status=='Disk Full'" style="color: red">  {{x.status}} </span>      
+                        <span ng-if="x.status=='Offline'" style="color: red">  {{x.status}}   </span>                                         
                       </td>                                  
                     </tr>             
                   </tbody>
