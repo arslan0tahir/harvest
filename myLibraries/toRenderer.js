@@ -10,6 +10,7 @@ const myWindow=require('./electronWindow')
 */
 
 const sendMsgToRenderer=(data)=> {
+    // console.log(data.msgType)
     let mainWindow=myWindow.getWindow();
     mainWindow.webContents.send('write-msg-to-renderer', data);
 }

@@ -1,6 +1,6 @@
 const myDbHandlers=require('./myDbHandlers')
 const myUiHandlers=require('./myUiHandlers')
-
+const myInitialize=require('./myInitialize')
 
 
 function getRandomInt(max) {
@@ -26,7 +26,41 @@ backupLockStatus=function () {
 }
 
 
+var getAutoBackupTime=()=>{
+        var myRnd=getRandomInt(72) 
+        
+        var myConfigs=myDbHandlers.getConfig();
+        var backupSlot=myConfigs.backupSlot;
+    
+        backupSlotMin=backupSlot*5;
+        var myRelHrs=Math.floor(backupSlotMin/60);
+        
+        var myHrs=myRelHrs+9;
+    
+        var myMin=Math.floor((backupSlotMin/60-myRelHrs)*60);
+    
+        currDate=new Date();
+
+        myMin=myMin.toString();
+        myHrs=myHrs.toString();
+
+        console.log(myMin)
+        if(myMin.length==1){
+            myMin="0"+myMin;
+        }
+        if(myHrs.length==1){
+            myHrs="0"+myHrs;
+        }
+        
+        return myHrs+":"+myMin;        
+       
+}
+
+
 var autoBackup=()=>{
+
+    myInitialize.initialize();
+
     // console.log("auto backup check called")
     var myRnd=getRandomInt(72) //72 5min interval from 9:00
     //if 0 the 9:00, if 8 then 9:40, if 60 then 02:00, -1 is not defined
@@ -60,6 +94,7 @@ var autoBackup=()=>{
     }
 }
 
+//check if backup condition valid
 var startAutoBackup=()=>{
     // console.log("auto backup check called");
     setInterval(autoBackup, 6000);
@@ -81,6 +116,7 @@ var assignBackupSlot=function (){
 exports.autoBackup = autoBackup;
 exports.assignBackupSlot=assignBackupSlot;
 exports.startAutoBackup=startAutoBackup;
+exports.getAutoBackupTime=getAutoBackupTime;
 exports.backuplock={
     backupLockLocked:   backupLockLocked,
     backupLockStatus:   backupLockStatus,

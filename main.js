@@ -1,9 +1,9 @@
 // Modules to control application life and create native browser window
 const {app, Tray, Menu, BrowserWindow, dialog, ipcMain ,Notification } = require('electron')
-const fs = require('fs');
+const fs = require('fs')
 const myFs=require('./myLibraries/myFolderOpHandler')
 const path = require('path')
-const util = require('util');
+const util = require('util')
 const myTime=require('./myLibraries/myTime')
 const myLogger=require('./myLibraries/myLogger')
 const myDbHandlers=require('./myLibraries/myDbHandlers')
@@ -11,13 +11,12 @@ const myUiHandlers=require('./myLibraries/myUiHandlers')
 const myWindow=require('./myLibraries/electronWindow')
 const myAutoBackup=require('./myLibraries/myAutoBackup')
 const configuration=require('./myLibraries/configuration')
+const myInitialize=require('./myLibraries/myInitialize')
+
 
  
 
 var progress = require('progress-stream');
-
-
-
 
 //This section will ensure that only single instance of this app will run.
 let mainWindow = null    
@@ -59,9 +58,8 @@ function showNotification () {
           folderSummary : {}
         }
       } else {
-        var folderSummary=myFs.getFolderSummary(filePaths[0])
-        
-        
+        var folderSummary=myFs.getFolderSummary(filePaths[0])    
+       
         return {
           folderPath    : filePaths[0],
           folderSummary : folderSummary
@@ -97,7 +95,17 @@ function showNotification () {
 
     myWindow.createWindow();
     mainWindow=myWindow.getWindow();
-    configuration.resetBackupLock();
+
+    mainWindow.webContents.on('did-finish-load',()=>{
+      myInitialize.initialize();
+      console.log("initialized")
+    });
+
+function WindowsReady() {
+    console.log('Ready');
+
+}
+    // myInitialize.initialize(); //msg to renderer didnt work so initialization is shifted in autobackup
     myAutoBackup.startAutoBackup();
     myFs.checkOnlineFolders();
     app.on('activate', function () {

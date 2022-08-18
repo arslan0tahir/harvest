@@ -7,7 +7,7 @@
 var app = angular.module('myApp', []);
 app.controller('personCtrl', function($scope) {
 
-
+    $scope.backupShedule=""  //e.g. 8:55
     $scope.firstName = "John";
     $scope.lastName = "Doe";
     $scope.windowError="Test Eror"
@@ -68,6 +68,7 @@ app.controller('personCtrl', function($scope) {
 
         window.electronAPI.onMsgFromMain((_event, msg) => { 
             //console.log(msg)
+            // console.log(msg.msgType)
             if (msg.msgType== "sourceRowMsg"){
                 for (let key in $scope.mySources){
                     if($scope.mySources[key].folderPath==msg.msgLocation){
@@ -87,7 +88,9 @@ app.controller('personCtrl', function($scope) {
             }
             if (msg.msgType== "console"){
                 console.log(msg.msg)
-
+            }
+            if (msg.msgType=="backupShedule"){
+                $scope.backupShedule=msg.msg
             }
 
 

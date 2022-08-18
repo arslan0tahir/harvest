@@ -4,7 +4,7 @@
     "folderPath": "E:\\hTest\\Source",
     "toltalFiles": 1,
     "folderSize": "679.0 MB",
-    "lastBackupDate": "4 Aug 2022, Thursday 3:52 PM",
+    "lastBackupDate": "4 Aug 2022, Thursday 4:7 PM",
     "isBackingUp": 0,
     "StatusSummary": "",
     "files": [
@@ -26,7 +26,7 @@
     "folderPath": "E:\\hTest\\source2",
     "toltalFiles": 16,
     "folderSize": "78.6 MB",
-    "lastBackupDate": "4 Aug 2022, Thursday 3:52 PM",
+    "lastBackupDate": "4 Aug 2022, Thursday 4:7 PM",
     "isBackingUp": 0,
     "StatusSummary": "",
     "files": [

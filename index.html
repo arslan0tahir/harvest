@@ -61,6 +61,7 @@
                   <button ng-click="startBackup()" type="button" class="btn btn-outline-primary" style="margin: 5px;" >
                     Start Backup
                   </button>
+                  
       
                   <!-- Modal -->
                   <div  class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -171,9 +172,14 @@
                           <button class="btn btn-danger">X</button>
                         </a>                 
                       </td>              
-                    </tr>             
+                    </tr>
+                               
                   </tbody>
                 </table>
+                <div>
+                  <span style="font-weight: bold;">Note: </span>
+                  <span style="font-size: smaller;">{{backupShedule}}</span>
+                </div>  
               </div>
             </div>
           </div>
