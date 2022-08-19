@@ -30,7 +30,7 @@ app.controller('personCtrl', function($scope) {
     $scope.myDestDefaults=[
         {
             folderAlias : "Zdrive",
-            folderPath  : "\\\\127.0.0.1\\share",
+            folderPath  : "Z:\\HARVEST-Backup",
             status      : "Online"        
         }
     ]
@@ -100,12 +100,9 @@ app.controller('personCtrl', function($scope) {
         })
 
         //show percetages and status of write stream
-        window.electronAPI.onWriteStreamStatus((_event, status) => {     
-            
-            
+        window.electronAPI.onWriteStreamStatus((_event, status) => {            
 
-            let activeSource=$scope.mySources[Number(status.currSource.currCount)-1]
-            
+            let activeSource=$scope.mySources[Number(status.currSource.currCount)-1]            
             if(activeSource.folderPath==status.currSource.sourcePath){      
 
                 activeSource.isBackingUp=1;
@@ -151,7 +148,7 @@ app.controller('personCtrl', function($scope) {
         $scope.myDest=[
             {
                 folderAlias  : "Zdrive",
-                folderPath  : "\\\\127.0.0.1\\share",        
+                folderPath  : "Z:\\HARVEST-Backup",        
             }
         ]    
         window.FILE_IO.saveDest(JSON.parse(angular.toJson($scope.myDest)));

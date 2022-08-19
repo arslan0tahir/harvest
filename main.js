@@ -12,7 +12,7 @@ const myWindow=require('./myLibraries/electronWindow')
 const myAutoBackup=require('./myLibraries/myAutoBackup')
 const configuration=require('./myLibraries/configuration')
 const myInitialize=require('./myLibraries/myInitialize')
-
+const myNotifications=require('./myLibraries/myNotifications')
 
  
 
@@ -98,16 +98,18 @@ function showNotification () {
 
     mainWindow.webContents.on('did-finish-load',()=>{
       myInitialize.initialize();
+      myNotifications.testNotification();
       console.log("initialized")
     });
 
-function WindowsReady() {
-    console.log('Ready');
-
-}
+    function WindowsReady() {
+        console.log('Ready');
+    }
     // myInitialize.initialize(); //msg to renderer didnt work so initialization is shifted in autobackup
     myAutoBackup.startAutoBackup();
-    myFs.checkOnlineFolders();
+   
+
+
     app.on('activate', function () {
       // On macOS it's common to re-create a window in the app when the
       // dock icon is clicked and there are no other windows open.

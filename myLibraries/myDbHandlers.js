@@ -85,6 +85,56 @@ const updateLastBackupDateInSourceDb = (streamStatus)=> {
 
 }
 
+const onlineSourceFolders=function(mySources){
+  for (key in mySources){
+      if(!fs.existsSync(mySources[key].folderPath)){
+          delete mySources[key];
+      }
+  }
+  if (mySources[0]==null){
+    mySources=[]
+  }
+  return mySources;
+}
+
+const onlineDestFolders=function(myDest){
+  for (key in myDest){
+      if(!fs.existsSync(myDest[key].folderPath)){         
+          delete myDest[key]
+      }
+  }
+  if (myDest[0]==null){
+    myDest=[]
+  }
+  return myDest
+}
+
+const sourceFoldersStatus=function(mySources){
+  let status={}
+  for (key in mySources){
+      if(!fs.existsSync(mySources[key].folderPath)){
+        status[mySources[key].folderPath] = "offline"
+      }
+      else{
+        status[mySources[key].folderPath] = "online"
+      }
+  }
+  return status;
+}
+
+const destFoldersStatus=function(myDest){
+  let status={}
+  for (key in myDest){
+      if(!fs.existsSync(myDest[key].folderPath)){         
+        status[myDest[key].folderPath] = "offline"
+      }
+      else{
+        status[mySources[key].folderPath] = "online"
+      }
+  }
+  return status
+}
+
 
 exports.updateLastBackupDateInSourceDb=updateLastBackupDateInSourceDb;
 exports.saveBackupSources=saveBackupSources;
@@ -93,3 +143,7 @@ exports.getBackupSources=getBackupSources;
 exports.getBackupDest=getBackupDest;
 exports.getConfig=getConfig;
 exports.setConfig=setConfig;
+exports.onlineSourceFolders=onlineSourceFolders;
+exports.onlineDestFolders=onlineDestFolders;
+exports.destFoldersStatus=destFoldersStatus
+exports.sourceFoldersStatus=sourceFoldersStatus

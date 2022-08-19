@@ -5,6 +5,10 @@ const toRenderer=require('./toRenderer')
 
 const checkDiskSpace = require('check-disk-space').default
 
+
+
+
+//checking floder sizes
 const prebackupValidation=async function(){
     let sourcesSize=sourcesSizeAccumlated();    
     let destSizeArray=await getDestSizeArray();
@@ -114,9 +118,6 @@ const onlineDestFolders=function(myDest){
             delete myDest[key]
         }
     }
-
-    
-
     return myDest
 }
 

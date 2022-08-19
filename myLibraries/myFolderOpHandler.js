@@ -178,7 +178,7 @@ const getFolderSummary = function(directoryPath) {
       fs.utimesSync(destination, sourceStats.atime, sourceStats.mtime);
       resolve("Copied "+source)
     })
-    writeStream.on("error",()=>(reject("!!ERROR "+source)))
+    writeStream.on("error",()=>(reject("!!ERROR "+source+" @dest@ "+destination)))
     
     
   })
@@ -314,38 +314,11 @@ const cleanEmptyFoldersRecursively=function (folder) {
   }
 }
 
-const checkOnlineFolders=function(){
-  setInterval(checkOnlineFoldersInterval,5000)
-}
 
-const checkOnlineFoldersInterval = function(directoryPath) {
-  
-  mySources=myDbHandlers.getBackupSources();
-  myDest=myDbHandlers.getBackupDest();
 
-  for (key in mySources){
-    if (!fs.existsSync(mySources[key].folderPath)){
-        toRenderer.sendMsgToRenderer({
-          error: "Path not found ",
-          msgType: "sourceRowMsg",
-          msgLocation: mySources[key].folderPath
-        })
-    }
-  }
 
-  for (key in myDest){
-    if (!fs.existsSync(myDest[key].folderPath)){
-        toRenderer.sendMsgToRenderer({
-          error: "Path not found ",
-          msgType: "console",
-          msgLocation: ""
-        })
-    }
-  }
-  
+const checkOnlineDestFolders = function(directoryPath) {
 
-  
-  
 }
 
 
@@ -356,5 +329,6 @@ exports.getAllFiles = getAllFiles;
 exports.myCopyFile=myCopyFile;
 exports.purgeDestination=purgeDestination;
 exports.cleanEmptyFoldersRecursively=cleanEmptyFoldersRecursively;
-exports.checkOnlineFolders=checkOnlineFolders
+
+
 // const result = getTotalSize("./my-directory")

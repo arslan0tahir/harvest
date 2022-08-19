@@ -1,6 +1,7 @@
 const myDbHandlers=require('./myDbHandlers')
 const myUiHandlers=require('./myUiHandlers')
 const myInitialize=require('./myInitialize')
+const fs = require('fs');
 
 
 function getRandomInt(max) {
@@ -44,7 +45,6 @@ var getAutoBackupTime=()=>{
         myMin=myMin.toString();
         myHrs=myHrs.toString();
 
-        console.log(myMin)
         if(myMin.length==1){
             myMin="0"+myMin;
         }
@@ -58,8 +58,6 @@ var getAutoBackupTime=()=>{
 
 
 var autoBackup=()=>{
-
-    myInitialize.initialize();
 
     // console.log("auto backup check called")
     var myRnd=getRandomInt(72) //72 5min interval from 9:00

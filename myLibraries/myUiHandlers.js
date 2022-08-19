@@ -25,18 +25,83 @@ var startBackupHandler=async (e)=>{
     else{
       configuration.setBackupLock();
     }
-  // myDbHandlers.getBackupSources();
-  // myDbHandlers.getBackupDest();
+
+    
+
+    // myData={
+    //   sources      :  myDbHandlers.getBackupSources(),
+    //   destinations :  myDbHandlers.getBackupDest()
+    // } 
 
 
+
+
+    // {
+
+          // sourcesStatus:{
+          //   sourcePaths: {
+          //     status   : online/offline
+          //     copiedTo : 
+          //   }
+          // }
+          // destStatus:{
+          //   destPaths: online/offline
+          // }
+          // backupStatus:{
+
+          // }  
+
+    // }
+
+
+
+    myHoldSources=  myDbHandlers.getBackupSources(),
+    myHoldDest=  myDbHandlers.getBackupDest()
+
+
+
+    //checking online folders
+    backupReport={
+      sourcesStatus : myDbHandlers.sourceFoldersStatus(myHoldSources),
+      destStatus    : myDbHandlers.destFoldersStatus(myHoldDest),
+      errors        : []
+    }
+
+
+    
     myData={
-      sources      :  myDbHandlers.getBackupSources(),
-      destinations :  myDbHandlers.getBackupDest()
-    } 
+      sources      :  myDbHandlers.onlineSourceFolders(myHoldSources),
+      destinations :  myDbHandlers.onlineDestFolders(myHoldDest)
+    }
+    
+
+    //checking if destinations are offline    
+    if (myData.destinations.length==0){
+      backupReport.error.push("All destination are offline")
+      toRenderer.sendMsgToRenderer({
+        msgType : "console",
+        msg     : backupReport
+      })
+
+      console.log("All destinations are offline")
+      return;
+    }
+
+    //checking if sources are offline    
+    if (myData.sources.length==0){
+      backupReport.error.push("All sources are offline")
+      toRenderer.sendMsgToRenderer({
+        msgType : "console",
+        msg     : backupReport
+      })
+          console.log("All sources are offline")
+      return;
+    }
+    
 
     myAutoBackup.assignBackupSlot();
     const mySources=myData.sources;
-    const myDestinations=myData.destinations
+    const myDestinations=myData.destinations;
   
     
     // Preparing and appending additional sources data in mySources array 
@@ -54,10 +119,7 @@ var startBackupHandler=async (e)=>{
           continue;
           
         }
-        mySources[key]["folderName"]=mySources[key]["folderPath"].split("\\").pop();
-
-
-       
+        mySources[key]["folderName"]=mySources[key]["folderPath"].split("\\").pop();       
       }
     }
     // if (!allSourcesFound){
@@ -71,6 +133,7 @@ var startBackupHandler=async (e)=>{
     }
     myLogger.generateLogSession();
     myLogger.purgeLog() //purge old log files
+    // console.log(logData)
     myLogger.generateLog(logData)     
 
 
@@ -126,17 +189,11 @@ var startBackupHandler=async (e)=>{
         myDbHandlers.updateLastBackupDateInSourceDb(streamStatus)   
 
       }
-      myFs.purgeDestination(myDestinations[key])
-    //purging
-      // loop all destinations one by one
-        //loop all destination files
-          //check if file exists in sources 
-            //retian that file in destination
-          //if file does not exist in sources
-            //delete file in destination.
-    
+      myFs.purgeDestination(myDestinations[key])  
     
     }
+
+    
     currDate=new Date();
     myConfigs.lastBackupDate=currDate.toString();
     myDbHandlers.setConfig(myConfigs);    
