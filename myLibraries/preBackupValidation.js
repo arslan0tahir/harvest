@@ -25,7 +25,7 @@ const prebackupValidation=async function(){
                     msgType     : "destRowMsg",
                     msgLocation : destSizeArray[key].folderPath
                 
-                 }
+                }
             )
         }
         else{
@@ -36,12 +36,12 @@ const prebackupValidation=async function(){
                     msgType     : "destRowMsg",
                     msgLocation : destSizeArray[key].folderPath
                 
-                 }
+                }
             )
         }
     }
-    console.log(sourcesSize)
-    console.log(destSizeArray)
+    // console.log(sourcesSize)
+    // console.log(destSizeArray)
 
 }
 
@@ -85,7 +85,6 @@ const sourcesSizeAccumlated=function(){
     mySources=myDbHandlers.getBackupSources()
     mySources=onlineSourceFolders(mySources)
     holdSize=0;
-
     for (key in mySources){
         hold=myFs.getFolderSummary(mySources[key].folderPath);
         

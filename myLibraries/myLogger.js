@@ -46,6 +46,18 @@ const logStream=function(logData){
   
 }
 
+const logDataReport=function(logData){
+  //make log folder for backup session
+  let dirPath=global.__backupSessionPath; 
+  try {
+    fs.appendFileSync(dirPath+"\\dataReport.txt", JSON.stringify(logData, null, 2));
+  } catch (err) {
+    console.error(err);
+  }
+
+  
+}
+
 const purgeLog=function(){
 
     fs.readdir(logFolder, function(err, files){
@@ -97,6 +109,7 @@ exports.generateLog=generateLog;
 exports.generateLogSession=generateLogSession;
 exports.logStream=logStream;
 exports.logPurging=logPurging;
+exports.logDataReport=logDataReport;
 
 
 

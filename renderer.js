@@ -7,6 +7,13 @@
 var app = angular.module('myApp', []);
 app.controller('personCtrl', function($scope) {
 
+    $scope.backupReport={
+        sourcesStatus : {},
+        destStatus    : {},
+        errors        : [],
+        copied        : []
+    }
+    $scope.backupReportSourcesStatus={}
     $scope.backupShedule=""  //e.g. 8:55
     $scope.firstName = "John";
     $scope.lastName = "Doe";
@@ -92,6 +99,19 @@ app.controller('personCtrl', function($scope) {
             if (msg.msgType=="backupShedule"){
                 $scope.backupShedule=msg.msg
             }
+
+            if (msg.msgType=="dataReport"){
+                $scope.backupReportSourcesStatus=msg.msg.sourcesStatus;
+                $scope.backupReportDestinationStatus=msg.msg.destStatus;
+                $scope.backupReportCopied=msg.msg.copied;
+
+                
+                var myModal = new bootstrap.Modal(document.getElementById('dataReportModal'), { keyboard: false});
+                myModal.toggle();
+            }
+
+
+            
 
 
 

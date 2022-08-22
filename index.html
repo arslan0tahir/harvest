@@ -328,7 +328,125 @@
               </div>
             </div>
           </div>
-        </div>       
+        </div>     
+        
+        
+
+
+
+            <!-- backup report model -->
+        <div class="modal fade" id="dataReportModal" tabindex="-1" aria-labelledby="dataReportModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="font-size: smaller;">
+              <div class="modal-header">
+                <h5 class="modal-title" id="dataReportModalLabel">Backup report</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div>
+                  <div style="width: 49%;display: inline-block;vertical-align: top;">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th scope="col">Source Path</th>
+                          <th scope="col">Status</th>                    
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="(key, value) in backupReportSourcesStatus" class="mySourcesRow">                    
+                          <td style="width: 70%; ">                        
+                            {{key}}
+                          </td>
+                          <td> 
+                            <div ng-if="value=='online'" style="color: green;">{{value}}</div> 
+                            <div ng-if="value!='online'" style="color: red;">{{value}}</div>
+                          </td>                               
+                        </tr>
+                                  
+                      </tbody>
+                    </table>
+                  </div>  
+                  
+                  <div style="width: 49%;display: inline-block;vertical-align: top;">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th scope="col">Destination Path</th>
+                          <th scope="col">Status</th>                    
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="(key, value) in backupReportDestinationStatus" class="mySourcesRow">                    
+                          <td style="width: 70%;">                        
+                            {{key}}
+                          </td>
+                          <td>
+                            <div ng-if="value=='online'" style="color: green;">{{value}}</div> 
+                            <div ng-if="value!='online'" style="color: red;">{{value}}</div>
+                            
+                          </td>                               
+                        </tr>
+                                  
+                      </tbody>
+                    </table>
+                  </div> 
+                </div>         
+
+
+                <div>
+                  <div class="card" ng-repeat="x in backupReportCopied">
+                    <div class="card-header">
+                      <b>{{x.destPath.folderPath}}</b>
+                    </div>
+                    <div class="card-body">
+
+                      <table class="table table-hover" >
+                        <thead>
+                          <tr>
+                            <th scope="col">Source Path</th>
+                            <th scope="col">Status</th>                    
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="y in x.sources" class="mySourcesRow">                    
+                            <td style="width: 70%;">                        
+                              {{y}}
+                            </td>
+                            <td>                        
+                              Copied
+                            </td>                               
+                          </tr>                                    
+                        </tbody>
+                      </table>
+                      
+                    </div>
+                  </div>
+                </div>
+
+                <b>Copy Logs</b>
+                <div>
+                  <div class="overflow-scroll" style="height: 200px;">
+                    <div ng-repeat="x in backupReportCopied">
+                      <ul ng-repeat="y in x.fileCopyStatus">
+                        <li ng-repeat="z in y">
+                          <span ng-if="z[0].indexof('!!ERROR') > -1" style="color: red;"> {{z[0]}}</span>
+                          <span ng-if="z[0].indexof('!!ERROR') == -1" style="color: green;"> {{z[0]}}</span>
+                          {{z[0]}}
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="modal-dataReport">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
         
       </div>
 
@@ -373,6 +491,13 @@
     </div>
 
     <!-- You can also require other files to run in this process -->
+
+
+    
+
+
+
+
 
     <script src="./renderer.js"></script>
     <script src="./js/myModule.js"></script>

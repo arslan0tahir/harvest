@@ -64,7 +64,10 @@ var startBackupHandler=async (e)=>{
     backupReport={
       sourcesStatus : myDbHandlers.sourceFoldersStatus(myHoldSources),
       destStatus    : myDbHandlers.destFoldersStatus(myHoldDest),
-      errors        : []
+      errors        : [],
+      copied: [ //ARRAY OF OBJECTS
+          //{}{keys > destPath[string], sources[array],filesCopyStatus[2D array] }
+      ]
     }
 
 
@@ -77,13 +80,14 @@ var startBackupHandler=async (e)=>{
 
     //checking if destinations are offline    
     if (myData.destinations.length==0){
-      backupReport.error.push("All destination are offline")
+      backupReport.errors.push("All destinations are offline")
       toRenderer.sendMsgToRenderer({
         msgType : "console",
         msg     : backupReport
       })
 
       console.log("All destinations are offline")
+      configuration.resetBackupLock();
       return;
     }
 
@@ -94,7 +98,8 @@ var startBackupHandler=async (e)=>{
         msgType : "console",
         msg     : backupReport
       })
-          console.log("All sources are offline")
+      console.log("All sources are offline")
+      configuration.resetBackupLock();
       return;
     }
     
@@ -140,7 +145,8 @@ var startBackupHandler=async (e)=>{
 
     //Initializing Replication of source data to destination folders.
     //loop myDestinations   
-    var streamStatus   
+    var streamStatus  
+    let fileCopyStatus 
     for (const key in myDestinations) {
       
       var currDestPath=myDestinations[key]
@@ -150,6 +156,14 @@ var startBackupHandler=async (e)=>{
         destPath:   myDestinations[key]
       }
       //loop sources
+
+      backupReport.copied.push({
+        destPath      : myDestinations[key],
+        sources       : [],
+        fileCopyStatus: []
+      })  //{keys > destPath[string], sources[array] }
+
+
       for (const key in mySources) {
 
         var sourceFilePaths=mySources[key].files;
@@ -161,7 +175,8 @@ var startBackupHandler=async (e)=>{
           sourcePath:   mySources[key].folderPath
         }
         //loop all sources files       
-       
+        backupReport.copied[backupReport.copied.length-1].fileCopyStatus.push([])
+        fileCopyStatusArray=backupReport.copied[backupReport.copied.length-1].fileCopyStatus
         for (const key in sourceFilePaths){
           
           var currSourceFilePath=sourceFilePaths[key];
@@ -182,21 +197,36 @@ var startBackupHandler=async (e)=>{
           }
           
           
-          await myFs.myCopyFile(currSourceFilePath,calculatedDestinationFilePath,streamStatus,writeStreamStatusToRendrer); 
-           
+          fileCopyStatus=await myFs.myCopyFile(currSourceFilePath,calculatedDestinationFilePath,streamStatus,writeStreamStatusToRendrer); 
+          // console.log(fileCopyStatus)
+          fileCopyStatusArray[fileCopyStatusArray.length-1].push([fileCopyStatus]);
         }
 
+        // console.log(backupReport)
+        // console.log(backupReport.copied[copied.length-1])
+
+        backupReport.copied[backupReport.copied.length-1].sources.push(mySources[key].folderPath)
         myDbHandlers.updateLastBackupDateInSourceDb(streamStatus)   
 
       }
+      toRenderer.sendMsgToRenderer({
+        msgType : "console",
+        msg     : backupReport
+      })
       myFs.purgeDestination(myDestinations[key])  
     
     }
 
+
+    toRenderer.sendMsgToRenderer({
+      msgType : "dataReport",
+      msg     : backupReport
+    })
     
     currDate=new Date();
     myConfigs.lastBackupDate=currDate.toString();
-    myDbHandlers.setConfig(myConfigs);    
+    myDbHandlers.setConfig(myConfigs);   
+    myLogger.logDataReport(backupReport);
     configuration.resetBackupLock();
     return
 

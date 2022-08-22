@@ -116,7 +116,7 @@ const getFolderSummary = function(directoryPath) {
         percentage: 100,
       };
       writeStreamStatusToRendrer(streamStatus);
-      return Promise.resolve("File already exist");
+      return Promise.resolve("File already synced: "+source);
       
     }
   }
@@ -178,7 +178,9 @@ const getFolderSummary = function(directoryPath) {
       fs.utimesSync(destination, sourceStats.atime, sourceStats.mtime);
       resolve("Copied "+source)
     })
-    writeStream.on("error",()=>(reject("!!ERROR "+source+" @dest@ "+destination)))
+    writeStream.on("error",(err)=>{
+      reject("!!ERROR @source@ "+source+" @dest@ "+destination+"  @ERROR@"+err)
+    })
     
     
   })

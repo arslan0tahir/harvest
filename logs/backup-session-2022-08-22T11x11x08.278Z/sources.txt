@@ -1,0 +1,80 @@
+[
+  {
+    "folderName": "Source",
+    "folderPath": "E:\\hTest\\Source",
+    "toltalFiles": 1,
+    "folderSize": "679.0 MB",
+    "lastBackupDate": "22 Aug 2022, Monday 4:10 PM",
+    "isBackingUp": 0,
+    "StatusSummary": "",
+    "files": [
+      "E:\\hTest\\Source\\files\\305.pdf",
+      "E:\\hTest\\Source\\files\\GitHub - jrkerns_pylinac A TG-142 toolkit for doing routine linear accelerator quality assurance.pdf",
+      "E:\\hTest\\Source\\files\\IJSTEV4I8030.pdf",
+      "E:\\hTest\\Source\\files\\isotopylog-0.0.7.tar.gz",
+      "E:\\hTest\\Source\\files\\mcnp_input_reader-0.1.8-py3-none-any.whl",
+      "E:\\hTest\\Source\\files\\mcnp_input_reader-0.1.8.tar.gz",
+      "E:\\hTest\\Source\\files\\mendeleev-0.9.0-py3-none-any.whl",
+      "E:\\hTest\\Source\\files\\mendeleev-0.9.0.tar.gz",
+      "E:\\hTest\\Source\\files\\mpich-4.0.1.tar.gz",
+      "E:\\hTest\\Source\\New Microsoft Word Document.docx",
+      "E:\\hTest\\Source\\Windows_XP_Professional_SP3x86-Integral_Edition_2021.4.24.rar"
+    ]
+  },
+  {
+    "folderName": "source2",
+    "folderPath": "E:\\hTest\\source2",
+    "toltalFiles": 16,
+    "folderSize": "78.6 MB",
+    "lastBackupDate": "22 Aug 2022, Monday 4:10 PM",
+    "isBackingUp": 0,
+    "StatusSummary": "",
+    "files": [
+      "E:\\hTest\\source2\\New Microsoft Word Document.docx"
+    ]
+  },
+  null,
+  {
+    "folderName": "General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files",
+    "folderPath": "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files",
+    "toltalFiles": 33,
+    "folderSize": "577.5 KB",
+    "lastBackupDate": "22 Aug 2022, Monday 4:10 PM",
+    "isBackingUp": 0,
+    "files": [
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\a.html",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\ads.html",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\adsbygoogle.js",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\ads_002.html",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\ads_003.html",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\ads_004.html",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\american-flag.jpg",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\china-flag.jpg",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\cookie.js",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\date-palm.jpg",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\default.css",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\devicepx-jetpack.js",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\europe.jpg",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\font-awesome.css",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\ga.js",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\india-flag.jpg",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\integrator.js",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\integrator_002.js",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\nigeria-flag.png",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\osd.js",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\pakistan-flag.jpg",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\public.css",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\q112.png",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\russia-flag.jpg",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\show_ads_impl_fy2019.js",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\style.css",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\turkey-flag.jpg",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\uk-flag.png",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\urdu.png",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\world.jpg",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\wp-embed.js",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\wp-emoji-release.js",
+      "E:\\Aleem\\General Knowledge (Pakistan Studies) MCQs Pak Study GK Questions and Answers eBook_files\\zrt_lookup.html"
+    ]
+  }
+]
