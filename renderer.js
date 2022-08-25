@@ -63,6 +63,16 @@ app.controller('personCtrl', function($scope) {
         lastBackupDate : "",  
     }    
 
+    $scope.containString=function(msg){
+        if (msg.includes('!!ERROR')){
+            return "error"
+        }
+        if (msg.includes('SYNCED')){
+            return "synced"
+        }
+
+    }
+
     $scope.init= function () {
         //$scope.loadSources();
         $scope.myDest=$scope.myDestDefaults;

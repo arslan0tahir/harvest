@@ -2,7 +2,8 @@ const fs = require("fs")
 const myDbHandlers=require('./myDbHandlers')
 const myFs=require('./myFolderOpHandler')
 const toRenderer=require('./toRenderer')
-
+const myFolderOpHandler=require('./myFolderOpHandler')
+const path=require('path');
 const checkDiskSpace = require('check-disk-space').default
 
 
@@ -10,14 +11,42 @@ const checkDiskSpace = require('check-disk-space').default
 
 //checking floder sizes
 const prebackupValidation=async function(){
-    let sourcesSize=sourcesSizeAccumlated();    
-    let destSizeArray=await getDestSizeArray();
+    let sizeReport={};
+    sizeReport['diffSourceVSdestAlready']=[];
+    let sourcesSize=sourcesSizeAccumlated();
 
+    let destSizeAlreadyObj=getDestSizeAlready();
+    destSizeAlready=destSizeAlreadyObj.destSizeArray
+
+    let destSizeObj=await getDestSizeArray();//destDiskSizeArray
+    destSizeArray=destSizeObj.destSizeArray
+
+
+    console.log(sourcesSize)
+
+    sizeReport={
+        sourcesSizeAccumulated  : sourcesSize,
+        destSizeAlreadyObj      : destSizeAlreadyObj,
+        destSizeNew             : destSizeObj
+    }
+
+    // console.log(sourcesSize-destSizeAlready[0].sizeBytes)
    
 
 
+    
+    if ( destSizeAlready.length != destSizeArray.length){ 
+        toRenderer.sendMsgToRenderer({
+            msgType : "console",
+            msg     : "destination mismatch"
+        })       
+        return 0;
+    }
+    
+    
     for (key in destSizeArray){
-        if (sourcesSize >= destSizeArray[key].size){
+        if ( (sourcesSize-destSizeAlready[key].sizeBytes) >= destSizeArray[key].size){
+            sizeReport['diffSourceVSdestAlready'].push(sourcesSize-destSizeAlready[key].sizeBytes)
             destSizeArray["error"]="Disk Full";
             toRenderer.sendMsgToRenderer(
                 {
@@ -27,9 +56,10 @@ const prebackupValidation=async function(){
                 
                 }
             )
+            return 0;
         }
         else{
-            destSizeArray["error"]="Online";
+            // destSizeArray["error"]="Online";
             toRenderer.sendMsgToRenderer(
                 {
                     msg         : "Online",
@@ -40,10 +70,14 @@ const prebackupValidation=async function(){
             )
         }
     }
+    console.log(sizeReport)
     // console.log(sourcesSize)
     // console.log(destSizeArray)
 
 }
+
+
+
 
 const getDiskSpace=async function(myPath){
     // console.log("PPPPPATH",myPath)
@@ -67,18 +101,74 @@ const getDestSizeArray=async function(){
     myDest=onlineDestFolders(myDest);    
     
     let destSizeArray=[];
+    let destPathArray=[];
     for (key in myDest){
 
         let destSize=await getDiskSpace(myDest[key].folderPath);
         destSize["folderPath"]=myDest[key].folderPath;
         // console.log(destSize)        
-        destSizeArray.push(destSize);   
+        destSizeArray.push(destSize);  
+        destPathArray.push(myDest[key].folderPath);
         // console.log(destSizeArray);  
         
     }
     // console.log(destSizeArray)  
-    return destSizeArray;
+    destSizeObject={
+        destSizeArray : destSizeArray,
+        destPathArray : destPathArray
+    }
+    return destSizeObject;
 }
+
+const getDestSizeAlready=function(){
+    let myDest=myDbHandlers.getBackupDest();
+    myDest=onlineDestFolders(myDest); 
+
+    let mySources=myDbHandlers.getBackupSources();
+    mySources=onlineSourceFolders(mySources); 
+
+    let destSizeArray=[];
+    let destPathArray=[];
+    let sourceFolderName;
+    let destSize;
+    for (key in myDest){
+        // console.log(myDest[key].folderPath)
+        let destSize
+
+        //workingl
+        holdDestSize=0;
+        for (key2 in mySources){
+            // console.log(mySources[key2])
+            sourceFolderName=mySources[key2].folderPath.split('\\');
+            sourceFolderName=sourceFolderName[sourceFolderName.length-1];     
+
+            // console.log(path.join(myDest[key].folderPath,sourceFolderName))
+
+            destSize=myFolderOpHandler.getFolderSummary(path.join(myDest[key].folderPath,sourceFolderName));
+            destSize=destSize.sizeBytes;
+            // console.log(destSize)
+            destSize=Number(destSize);
+            holdDestSize=holdDestSize+destSize;
+            
+
+        }
+        destSize=holdDestSize;
+        destSize["folderPath"]=myDest[key].folderPath;
+        // console.log(destSize)        
+        destSizeArray.push(destSize);   
+        destPathArray.push(myDest[key].folderPath);
+        // console.log(destSizeArray);  
+        
+    }
+    // console.log(destSizeArray) 
+    
+    destSizeObj={
+        destSizeArray:destSizeArray,
+        destPathArray:destPathArray
+    }
+    return destSizeObj;
+}
+
 
 
 const sourcesSizeAccumlated=function(){

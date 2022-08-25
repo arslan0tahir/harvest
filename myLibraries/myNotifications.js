@@ -1,6 +1,6 @@
 const notifier = require('node-notifier');
 const path = require('path');
-
+const myAutoBackup=require('./myAutoBackup')
 // String
 
 testNotification=function(title,message){
@@ -11,7 +11,7 @@ testNotification=function(title,message){
         title='Starting HARVEST';
     }
     if(!message){
-        message='Backingup your source folder to destinations';
+        message='Backup is sheduled at '+myAutoBackup.getAutoBackupTime();
     }
 
 

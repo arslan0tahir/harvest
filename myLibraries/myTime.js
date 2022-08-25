@@ -30,7 +30,13 @@ var getCurrentTime=function (){
     let hours = twelveHours();
     let minutes = myDate.getMinutes();
 
-    let currentTime = `${hours}:${minutes} ${amOrPm}`;
+       
+    myMin=minutes.toString();
+    if(myMin.length==1){
+        myMin="0"+myMin;
+    }
+
+    let currentTime = `${hours}:${myMin} ${amOrPm}`;
     return today + ' ' + currentTime
 }
 
@@ -64,7 +70,15 @@ var formatDate=function (myDate){
     let hours = twelveHours();
     let minutes = myDate.getMinutes();
 
-    let currentTime = `${hours}:${minutes} ${amOrPm}`;
+    
+    myMin=minutes.toString();
+    if(myMin.length==1){
+        myMin="0"+myMin;
+    }
+   
+
+
+    let currentTime = `${hours}:${myMin} ${amOrPm}`;
     return today + ' ' + currentTime
 }
 

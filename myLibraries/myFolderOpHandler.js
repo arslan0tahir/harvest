@@ -116,7 +116,7 @@ const getFolderSummary = function(directoryPath) {
         percentage: 100,
       };
       writeStreamStatusToRendrer(streamStatus);
-      return Promise.resolve("File already synced: "+source);
+      return Promise.resolve("SYNCED : "+source);
       
     }
   }
@@ -195,10 +195,13 @@ const purgeDestination=function (dest){
   let mySources=myDbHandlers.getBackupSources();
   let destFileRelativePath='';
   let destFiles=[]
+  let sourceFolderInDest=[];
   //narrowing scope of destination folder to source folder names
   
+  let destinationFolder;
   
-  
+
+
   
   if (!fs.existsSync(dest.folderPath)){
     delete mySources[key];
@@ -206,8 +209,10 @@ const purgeDestination=function (dest){
     return ;
   }
 
-  for (key in mySources){
 
+
+  //collecting destination files with source folder names in absolute paths 
+  for (key in mySources){
 
     hold=mySources[key].folderPath;
     
@@ -226,7 +231,7 @@ const purgeDestination=function (dest){
     hold=hold.pop();
 
     destinationFolder=path.join(dest.folderPath,hold);
-
+    sourceFolderInDest.push(destinationFolder);
     if (destinationFolder==dest.folderPath){
       console.trace("Critical Error");
       return;
@@ -242,19 +247,14 @@ const purgeDestination=function (dest){
       console.trace("Error accessing destination files: ",destinationFolder)
       return;
     }
-
   }
 
+  
 
   for(key in destFiles){
     destFileRelativePath=destFiles[key].split(dest.folderPath)[1];
     
-    // hold=destFileRelativePath.split("\\");
-    // hold.shift();
-    // hold.shift();
-    // destFileRelativePath="\\"+hold.join("\\")
-   
-    //get my sources 
+
 
 
     //find if destination file exists in all sources
@@ -279,14 +279,18 @@ const purgeDestination=function (dest){
     }
 
     if (found==0){
-      myLogger.logPurging("DELETING FILE "+dest.folderPath+destFileRelativePath+"\n")
+      // myLogger.logPurging("DELETING FILE "+dest.folderPath+destFileRelativePath+"\n")
       // console.log(path.join(dest.folderPath,destFileRelativePath))
       fs.rmSync(path.join(dest.folderPath,destFileRelativePath))
-    }
-
+    }    
   }
 
-  cleanEmptyFoldersRecursively(destinationFolder);
+  // console.log("Purging Empty Folders",sourceFolderInDest);
+  for (key in sourceFolderInDest){
+    console.log("Purging Empty Folders",sourceFolderInDest[key]);
+    cleanEmptyFoldersRecursively(sourceFolderInDest[key]);
+  }
+
 }
 
 const cleanEmptyFoldersRecursively=function (folder) {

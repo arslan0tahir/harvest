@@ -429,9 +429,10 @@
                     <div ng-repeat="x in backupReportCopied">
                       <ul ng-repeat="y in x.fileCopyStatus">
                         <li ng-repeat="z in y">
-                          <span ng-if="z[0].indexof('!!ERROR') > -1" style="color: red;"> {{z[0]}}</span>
-                          <span ng-if="z[0].indexof('!!ERROR') == -1" style="color: green;"> {{z[0]}}</span>
-                          {{z[0]}}
+
+                          <span ng-if="containString(z[0])=='error'" style="color: red;"> {{z[0]}}</span>
+                          <span ng-if="containString(z[0])=='synced'" style="color: rgb(0, 52, 0);"> {{z[0]}}</span>
+                          
                         </li>
                       </ul>
                     </div>

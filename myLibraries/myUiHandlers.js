@@ -7,14 +7,15 @@ const myAutoBackup=require('./myAutoBackup')
 const configuration=require('./configuration')
 const path = require('path')
 const toRenderer=require('./toRenderer')
+const myNotifications=require('./myNotifications')
+
 
 
 const prebackupValidation=require('./preBackupValidation')
 
 var startBackupHandler=async (e)=>{
-    
+    myNotifications.testNotification("Harvesting","Back Started")
     await prebackupValidation.prebackupValidation();
-
 
     var myConfigs=myDbHandlers.getConfig();
     
@@ -24,41 +25,10 @@ var startBackupHandler=async (e)=>{
     }
     else{
       configuration.setBackupLock();
-    }
-
-    
-
-    // myData={
-    //   sources      :  myDbHandlers.getBackupSources(),
-    //   destinations :  myDbHandlers.getBackupDest()
-    // } 
-
-
-
-
-    // {
-
-          // sourcesStatus:{
-          //   sourcePaths: {
-          //     status   : online/offline
-          //     copiedTo : 
-          //   }
-          // }
-          // destStatus:{
-          //   destPaths: online/offline
-          // }
-          // backupStatus:{
-
-          // }  
-
-    // }
-
-
+    } 
 
     myHoldSources=  myDbHandlers.getBackupSources(),
     myHoldDest=  myDbHandlers.getBackupDest()
-
-
 
     //checking online folders
     backupReport={
@@ -93,7 +63,7 @@ var startBackupHandler=async (e)=>{
 
     //checking if sources are offline    
     if (myData.sources.length==0){
-      backupReport.error.push("All sources are offline")
+      backupReport.errors.push("All sources are offline")
       toRenderer.sendMsgToRenderer({
         msgType : "console",
         msg     : backupReport
@@ -112,18 +82,17 @@ var startBackupHandler=async (e)=>{
     // Preparing and appending additional sources data in mySources array 
     // let allSourcesFound=1;
     for (const key in mySources) {
-      if (mySources.hasOwnProperty(key)) {   
-        
-        
+
+      if (mySources.hasOwnProperty(key)) {         
         //Append folder name and file paths in each item of "mySources" array (json objects)
         mySources[key]["files"]=myFs.getAllFiles(mySources[key].folderPath);   
         if(!Array.isArray(mySources[key]["files"])){
           configuration.resetBackupLock();
           // allSourcesFound=0;
           delete mySources[key];
-          continue;
-          
+          continue;          
         }
+
         mySources[key]["folderName"]=mySources[key]["folderPath"].split("\\").pop();       
       }
     }
