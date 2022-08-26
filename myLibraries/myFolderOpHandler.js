@@ -287,7 +287,6 @@ const purgeDestination=function (dest){
 
   // console.log("Purging Empty Folders",sourceFolderInDest);
   for (key in sourceFolderInDest){
-    console.log("Purging Empty Folders",sourceFolderInDest[key]);
     cleanEmptyFoldersRecursively(sourceFolderInDest[key]);
   }
 

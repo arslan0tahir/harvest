@@ -13,6 +13,9 @@ app.controller('personCtrl', function($scope) {
         errors        : [],
         copied        : []
     }
+    $scope.destDiskSizeNew={}
+    
+    $scope.destDiskSizeAlready={};
     $scope.backupReportSourcesStatus={}
     $scope.backupShedule=""  //e.g. 8:55
     $scope.firstName = "John";
@@ -26,8 +29,33 @@ app.controller('personCtrl', function($scope) {
         lastBackupDate : "n/a"
     };
 
-    
-
+    $scope.formatSizeReport=function(){
+        if(!$scope.destDiskSizeNew.destPathArray){
+            return ({
+                diskName        : '',
+                freeSpace       : '',
+                usedSpace       : '',
+                requiredSpace   : '',
+                destPath        : ''  
+            });
+        }
+        let hold=[];
+        let holdDestPath=$scope.destDiskSizeNew.destPathArray;
+        let holdDestSize=$scope.destDiskSizeNew.destSizeArray;
+        let holdDestSizeAlready=$scope.destDiskSizeAlready.destSizeArray;
+        
+        for(key in holdDestPath){
+            hold.push({
+                diskName        : holdDestSize[key].diskPath,
+                freeSpace       : (holdDestSize[key].free/(1024*1024*1024)).toFixed(2) + " GB",
+                usedSpace       : (holdDestSize[key].size/(1024*1024*1024)).toFixed(2) + " GB",
+                requiredSpace   : (($scope.sourcesSizeAccumulated-holdDestSizeAlready[key])/(1024*1024*1024)).toFixed(2) + " GB",
+                destPath        : holdDestPath[key]  
+            })
+        }
+        return hold;
+    }
+    $scope.formattedSizeReport=$scope.formatSizeReport();
     $scope.mySources=[
     ]
 
@@ -114,8 +142,12 @@ app.controller('personCtrl', function($scope) {
                 $scope.backupReportSourcesStatus=msg.msg.sourcesStatus;
                 $scope.backupReportDestinationStatus=msg.msg.destStatus;
                 $scope.backupReportCopied=msg.msg.copied;
-
                 
+                $scope.destDiskSizeNew=msg.msg.dataReport.destSizeNew;
+                $scope.destDiskSizeAlready=msg.msg.dataReport.destSizeAlreadyObj;
+                $scope.sourcesSizeAccumulated=msg.msg.dataReport.sourcesSizeAccumulated;
+
+                $scope.formattedSizeReport=$scope.formatSizeReport();
                 var myModal = new bootstrap.Modal(document.getElementById('dataReportModal'), { keyboard: false});
                 myModal.toggle();
             }

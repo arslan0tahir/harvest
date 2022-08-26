@@ -365,8 +365,7 @@
                                   
                       </tbody>
                     </table>
-                  </div>  
-                  
+                  </div>
                   <div style="width: 49%;display: inline-block;vertical-align: top;">
                     <table class="table table-hover">
                       <thead>
@@ -389,8 +388,49 @@
                                   
                       </tbody>
                     </table>
-                  </div> 
+                  </div>  
                 </div>         
+
+                <div>
+                  <div class="card" >
+                    <div class="card-header">
+                      <b>Space Requirement</b>
+                    </div>
+                    <div class="card-body">
+                      <table class="table table-hover" >
+                        <thead>
+                          <tr>
+                            <th scope="col">Disk Name</th>
+                            <th scope="col">Free Space</th>   
+                            <th scope="col">Used Space</th>
+                            <th scope="col">Required Space</th>
+                            <th scope="col">Destination Path</th>                          
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="x in formattedSizeReport" class="mySourcesRow">                    
+                            <td style="width: 15%;">                        
+                              {{x.diskName}}
+                            </td>
+                            <td>                        
+                              {{x.freeSpace}}
+                            </td>  
+                            <td>                        
+                              {{x.usedSpace}}
+                            </td>
+                            <td>                        
+                              {{x.requiredSpace}}
+                            </td>
+                            <td>                        
+                              {{x.destPath}}
+                            </td>                             
+                          </tr>                                    
+                        </tbody>
+                      </table>
+                      
+                    </div>
+                  </div>
+                </div>
 
 
                 <div>

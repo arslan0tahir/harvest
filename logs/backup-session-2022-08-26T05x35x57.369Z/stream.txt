@@ -1,0 +1,27 @@
+[
+  "1.20587014283146 E:\\hTest\\Source\\Windows_XP_Professional_SP3x86-Integral_Edition_2021.4.24 - Copy.rar--E:\\hTest\\Destination--E:\\hTest\\Source"
+][
+  "19.103065140394783 E:\\hTest\\Source\\Windows_XP_Professional_SP3x86-Integral_Edition_2021.4.24 - Copy.rar--E:\\hTest\\Destination--E:\\hTest\\Source"
+][
+  "43.237818646561124 E:\\hTest\\Source\\Windows_XP_Professional_SP3x86-Integral_Edition_2021.4.24 - Copy.rar--E:\\hTest\\Destination--E:\\hTest\\Source"
+][
+  "72.23075402312759 E:\\hTest\\Source\\Windows_XP_Professional_SP3x86-Integral_Edition_2021.4.24 - Copy.rar--E:\\hTest\\Destination--E:\\hTest\\Source"
+][
+  "96.33948155498821 E:\\hTest\\Source\\Windows_XP_Professional_SP3x86-Integral_Edition_2021.4.24 - Copy.rar--E:\\hTest\\Destination--E:\\hTest\\Source"
+][
+  "100 E:\\hTest\\Source\\Windows_XP_Professional_SP3x86-Integral_Edition_2021.4.24 - Copy.rar--E:\\hTest\\Destination--E:\\hTest\\Source"
+][
+  "28.420363941840737 E:\\hTest\\Source\\Windows_XP_Professional_SP3x86-Integral_Edition_2021.4.24 - Copy.rar--E:\\hTest\\d2--E:\\hTest\\Source"
+][
+  "42.040623828498234 E:\\hTest\\Source\\Windows_XP_Professional_SP3x86-Integral_Edition_2021.4.24 - Copy.rar--E:\\hTest\\d2--E:\\hTest\\Source"
+][
+  "53.55277979639281 E:\\hTest\\Source\\Windows_XP_Professional_SP3x86-Integral_Edition_2021.4.24 - Copy.rar--E:\\hTest\\d2--E:\\hTest\\Source"
+][
+  "63.850390296687365 E:\\hTest\\Source\\Windows_XP_Professional_SP3x86-Integral_Edition_2021.4.24 - Copy.rar--E:\\hTest\\d2--E:\\hTest\\Source"
+][
+  "73.78363715670191 E:\\hTest\\Source\\Windows_XP_Professional_SP3x86-Integral_Edition_2021.4.24 - Copy.rar--E:\\hTest\\d2--E:\\hTest\\Source"
+][
+  "88.41891004128229 E:\\hTest\\Source\\Windows_XP_Professional_SP3x86-Integral_Edition_2021.4.24 - Copy.rar--E:\\hTest\\d2--E:\\hTest\\Source"
+][
+  "100 E:\\hTest\\Source\\Windows_XP_Professional_SP3x86-Integral_Edition_2021.4.24 - Copy.rar--E:\\hTest\\d2--E:\\hTest\\Source"
+]

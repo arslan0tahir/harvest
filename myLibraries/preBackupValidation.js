@@ -70,7 +70,8 @@ const prebackupValidation=async function(){
             )
         }
     }
-    console.log(sizeReport)
+    // console.log(sizeReport)
+    return sizeReport
     // console.log(sourcesSize)
     // console.log(destSizeArray)
 
@@ -105,7 +106,7 @@ const getDestSizeArray=async function(){
     for (key in myDest){
 
         let destSize=await getDiskSpace(myDest[key].folderPath);
-        destSize["folderPath"]=myDest[key].folderPath;
+        // destSize["folderPath"]=myDest[key].folderPath;
         // console.log(destSize)        
         destSizeArray.push(destSize);  
         destPathArray.push(myDest[key].folderPath);

@@ -15,7 +15,8 @@ const prebackupValidation=require('./preBackupValidation')
 
 var startBackupHandler=async (e)=>{
     myNotifications.testNotification("Harvesting","Back Started")
-    await prebackupValidation.prebackupValidation();
+    var dataReport=await prebackupValidation.prebackupValidation();
+    // console.log(dataReport)
 
     var myConfigs=myDbHandlers.getConfig();
     
@@ -32,6 +33,7 @@ var startBackupHandler=async (e)=>{
 
     //checking online folders
     backupReport={
+      dataReport:dataReport,
       sourcesStatus : myDbHandlers.sourceFoldersStatus(myHoldSources),
       destStatus    : myDbHandlers.destFoldersStatus(myHoldDest),
       errors        : [],
