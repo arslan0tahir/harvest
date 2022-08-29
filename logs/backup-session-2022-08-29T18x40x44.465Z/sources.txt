@@ -4,9 +4,8 @@
     "folderPath": "E:\\hTest\\Source",
     "toltalFiles": 19,
     "folderSize": "795.3 MB",
-    "lastBackupDate": "29 Aug 2022, Monday 9:01 PM",
+    "lastBackupDate": "29 Aug 2022, Monday 11:40 PM",
     "isBackingUp": 0,
-    "StatusSummary": "",
     "files": [
       "E:\\hTest\\Source\\files\\305.pdf",
       "E:\\hTest\\Source\\files\\GitHub - jrkerns_pylinac A TG-142 toolkit for doing routine linear accelerator quality assurance.pdf",

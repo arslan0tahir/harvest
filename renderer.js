@@ -207,6 +207,9 @@ app.controller('personCtrl', function($scope) {
 
     $scope.loadSources=async function(){
         $scope.mySources=await window.FILE_IO.getSources();
+        if ($scope.mySources.length>0){
+            $scope.carousal=0;
+        }
         $scope.$apply();
     }
 

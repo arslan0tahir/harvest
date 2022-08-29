@@ -13,7 +13,7 @@
       "destSizeArray": [
         {
           "diskPath": "E:",
-          "free": 254036459520,
+          "free": 254035251200,
           "size": 429703294976
         }
       ],
