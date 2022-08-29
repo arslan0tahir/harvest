@@ -5,6 +5,7 @@
 // selectively enable features needed in the rendering
 // process.
 var app = angular.module('myApp', []);
+var myModal = new bootstrap.Modal(document.getElementById('dataReportModal'), { keyboard: false});
 app.controller('personCtrl', function($scope) {
 
     $scope.backupReport={
@@ -14,7 +15,10 @@ app.controller('personCtrl', function($scope) {
         copied        : []
     }
     $scope.destDiskSizeNew={}
-    
+    $scope.carousal=1;
+    $scope.carousalCardCount=1;
+    $scope.carousalCardTotalCount=3;
+    $scope.showCarouselSkip=0;
     $scope.destDiskSizeAlready={};
     $scope.backupReportSourcesStatus={}
     $scope.backupShedule=""  //e.g. 8:55
@@ -43,15 +47,19 @@ app.controller('personCtrl', function($scope) {
         let holdDestPath=$scope.destDiskSizeNew.destPathArray;
         let holdDestSize=$scope.destDiskSizeNew.destSizeArray;
         let holdDestSizeAlready=$scope.destDiskSizeAlready.destSizeArray;
-        
+        let holdFormatted
         for(key in holdDestPath){
-            hold.push({
+            holdFormatted={
                 diskName        : holdDestSize[key].diskPath,
                 freeSpace       : (holdDestSize[key].free/(1024*1024*1024)).toFixed(2) + " GB",
                 usedSpace       : (holdDestSize[key].size/(1024*1024*1024)).toFixed(2) + " GB",
                 requiredSpace   : (($scope.sourcesSizeAccumulated-holdDestSizeAlready[key])/(1024*1024*1024)).toFixed(2) + " GB",
                 destPath        : holdDestPath[key]  
-            })
+            }
+            if (holdFormatted.requiredSpace>holdFormatted.freeSpace){
+                holdFormatted.diskName=`ERROR DISK FULL`
+            }
+            hold.push(holdFormatted)
         }
         return hold;
     }
@@ -104,7 +112,7 @@ app.controller('personCtrl', function($scope) {
     $scope.init= function () {
         //$scope.loadSources();
         $scope.myDest=$scope.myDestDefaults;
-        $scope.checkSummaryVisibility();        
+        $scope.checkSummaryVisibility();       
     }
 
     angular.element(document).ready(function () {        
@@ -139,6 +147,7 @@ app.controller('personCtrl', function($scope) {
             }
 
             if (msg.msgType=="dataReport"){
+                myModal.hide()
                 $scope.backupReportSourcesStatus=msg.msg.sourcesStatus;
                 $scope.backupReportDestinationStatus=msg.msg.destStatus;
                 $scope.backupReportCopied=msg.msg.copied;
@@ -148,8 +157,8 @@ app.controller('personCtrl', function($scope) {
                 $scope.sourcesSizeAccumulated=msg.msg.dataReport.sourcesSizeAccumulated;
 
                 $scope.formattedSizeReport=$scope.formatSizeReport();
-                var myModal = new bootstrap.Modal(document.getElementById('dataReportModal'), { keyboard: false});
-                myModal.toggle();
+                myModal.show();
+
             }
 
 
@@ -267,6 +276,26 @@ app.controller('personCtrl', function($scope) {
             return;
         }
 
+
+        let currSourceFolderPath=$scope.currsource.folderPath;
+        for(var key in $scope.mySources){
+            if ( $scope.currsource.folderPath==$scope.mySources[key].folderPath){
+                alert("Error: Source Folder Already Exist")
+                return;
+            }
+
+            let arrSourceFolderPath=$scope.mySources[key].folderPath
+
+            
+            if ( currSourceFolderPath.split('\\')[currSourceFolderPath.lenght-1]== arrSourceFolderPath.split('\\')[arrSourceFolderPath.lenght-1]){
+                alert(`Error: Same Source Foldername not allowed
+                ${currSourceFolderPath}
+                ${arrSourceFolderPath}
+                `)
+                return;
+            }
+        }
+
         $scope.mySources.push({
             folderName  :   $scope.currsource.folderName,
             folderPath  :   $scope.currsource.folderPath,
@@ -283,6 +312,25 @@ app.controller('personCtrl', function($scope) {
         if ($scope.currDest.folderPath==''){
             return;
         }
+
+        let currDestFolderPath=$scope.currDest.folderPath;
+
+        for(var key in $scope.myDest){
+            if ( $scope.currDest.folderPath==$scope.myDest[key].folderPath){
+                alert("Error: Destination Folder Already Exist")
+                return;
+            }
+
+            let arrDestFolderPath=$scope.myDest[key].folderPath
+            if ( currDestFolderPath.split('\\')[currDestFolderPath.lenght-1]== arrDestFolderPath.split('\\')[arrDestFolderPath.lenght-1]){
+                alert(`Error: Same Destination Foldername not allowed
+                ${currDestFolderPath}
+                ${arrDestFolderPath}
+                `)
+                return;
+            }
+        }
+
 
         $scope.myDest.push($scope.currDest)
                 
@@ -380,6 +428,27 @@ app.controller('personCtrl', function($scope) {
         console.log("RENDERER In start Backup")
         await window.BACKUP.startBackup(); 
         
+        
+    }
+
+    $scope.displayCarousal=async () => {
+        if ($scope.mySources.lenght==0){
+            $scope.carousal= 1;
+        }
+        else{
+            $scope.carousal= 0;
+        }       
+    }
+    $scope.hideCarousal=async () => {
+        $scope.carousal= 0;
+    }
+
+    $scope.carouselNext=function(){       
+        $scope.carousalCardCount=$scope.carousalCardCount+1;
+        if ($scope.carousalCardCount == $scope.carousalCardTotalCount){
+            $scope.showCarouselSkip=1
+        }
+
         
     }
 

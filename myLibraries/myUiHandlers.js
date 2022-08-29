@@ -15,6 +15,11 @@ const prebackupValidation=require('./preBackupValidation')
 
 var startBackupHandler=async (e)=>{
     myNotifications.testNotification("Harvesting","Back Started")
+    toRenderer.sendMsgToRenderer({
+      msgType : "console",
+      msg     : "Backup Started at "+ new Date()
+    })
+    console.log("Backup Started")
     var dataReport=await prebackupValidation.prebackupValidation();
     // console.log(dataReport)
 
@@ -31,11 +36,19 @@ var startBackupHandler=async (e)=>{
     myHoldSources=  myDbHandlers.getBackupSources(),
     myHoldDest=  myDbHandlers.getBackupDest()
 
+    
+    myData={
+      sources      :  myDbHandlers.onlineSourceFolders(myHoldSources),
+      destinations :  myDbHandlers.onlineDestFolders(myHoldDest)
+    }
+    
+
+
     //checking online folders
     backupReport={
       dataReport:dataReport,
-      sourcesStatus : myDbHandlers.sourceFoldersStatus(myHoldSources),
-      destStatus    : myDbHandlers.destFoldersStatus(myHoldDest),
+      sourcesStatus : '',
+      destStatus    : '',
       errors        : [],
       copied: [ //ARRAY OF OBJECTS
           //{}{keys > destPath[string], sources[array],filesCopyStatus[2D array] }
@@ -43,12 +56,6 @@ var startBackupHandler=async (e)=>{
     }
 
 
-    
-    myData={
-      sources      :  myDbHandlers.onlineSourceFolders(myHoldSources),
-      destinations :  myDbHandlers.onlineDestFolders(myHoldDest)
-    }
-    
 
     //checking if destinations are offline    
     if (myData.destinations.length==0){
@@ -75,6 +82,10 @@ var startBackupHandler=async (e)=>{
       return;
     }
     
+    backupReport.sourcesStatus=myDbHandlers.sourceFoldersStatus(myHoldSources);
+    backupReport.destStatus=myDbHandlers.destFoldersStatus(myHoldDest);
+
+
 
     myAutoBackup.assignBackupSlot();
     const mySources=myData.sources;

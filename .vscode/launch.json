@@ -1,13 +1,17 @@
 {
-    "version": "1.0.0",
-    "configurations": [
-       {
-          "name": "Debug Main Process",
-          "type": "node",
-          "request": "launch",
-          "cwd": "${workspaceRoot}",
-          "runtimeExecutable": "E:/electron/harvest/electron/electron.exe",
-          "program": "${workspaceRoot}/main.js"
-       }
-    ]
+   "version": "0.2.0",
+   "configurations": [
+     {
+       "name": "Debug Main Process",
+       "type": "node",
+       "request": "launch",
+       "cwd": "${workspaceFolder}",
+       "runtimeExecutable": "E:\\electron\\harvest\\electron\\electron.exe",
+       "windows": {
+         "runtimeExecutable": "E:\\electron\\harvest\\electron\\electron.exe"
+       },
+       "args" : ["."],
+       "outputCapture": "std"
+     }
+   ]
  }

@@ -278,7 +278,7 @@ const purgeDestination=function (dest){
       }
     }
 
-    if (found==0){
+    if (found==0 && fs.existsSync(destinationFolder)){
       // myLogger.logPurging("DELETING FILE "+dest.folderPath+destFileRelativePath+"\n")
       // console.log(path.join(dest.folderPath,destFileRelativePath))
       fs.rmSync(path.join(dest.folderPath,destFileRelativePath))

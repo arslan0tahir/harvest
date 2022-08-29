@@ -2,6 +2,7 @@ const myDbHandlers=require('./myDbHandlers')
 const myUiHandlers=require('./myUiHandlers')
 const myInitialize=require('./myInitialize')
 const fs = require('fs');
+const toRenderer=require('./toRenderer')
 
 
 function getRandomInt(max) {
@@ -85,10 +86,26 @@ var autoBackup=()=>{
     myLastBackupDate=new Date(myLastBackupDate);
 
     // console.log(estimatedBackupDate.toString(),currDate.toString(),myLastBackupDate.toString())
-    
-    if (estimatedBackupDate<=currDate && myLastBackupDate.getDate()!=estimatedBackupDate.getDate()){
-        // console.log("auto backup condition valid")        
+    console.log(global.mySheduleBackup)
+    if ( (estimatedBackupDate<=currDate && global.mySheduleBackup==0) || (myLastBackupDate.getDate()!=estimatedBackupDate.getDate()) ){
+        // console.log("auto backup condition valid")   
+        console.log("AutoBackup Condition Valid: Backup Started");    
+        toRenderer.sendMsgToRenderer({
+            msgType : "console",
+            msg     : "AutoBackup Condition Valid: Backup Started"
+        }) 
+        if (estimatedBackupDate<=currDate && global.mySheduleBackup==0){global.mySheduleBackup=1}
+        console.log(estimatedBackupDate)
+        console.log(currDate)
         myUiHandlers.startBackupHandler();        
+
+    }
+    else{
+        console.log("AutoBackup condition not fulfilled ");
+        // toRenderer.sendMsgToRenderer({
+        //     msgType : "console",
+        //     msg     : "AutoBackup Condition Valid: Backup Started"
+        // }) 
     }
 }
 

@@ -6,8 +6,11 @@ const fs = require("fs")
 
 
 
-const saveBackupSources=function (e,mySources){      
+const saveBackupSources=function (e,mySources){   
+
+    
     let data = JSON.stringify(mySources, null, 2);
+
     fs.writeFileSync('db/backupSources.json', data, (err) => {
       if (err) throw err;
       
@@ -86,27 +89,25 @@ const updateLastBackupDateInSourceDb = (streamStatus)=> {
 }
 
 const onlineSourceFolders=function(mySources){
+  var holdMySources=[]
   for (key in mySources){
-      if(!fs.existsSync(mySources[key].folderPath)){
-          delete mySources[key];
+      if(fs.existsSync(mySources[key].folderPath)){
+        holdMySources.push(mySources[key])
       }
+      
   }
-  if (mySources[0]==null){
-    mySources=[]
-  }
-  return mySources;
+//  console.log(holdMySources)
+  return holdMySources;
 }
 
 const onlineDestFolders=function(myDest){
+  var holdMyDest=[]
   for (key in myDest){
-      if(!fs.existsSync(myDest[key].folderPath)){         
-          delete myDest[key]
+      if(fs.existsSync(myDest[key].folderPath)){
+        holdMyDest.push(myDest[key])          
       }
-  }
-  if (myDest[0]==null){
-    myDest=[]
-  }
-  return myDest
+  }  
+  return holdMyDest
 }
 
 const sourceFoldersStatus=function(mySources){
@@ -129,7 +130,7 @@ const destFoldersStatus=function(myDest){
         status[myDest[key].folderPath] = "offline"
       }
       else{
-        status[mySources[key].folderPath] = "online"
+        status[myDest[key].folderPath] = "online"
       }
   }
   return status
