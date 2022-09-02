@@ -22,7 +22,7 @@ const prebackupValidation=async function(){
     destSizeArray=destSizeObj.destSizeArray
 
 
-    console.log(sourcesSize)
+    // console.log(sourcesSize)
 
     sizeReport={
         sourcesSizeAccumulated  : sourcesSize,

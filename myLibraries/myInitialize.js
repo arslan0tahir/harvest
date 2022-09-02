@@ -7,7 +7,7 @@ const fs = require('fs');
 
 
 const initialize=function(){
-    global.mySheduleBackup=0;
+    myDbHandlers.resetBackupShedule();
     initializeShedulePlaceholder();
     updateOnlineSourceFoldersInfo();
     updateOnlineDestFoldersInfo();

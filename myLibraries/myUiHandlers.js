@@ -8,30 +8,46 @@ const configuration=require('./configuration')
 const path = require('path')
 const toRenderer=require('./toRenderer')
 const myNotifications=require('./myNotifications')
+const fs=require('fs')
 
 
 
 const prebackupValidation=require('./preBackupValidation')
 
 var startBackupHandler=async (e)=>{
-    myNotifications.testNotification("Harvesting","Back Started")
-    toRenderer.sendMsgToRenderer({
-      msgType : "console",
-      msg     : "Backup Started at "+ new Date()
-    })
-    console.log("Backup Started")
+
+  toRenderer.sendMsgToRenderer({
+    msgType : "console",
+    msg     : "Backup Requested at "+ new Date()
+  })
+  console.log("Backup Requested")
+
     var dataReport=await prebackupValidation.prebackupValidation();
     // console.log(dataReport)
 
+    currDate=new Date();
     var myConfigs=myDbHandlers.getConfig();
+    myConfigs.lastBackupDate=currDate.toString();
+    myDbHandlers.setConfig(myConfigs);
     
     if (configuration.getBackupLock()){
+      toRenderer.sendMsgToRenderer({
+        msgType : "console",
+        msg     : "Backing up already in progresst "+ new Date()
+      })
       console.log("Backing up already in progress");
       return;
     }
     else{
       configuration.setBackupLock();
     } 
+
+    myNotifications.testNotification("Harvesting","Back Started")
+    toRenderer.sendMsgToRenderer({
+      msgType : "console",
+      msg     : "Backup Started at "+ new Date()
+    })
+    console.log("Backup Started")
 
     myHoldSources=  myDbHandlers.getBackupSources(),
     myHoldDest=  myDbHandlers.getBackupDest()
@@ -159,6 +175,14 @@ var startBackupHandler=async (e)=>{
         //loop all sources files       
         backupReport.copied[backupReport.copied.length-1].fileCopyStatus.push([])
         fileCopyStatusArray=backupReport.copied[backupReport.copied.length-1].fileCopyStatus
+
+
+        //create source folder in destination if does not exist
+        let calcDestPath=path.join(currDestPath.folderPath,sourceFolderName)
+        if (!fs.existsSync(calcDestPath)) {
+          fs.mkdirSync(calcDestPath);
+        }
+
         for (const key in sourceFilePaths){
           
           var currSourceFilePath=sourceFilePaths[key];
@@ -205,9 +229,7 @@ var startBackupHandler=async (e)=>{
       msg     : backupReport
     })
     
-    currDate=new Date();
-    myConfigs.lastBackupDate=currDate.toString();
-    myDbHandlers.setConfig(myConfigs);   
+   
     myLogger.logDataReport(backupReport);
     configuration.resetBackupLock();
     return

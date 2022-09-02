@@ -22,7 +22,7 @@ const getAllFiles = function(dirPath, arrayOfFiles) {
       msgLocation: dirPath
     })
     
-    return "Offline"
+    return []
   }
   files = fs.readdirSync(dirPath)
 
@@ -287,12 +287,12 @@ const purgeDestination=function (dest){
 
   // console.log("Purging Empty Folders",sourceFolderInDest);
   for (key in sourceFolderInDest){
-    cleanEmptyFoldersRecursively(sourceFolderInDest[key]);
+    cleanEmptyFoldersRecursively(sourceFolderInDest[key],sourceFolderInDest[key]);
   }
 
 }
 
-const cleanEmptyFoldersRecursively=function (folder) {
+const cleanEmptyFoldersRecursively=function (folder,root) {
   var fs = require('fs');
   var path = require('path');
 
@@ -304,7 +304,10 @@ const cleanEmptyFoldersRecursively=function (folder) {
   if (files.length > 0) {
     files.forEach(function(file) {
       var fullPath = path.join(folder, file);
-      cleanEmptyFoldersRecursively(fullPath);
+      
+
+      
+      cleanEmptyFoldersRecursively(fullPath,root);
     });
 
     // re-evaluate files; after deleting subfolder
@@ -313,8 +316,11 @@ const cleanEmptyFoldersRecursively=function (folder) {
   }
 
   if (files.length == 0) {
-    console.log("removing: ", folder);
-    fs.rmdirSync(folder);
+    //donot delete folder if its a root foolder
+    if (folder!=root){
+      console.log("removing: ", folder);
+      fs.rmdirSync(folder);
+    }   
     return;
   }
 }

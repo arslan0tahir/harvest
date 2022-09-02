@@ -1,10 +1,11 @@
 const fs = require("fs")
-const logFolder=".\\logs"
+const path=require("path")
+const logFolder=path.join(__dirname,'..','\\logs')
 
 
 const generateLogSession=function(logData){
   //make log folder for backup session
-  dirPath='logs\\backup-session-'+new Date().toISOString().replaceAll(":","x");
+  dirPath=logFolder+'\\backup-session-'+new Date().toISOString().replaceAll(":","x");
   global.__backupSessionPath = dirPath;
   
 }

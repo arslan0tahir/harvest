@@ -86,15 +86,15 @@ var autoBackup=()=>{
     myLastBackupDate=new Date(myLastBackupDate);
 
     // console.log(estimatedBackupDate.toString(),currDate.toString(),myLastBackupDate.toString())
-    console.log(global.mySheduleBackup)
-    if ( (estimatedBackupDate<=currDate && global.mySheduleBackup==0) || (myLastBackupDate.getDate()!=estimatedBackupDate.getDate()) ){
+    console.log(myDbHandlers.getBackupShedule())
+    if ( (estimatedBackupDate<=currDate && myDbHandlers.getBackupShedule()==0) || (myLastBackupDate.getDate()!=estimatedBackupDate.getDate()) ){
         // console.log("auto backup condition valid")   
         console.log("AutoBackup Condition Valid: Backup Started");    
         toRenderer.sendMsgToRenderer({
             msgType : "console",
             msg     : "AutoBackup Condition Valid: Backup Started"
         }) 
-        if (estimatedBackupDate<=currDate && global.mySheduleBackup==0){global.mySheduleBackup=1}
+        if (estimatedBackupDate<=currDate && myDbHandlers.getBackupShedule()==0){myDbHandlers.setBackupShedule()}
         console.log(estimatedBackupDate)
         console.log(currDate)
         myUiHandlers.startBackupHandler();        
@@ -112,7 +112,7 @@ var autoBackup=()=>{
 //check if backup condition valid
 var startAutoBackup=()=>{
     // console.log("auto backup check called");
-    setInterval(autoBackup, 6000);
+    setInterval(autoBackup, 5000);
 }
 
 

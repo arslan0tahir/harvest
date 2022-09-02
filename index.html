@@ -340,7 +340,7 @@
               <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
               <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
-            <div class="carousel-inner">
+            <div class="carousel-inner" style="width: 80%;margin: auto;">
               <div class="carousel-item active" >
                 <img src="myLibraries/pictures/1.png" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block">
@@ -521,7 +521,8 @@
 
                           <span ng-if="containString(z[0])=='error'" style="color: red;"> {{z[0]}}</span>
                           <span ng-if="containString(z[0])=='synced'" style="color: rgb(0, 52, 0);"> {{z[0]}}</span>
-                          
+                          <span ng-if="containString(z[0])!='synced' && containString(z[0])!='error'" style="color: black;"> {{z[0]}}</span>
+                         
                         </li>
                       </ul>
                     </div>

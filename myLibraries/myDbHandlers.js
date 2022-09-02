@@ -1,4 +1,5 @@
 const fs = require("fs")
+const path = require("path")
 
 
 
@@ -11,7 +12,7 @@ const saveBackupSources=function (e,mySources){
     
     let data = JSON.stringify(mySources, null, 2);
 
-    fs.writeFileSync('db/backupSources.json', data, (err) => {
+    fs.writeFileSync(path.join(__dirname,'..','/db/backupSources.json'), data, (err) => {
       if (err) throw err;
       
     });  
@@ -19,14 +20,14 @@ const saveBackupSources=function (e,mySources){
 
 const saveBackupDest=function(e,myDest){      
   let data = JSON.stringify(myDest, null, 2);
-  fs.writeFileSync('db/backupDest.json', data, (err) => {
+  fs.writeFileSync(path.join(__dirname,'..','/db/backupDest.json'), data, (err) => {
     if (err) throw err;        
   });
 }
 
 const getBackupSources=function(e,arg){
 
-  var mySources = fs.readFileSync('db/backupSources.json');
+  var mySources = fs.readFileSync(path.join(__dirname,'..','/db/backupSources.json'));
   if (mySources!=""){
     mySources = JSON.parse(mySources);
   }
@@ -37,9 +38,31 @@ const getBackupSources=function(e,arg){
   return mySources;
 }
 
-const getConfig=function(){
 
-  var myConfigs = fs.readFileSync('db/configuration.json');
+const setBackupShedule=function(){
+
+  let myConfig=getConfig();
+  myConfig.mySheduleBackup=1;
+  setConfig(myConfig);    
+}
+
+const getBackupShedule=function(){
+
+  let myConfig=getConfig();
+  return myConfig.mySheduleBackup;
+  
+}
+
+const resetBackupShedule=function(){
+  let myConfig=getConfig();
+  myConfig.mySheduleBackup=0;
+  setConfig(myConfig);  
+}
+
+
+const getConfig=function(){
+  
+  var myConfigs = fs.readFileSync(path.join(__dirname,'..','/db/configuration.json'));
   myConfigs = JSON.parse(myConfigs);
   
   return myConfigs;
@@ -47,7 +70,7 @@ const getConfig=function(){
 
 const setConfig=function(data){
   data=JSON.stringify(data,null,2)
-  fs.writeFileSync('db/configuration.json', data, (err) => {
+  fs.writeFileSync(path.join(__dirname,'..','/db/configuration.json'), data, (err) => {
     if (err) throw err;        
   });  
   
@@ -57,7 +80,7 @@ const setConfig=function(data){
 
 const getBackupDest=function(e,arg){
 
-  var myDest = fs.readFileSync('db/backupDest.json');    
+  var myDest = fs.readFileSync(path.join(__dirname,'..','/db/backupDest.json'));    
   myDest = JSON.parse(myDest);
   return myDest;
 
@@ -66,7 +89,7 @@ const getBackupDest=function(e,arg){
 
 const updateLastBackupDateInSourceDb = (streamStatus)=> { 
 
-    var mySources = fs.readFileSync('db/backupSources.json');
+    var mySources = fs.readFileSync(path.join(__dirname,'..','/db/backupSources.json'));
     if (mySources!=""){
       mySources = JSON.parse(mySources);
     }
@@ -79,7 +102,7 @@ const updateLastBackupDateInSourceDb = (streamStatus)=> {
         if (mySources[key].folderPath==streamStatus.currSource.sourcePath){            
             mySources[key].lastBackupDate=streamStatus.currTime;            
             let data = JSON.stringify(mySources, null, 2);
-            fs.writeFileSync('db/backupSources.json', data, (err) => {
+            fs.writeFileSync(path.join(__dirname,'..','/db/backupSources.json'), data, (err) => {
             if (err) throw err;        
             });
             break;
@@ -148,3 +171,8 @@ exports.onlineSourceFolders=onlineSourceFolders;
 exports.onlineDestFolders=onlineDestFolders;
 exports.destFoldersStatus=destFoldersStatus
 exports.sourceFoldersStatus=sourceFoldersStatus
+exports.setBackupShedule=setBackupShedule
+exports.getBackupShedule=getBackupShedule
+exports.resetBackupShedule=resetBackupShedule
+
+

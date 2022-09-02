@@ -289,8 +289,9 @@ app.controller('personCtrl', function($scope) {
 
             let arrSourceFolderPath=$scope.mySources[key].folderPath
 
-            
-            if ( currSourceFolderPath.split('\\')[currSourceFolderPath.lenght-1]== arrSourceFolderPath.split('\\')[arrSourceFolderPath.lenght-1]){
+            splitCurrSourceFolderPath=currSourceFolderPath.split('\\')
+            splitArrSourceFolderPath=arrSourceFolderPath.split('\\')
+            if ( splitCurrSourceFolderPath[splitCurrSourceFolderPath.length-1]== splitArrSourceFolderPath[splitArrSourceFolderPath.lenght-1]){
                 alert(`Error: Same Source Foldername not allowed
                 ${currSourceFolderPath}
                 ${arrSourceFolderPath}
