@@ -9,6 +9,7 @@ const path = require('path')
 const toRenderer=require('./toRenderer')
 const myNotifications=require('./myNotifications')
 const fs=require('fs')
+var _ = require('underscore');
 
 
 
@@ -20,7 +21,7 @@ var startBackupHandler=async (e)=>{
     msgType : "console",
     msg     : "Backup Requested at "+ new Date()
   })
-  console.log("Backup Requested")
+  console.log("Backup Requested at "+ new Date())
 
     var dataReport=await prebackupValidation.prebackupValidation();
     // console.log(dataReport)
@@ -104,9 +105,16 @@ var startBackupHandler=async (e)=>{
 
 
     myAutoBackup.assignBackupSlot();
+    let myMsg={
+      msg         : "Automatic backup is sheduled at "+myAutoBackup.getAutoBackupTime(),
+      msgType     : "backupShedule",
+      msgLocation : ""
+    }
+    toRenderer.sendMsgToRenderer(myMsg)
+    
     const mySources=myData.sources;
     const myDestinations=myData.destinations;
-  
+    
     
     // Preparing and appending additional sources data in mySources array 
     // let allSourcesFound=1;
@@ -182,7 +190,8 @@ var startBackupHandler=async (e)=>{
         if (!fs.existsSync(calcDestPath)) {
           fs.mkdirSync(calcDestPath);
         }
-
+        
+        streamStatus={}
         for (const key in sourceFilePaths){
           
           var currSourceFilePath=sourceFilePaths[key];
@@ -212,7 +221,7 @@ var startBackupHandler=async (e)=>{
         // console.log(backupReport.copied[copied.length-1])
 
         backupReport.copied[backupReport.copied.length-1].sources.push(mySources[key].folderPath)
-        myDbHandlers.updateLastBackupDateInSourceDb(streamStatus)   
+        myDbHandlers.updateLastBackupDateInSourceDb(streamStatus,mySources[key].folderPath)   
 
       }
       toRenderer.sendMsgToRenderer({

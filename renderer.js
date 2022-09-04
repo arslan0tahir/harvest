@@ -363,8 +363,14 @@ app.controller('personCtrl', function($scope) {
         $scope.resetDialog();
     }
 
-    $scope.openModal=() => {              
+    $scope.openModal=() => {      
+        alert   (`       Kindly ensure that your Destinations Folders
+        contains sufficient space to store the backup files.
+        Defualt Destination folder (Harvest-Backup) is in Z drive
+        with maximum capacity of 10 GB `)
         $scope.checkSummaryVisibility();
+                
+        
     }
 
     $scope.openDialogDest=async () => {
@@ -429,8 +435,10 @@ app.controller('personCtrl', function($scope) {
     }
 
     $scope.startBackup=async () => {
+        
         console.log("RENDERER In start Backup")
         await window.BACKUP.startBackup(); 
+        $scope.loadSources()
         
         
     }

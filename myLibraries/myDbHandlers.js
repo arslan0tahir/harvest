@@ -1,6 +1,7 @@
 const fs = require("fs")
 const path = require("path")
-
+var myTime=require('../myLibraries/myTime.js')
+var _ = require('underscore');
 
 
 
@@ -87,7 +88,7 @@ const getBackupDest=function(e,arg){
 }
 
 
-const updateLastBackupDateInSourceDb = (streamStatus)=> { 
+const updateLastBackupDateInSourceDb = (streamStatus,sourcePath)=> { 
 
     var mySources = fs.readFileSync(path.join(__dirname,'..','/db/backupSources.json'));
     if (mySources!=""){
@@ -99,8 +100,14 @@ const updateLastBackupDateInSourceDb = (streamStatus)=> {
 
     
     for (key in mySources){        
-        if (mySources[key].folderPath==streamStatus.currSource.sourcePath){            
-            mySources[key].lastBackupDate=streamStatus.currTime;            
+        if (mySources[key].folderPath==sourcePath){
+            if (_.isEmpty(streamStatus))  {
+              mySources[key].lastBackupDate=myTime.formattedTime(); 
+            }    
+            else{
+              mySources[key].lastBackupDate=streamStatus.currTime; 
+            }      
+                       
             let data = JSON.stringify(mySources, null, 2);
             fs.writeFileSync(path.join(__dirname,'..','/db/backupSources.json'), data, (err) => {
             if (err) throw err;        

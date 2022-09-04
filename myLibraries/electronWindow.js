@@ -18,7 +18,7 @@ const createWindow=function () {
         preload: path.join(__dirname, '..', 'preload.js')
       },
       icon: iconpath,
-    //   resizable: false
+      resizable: false
     })
 
   

@@ -1,0 +1,22 @@
+[
+  {
+    "folderName": "s",
+    "folderPath": "E:\\htest\\s",
+    "toltalFiles": 1,
+    "folderSize": "8.8 MB",
+    "lastBackupDate": "4 Sep 2022, Sunday 10:15 PM",
+    "isBackingUp": 0,
+    "files": [
+      "E:\\htest\\s\\fwdtermreportsummervacationhomework.zip"
+    ]
+  },
+  {
+    "folderName": "s2",
+    "folderPath": "E:\\htest\\s2",
+    "toltalFiles": 0,
+    "folderSize": "n/a",
+    "lastBackupDate": "4 Sep 2022, Sunday 10:15 PM",
+    "isBackingUp": 0,
+    "files": []
+  }
+]
