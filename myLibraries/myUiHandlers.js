@@ -17,6 +17,7 @@ const prebackupValidation=require('./preBackupValidation')
 
 var startBackupHandler=async (e)=>{
 
+  myNotifications.testNotification("Harvest","Intiating backup")
   toRenderer.sendMsgToRenderer({
     msgType : "console",
     msg     : "Backup Requested at "+ new Date()
@@ -43,13 +44,7 @@ var startBackupHandler=async (e)=>{
       configuration.setBackupLock();
     } 
 
-    myNotifications.testNotification("Harvesting","Back Started")
-    toRenderer.sendMsgToRenderer({
-      msgType : "console",
-      msg     : "Backup Started at "+ new Date()
-    })
-    console.log("Backup Started")
-
+    
     myHoldSources=  myDbHandlers.getBackupSources(),
     myHoldDest=  myDbHandlers.getBackupDest()
 
@@ -83,6 +78,12 @@ var startBackupHandler=async (e)=>{
       })
 
       console.log("All destinations are offline")
+
+      toRenderer.sendMsgToRenderer({
+        msgType : "alert",
+        msg     : "All destination drives are offline"
+      })
+
       configuration.resetBackupLock();
       return;
     }
@@ -95,10 +96,23 @@ var startBackupHandler=async (e)=>{
         msg     : backupReport
       })
       console.log("All sources are offline")
+      toRenderer.sendMsgToRenderer({
+        msgType : "alert",
+        msg     : "All source folders are offline"
+      })
       configuration.resetBackupLock();
       return;
     }
     
+    // myNotifications.testNotification("Harvesting","Back Started")
+    toRenderer.sendMsgToRenderer({
+      msgType : "console",
+      msg     : "Backup Started at "+ new Date()
+    })
+    console.log("Backup Started")
+
+
+
     backupReport.sourcesStatus=myDbHandlers.sourceFoldersStatus(myHoldSources);
     backupReport.destStatus=myDbHandlers.destFoldersStatus(myHoldDest);
 
@@ -213,6 +227,17 @@ var startBackupHandler=async (e)=>{
           
           
           fileCopyStatus=await myFs.myCopyFile(currSourceFilePath,calculatedDestinationFilePath,streamStatus,writeStreamStatusToRendrer); 
+          if (fileCopyStatus==1){
+              fileCopyStatus= "Copied "+currSourceFilePath;
+          }
+         
+          // fs.utimesSync(destination, sourceStats.atime, sourceStats.mtime);
+          // reject("!!ERROR @source@ "+source+" @dest@ "+destination+"  @ERROR@"+err)
+
+          
+          let sourceStats = fs.statSync(currSourceFilePath);      
+          fs.utimesSync(calculatedDestinationFilePath, sourceStats.atime, sourceStats.mtime);
+          
           // console.log(fileCopyStatus)
           fileCopyStatusArray[fileCopyStatusArray.length-1].push([fileCopyStatus]);
         }

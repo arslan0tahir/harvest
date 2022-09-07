@@ -1,0 +1,6 @@
+FOUND E:\htest\d\s\fwdtermreportsummervacationhomework.zip @AT@ E:\htest\s\fwdtermreportsummervacationhomework.zip
+FOUND E:\htest\d\s2\fwdtermreportsummervacationhomework.zip @AT@ E:\htest\s2\fwdtermreportsummervacationhomework.zip
+FOUND E:\htest\d\s2\rufus-3.17.exe @AT@ E:\htest\s2\rufus-3.17.exe
+FOUND E:\htest\d\s2\Windows10andWindowsServer2016PolicySettings.xlsx @AT@ E:\htest\s2\Windows10andWindowsServer2016PolicySettings.xlsx
+FOUND E:\htest\d\s2\Windows10andWindowsServer2019PolicySettings--2004.xlsx @AT@ E:\htest\s2\Windows10andWindowsServer2019PolicySettings--2004.xlsx
+FOUND E:\htest\d\s2\Windows10andWindowsServer2019PolicySettings--20H2.xlsx @AT@ E:\htest\s2\Windows10andWindowsServer2019PolicySettings--20H2.xlsx

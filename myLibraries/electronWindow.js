@@ -1,5 +1,6 @@
 const {app, Tray, Menu, BrowserWindow, dialog, ipcMain } = require('electron')
 const path = require('path')
+const myNotifications=require('./myNotifications')
 
 
 
@@ -50,6 +51,7 @@ const createWindow=function () {
     // onMinimize hide to system tray
     mainWindow.on('minimize',function(event){
       event.preventDefault();
+      myNotifications.testNotification("Harvest","Minimized in the tray")
       mainWindow.hide();
     });
   

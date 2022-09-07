@@ -1,0 +1,28 @@
+[
+  {
+    "folderName": "s",
+    "folderPath": "E:\\htest\\s",
+    "toltalFiles": 1,
+    "folderSize": "8.8 MB",
+    "lastBackupDate": "7 Sep 2022, Wednesday 9:44 PM",
+    "isBackingUp": 0,
+    "files": [
+      "E:\\htest\\s\\fwdtermreportsummervacationhomework.zip"
+    ]
+  },
+  {
+    "folderName": "s2",
+    "folderPath": "E:\\htest\\s2",
+    "toltalFiles": 0,
+    "folderSize": "n/a",
+    "lastBackupDate": "7 Sep 2022, Wednesday 9:44 PM",
+    "isBackingUp": 0,
+    "files": [
+      "E:\\htest\\s2\\fwdtermreportsummervacationhomework.zip",
+      "E:\\htest\\s2\\rufus-3.17.exe",
+      "E:\\htest\\s2\\Windows10andWindowsServer2016PolicySettings.xlsx",
+      "E:\\htest\\s2\\Windows10andWindowsServer2019PolicySettings--2004.xlsx",
+      "E:\\htest\\s2\\Windows10andWindowsServer2019PolicySettings--20H2.xlsx"
+    ]
+  }
+]

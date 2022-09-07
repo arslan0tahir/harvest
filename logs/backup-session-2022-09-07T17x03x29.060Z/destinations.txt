@@ -1,10 +1,5 @@
 [
   {
-    "folderAlias": "Zdrive",
-    "folderPath": "Z:\\HARVEST-Backup",
-    "status": "Offline"
-  },
-  {
     "folderAlias": "d1",
     "folderPath": "E:\\htest\\d",
     "status": "Online"

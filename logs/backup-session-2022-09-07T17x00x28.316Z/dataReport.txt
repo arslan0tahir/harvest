@@ -1,0 +1,115 @@
+{
+  "dataReport": {
+    "sourcesSizeAccumulated": 21950095,
+    "destSizeAlreadyObj": {
+      "destSizeArray": [
+        21950095,
+        21950095
+      ],
+      "destPathArray": [
+        "E:\\htest\\d",
+        "E:\\htest\\New folder"
+      ]
+    },
+    "destSizeNew": {
+      "destSizeArray": [
+        {
+          "diskPath": "E:",
+          "free": 54855835648,
+          "size": 196487409664
+        },
+        {
+          "diskPath": "E:",
+          "free": 54855835648,
+          "size": 196487409664
+        }
+      ],
+      "destPathArray": [
+        "E:\\htest\\d",
+        "E:\\htest\\New folder"
+      ]
+    }
+  },
+  "sourcesStatus": {
+    "E:\\htest\\s": "online",
+    "E:\\htest\\s2": "online"
+  },
+  "destStatus": {
+    "Z:\\HARVEST-Backup": "offline",
+    "E:\\htest\\d": "online",
+    "E:\\htest\\New folder": "online"
+  },
+  "errors": [],
+  "copied": [
+    {
+      "destPath": {
+        "folderAlias": "d1",
+        "folderPath": "E:\\htest\\d",
+        "status": "Online"
+      },
+      "sources": [
+        "E:\\htest\\s",
+        "E:\\htest\\s2"
+      ],
+      "fileCopyStatus": [
+        [
+          [
+            "SYNCED : E:\\htest\\s\\fwdtermreportsummervacationhomework.zip"
+          ]
+        ],
+        [
+          [
+            "SYNCED : E:\\htest\\s2\\fwdtermreportsummervacationhomework.zip"
+          ],
+          [
+            "SYNCED : E:\\htest\\s2\\rufus-3.17.exe"
+          ],
+          [
+            "SYNCED : E:\\htest\\s2\\Windows10andWindowsServer2016PolicySettings.xlsx"
+          ],
+          [
+            "SYNCED : E:\\htest\\s2\\Windows10andWindowsServer2019PolicySettings--2004.xlsx"
+          ],
+          [
+            "SYNCED : E:\\htest\\s2\\Windows10andWindowsServer2019PolicySettings--20H2.xlsx"
+          ]
+        ]
+      ]
+    },
+    {
+      "destPath": {
+        "folderAlias": "d2",
+        "folderPath": "E:\\htest\\New folder",
+        "status": "Online"
+      },
+      "sources": [
+        "E:\\htest\\s",
+        "E:\\htest\\s2"
+      ],
+      "fileCopyStatus": [
+        [
+          [
+            "SYNCED : E:\\htest\\s\\fwdtermreportsummervacationhomework.zip"
+          ]
+        ],
+        [
+          [
+            "SYNCED : E:\\htest\\s2\\fwdtermreportsummervacationhomework.zip"
+          ],
+          [
+            "SYNCED : E:\\htest\\s2\\rufus-3.17.exe"
+          ],
+          [
+            "SYNCED : E:\\htest\\s2\\Windows10andWindowsServer2016PolicySettings.xlsx"
+          ],
+          [
+            "SYNCED : E:\\htest\\s2\\Windows10andWindowsServer2019PolicySettings--2004.xlsx"
+          ],
+          [
+            "SYNCED : E:\\htest\\s2\\Windows10andWindowsServer2019PolicySettings--20H2.xlsx"
+          ]
+        ]
+      ]
+    }
+  ]
+}

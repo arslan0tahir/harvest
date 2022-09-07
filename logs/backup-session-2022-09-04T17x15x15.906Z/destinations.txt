@@ -1,7 +1,0 @@
-[
-  {
-    "folderAlias": "d1",
-    "folderPath": "E:\\htest\\d",
-    "status": "Online"
-  }
-]

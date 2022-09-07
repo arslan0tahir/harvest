@@ -1,0 +1,11 @@
+[
+  "100 E:\\htest\\s2\\fwdtermreportsummervacationhomework.zip--E:\\htest\\d--E:\\htest\\s2"
+][
+  "100 E:\\htest\\s2\\rufus-3.17.exe--E:\\htest\\d--E:\\htest\\s2"
+][
+  "100 E:\\htest\\s2\\Windows10andWindowsServer2016PolicySettings.xlsx--E:\\htest\\d--E:\\htest\\s2"
+][
+  "100 E:\\htest\\s2\\Windows10andWindowsServer2019PolicySettings--2004.xlsx--E:\\htest\\d--E:\\htest\\s2"
+][
+  "100 E:\\htest\\s2\\Windows10andWindowsServer2019PolicySettings--20H2.xlsx--E:\\htest\\d--E:\\htest\\s2"
+]
