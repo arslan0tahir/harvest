@@ -1,0 +1,52 @@
+{
+  "dataReport": {
+    "sourcesSizeAccumulated": 9185069,
+    "destSizeAlreadyObj": {
+      "destSizeArray": [
+        9185069
+      ],
+      "destPathArray": [
+        "E:\\htest\\d"
+      ]
+    },
+    "destSizeNew": {
+      "destSizeArray": [
+        {
+          "diskPath": "E:",
+          "free": 55397097472,
+          "size": 196487409664
+        }
+      ],
+      "destPathArray": [
+        "E:\\htest\\d"
+      ]
+    }
+  },
+  "sourcesStatus": {
+    "E:\\htest\\s": "online"
+  },
+  "destStatus": {
+    "Z:\\HARVEST-Backup": "offline",
+    "E:\\htest\\d": "online"
+  },
+  "errors": [],
+  "copied": [
+    {
+      "destPath": {
+        "folderAlias": "dw",
+        "folderPath": "E:\\htest\\d",
+        "status": "Online"
+      },
+      "sources": [
+        "E:\\htest\\s"
+      ],
+      "fileCopyStatus": [
+        [
+          [
+            "SYNCED : E:\\htest\\s\\fwdtermreportsummervacationhomework.zip"
+          ]
+        ]
+      ]
+    }
+  ]
+}

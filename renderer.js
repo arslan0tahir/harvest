@@ -326,7 +326,9 @@ app.controller('personCtrl', function($scope) {
             }
 
             let arrDestFolderPath=$scope.myDest[key].folderPath
-            if ( currDestFolderPath.split('\\')[currDestFolderPath.lenght-1]== arrDestFolderPath.split('\\')[arrDestFolderPath.lenght-1]){
+            let splitCurrDestFolderPath=currDestFolderPath.split('\\');
+            let splitArrDestFolderPath=arrDestFolderPath.split('\\');
+            if ( splitCurrDestFolderPath[splitCurrDestFolderPath.length-1]== splitArrDestFolderPath[splitArrDestFolderPath.length-1]){
                 alert(`Error: Same Destination Foldername not allowed
                 ${currDestFolderPath}
                 ${arrDestFolderPath}

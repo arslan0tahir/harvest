@@ -1,0 +1,7 @@
+[
+  {
+    "folderAlias": "dw",
+    "folderPath": "E:\\htest\\d",
+    "status": "Online"
+  }
+]

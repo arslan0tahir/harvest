@@ -1,0 +1,13 @@
+[
+  {
+    "folderName": "s",
+    "folderPath": "E:\\htest\\s",
+    "toltalFiles": 1,
+    "folderSize": "8.8 MB",
+    "lastBackupDate": "n/a",
+    "isBackingUp": 0,
+    "files": [
+      "E:\\htest\\s\\fwdtermreportsummervacationhomework.zip"
+    ]
+  }
+]
