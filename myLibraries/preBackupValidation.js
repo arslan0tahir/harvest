@@ -10,7 +10,14 @@ const checkDiskSpace = require('check-disk-space').default
 
 
 //checking floder sizes
+
+
 const prebackupValidation=async function(){
+
+    
+
+
+
     let sizeReport={};
     sizeReport['diffSourceVSdestAlready']=[];
     let sourcesSize=sourcesSizeAccumlated();
