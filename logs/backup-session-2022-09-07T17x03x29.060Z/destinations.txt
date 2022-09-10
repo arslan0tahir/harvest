@@ -1,0 +1,12 @@
+[
+  {
+    "folderAlias": "d1",
+    "folderPath": "E:\\htest\\d",
+    "status": "Online"
+  },
+  {
+    "folderAlias": "d2",
+    "folderPath": "E:\\htest\\New folder",
+    "status": "Online"
+  }
+]
