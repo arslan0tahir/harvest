@@ -97,7 +97,30 @@ var autoBackup=()=>{
         if (estimatedBackupDate<=currDate && myDbHandlers.getBackupShedule()==0){myDbHandlers.setBackupShedule()}
         console.log(estimatedBackupDate)
         console.log(currDate)
-        myUiHandlers.startBackupHandler();        
+
+        
+        let s=myDbHandlers.getBackupSources();
+        let d=myDbHandlers.getBackupDest();
+        s=myDbHandlers.onlineSourceFolders(s);
+        d=myDbHandlers.onlineDestFolders(d); 
+
+        if (s.length!=0 && d.length!=0){
+            myUiHandlers.startBackupHandler();        
+
+        }
+        else if (s.length==0){
+            toRenderer.sendMsgToRenderer({
+                msgType : "alert",
+                msg     : "All source folders are offline"
+            })
+        }
+        else if (d.length==0){
+            toRenderer.sendMsgToRenderer({
+                msgType : "alert",
+                msg     : "All destination drives are offline"
+            })
+        }
+
 
     }
     else{

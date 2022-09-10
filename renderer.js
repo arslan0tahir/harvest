@@ -142,6 +142,11 @@ app.controller('personCtrl', function($scope) {
             if (msg.msgType== "console"){
                 console.log(msg.msg)
             }
+            if (msg.msgType== "alert"){
+                if($scope.carousal==0){
+                    alert(msg.msg);
+                }
+            }
             if (msg.msgType=="backupShedule"){
                 $scope.backupShedule=msg.msg
             }
@@ -326,7 +331,9 @@ app.controller('personCtrl', function($scope) {
             }
 
             let arrDestFolderPath=$scope.myDest[key].folderPath
-            if ( currDestFolderPath.split('\\')[currDestFolderPath.lenght-1]== arrDestFolderPath.split('\\')[arrDestFolderPath.lenght-1]){
+            let splitCurrDestFolderPath=currDestFolderPath.split('\\');
+            let splitArrDestFolderPath=arrDestFolderPath.split('\\');
+            if ( splitCurrDestFolderPath[splitCurrDestFolderPath.length-1]== splitArrDestFolderPath[splitArrDestFolderPath.length-1]){
                 alert(`Error: Same Destination Foldername not allowed
                 ${currDestFolderPath}
                 ${arrDestFolderPath}
@@ -366,7 +373,7 @@ app.controller('personCtrl', function($scope) {
     $scope.openModal=() => {      
         alert   (`       Kindly ensure that your Destinations Folders
         contains sufficient space to store the backup files.
-        Defualt Destination folder (Harvest-Backup) is in Z drive
+        Default Destination folder (Harvest-Backup) is in Z drive
         with maximum capacity of 10 GB `)
         $scope.checkSummaryVisibility();
                 

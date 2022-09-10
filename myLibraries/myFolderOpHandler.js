@@ -175,8 +175,9 @@ const getFolderSummary = function(directoryPath) {
 
     
     writeStream.on("finish",()=>{
-      fs.utimesSync(destination, sourceStats.atime, sourceStats.mtime);
-      resolve("Copied "+source)
+      // fs.utimesSync(destination, sourceStats.atime, sourceStats.mtime);
+      resolve(1)
+      // resolve("Copied "+source)
     })
     writeStream.on("error",(err)=>{
       reject("!!ERROR @source@ "+source+" @dest@ "+destination+"  @ERROR@"+err)
